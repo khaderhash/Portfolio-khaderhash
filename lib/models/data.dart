@@ -1,0 +1,46 @@
+// قائمة المشاريع
+final List<Map<String, dynamic>> projectsData = [
+  {
+    "title": "UniVerse",
+    "desc":
+        "Smart University Assistant. Integrated n8n AI workflows & Flutter for automated scheduling.",
+    "tech": ["Flutter", "n8n", "Gemini"],
+    "behance": "https://www.behance.net/gallery/241792513/UniVerse",
+    "image": "assets/universelogo.png",
+  },
+  {
+    "title": "Lumi Rewards",
+    "desc": "B2B Loyalty App introducing new rewards concept with QR scanning.",
+    "tech": ["Flutter", "GetX", "QR Code"],
+    "behance": "https://www.behance.net/gallery/238527685/LUMI-REWARDS",
+    "image": "assets/lumilogo.jpeg",
+  },
+  {
+    "title": "Student Learning Platform",
+    "desc": "Cross-platform E-learning app. Scalable MVVM architecture.",
+    "tech": ["Flutter", "MVVM", "Education"],
+    "behance":
+        "https://www.behance.net/gallery/234016951/learning-app-for-student",
+    "github": "https://github.com/khaderhash/learning-app2",
+    "image": "assets/learning.png",
+  },
+  {
+    "title": "Expen Scope (EXS)",
+    "desc":
+        "Dual-personality financial assistant (Business/Individual) with AI-driven workflows.",
+    "tech": ["Flutter", "n8n", "Laravel"],
+    "behance":
+        "https://www.behance.net/gallery/231325481/Exs-A-smart-financial",
+    "image": "assets/exslogo.png",
+  },
+  {
+    "title": "Abo Najib",
+    "desc":
+        "Financial management app (Offline & Online). Built with Flutter & Laravel (MVC).",
+    "tech": ["Flutter", "Laravel", "MVC"],
+    "behance":
+        "https://www.behance.net/gallery/223675637/Abo-Najib-Personal-Finance-Expense-Management-App",
+    "github": "https://github.com/khaderhash/Abo_Najib_front",
+    "image": "assets/abonajib.png",
+  },
+];

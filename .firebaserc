@@ -1,0 +1,15 @@
+{
+  "projects": {
+    "default": "appreservation-7cc6f"
+  },
+  "targets": {
+    "appreservation-7cc6f": {
+      "hosting": {
+        "portfolio": [
+          "khader-hwaijeh"
+        ]
+      }
+    }
+  },
+  "etags": {}
+}
