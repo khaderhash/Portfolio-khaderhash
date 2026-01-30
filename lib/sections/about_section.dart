@@ -40,9 +40,9 @@ class AboutSection extends StatelessWidget {
             ConstrainedBox(
               constraints: const BoxConstraints(maxWidth: 600),
               child: Text(
-                "I am a Software Engineer graduating from Yarmouk Private University (2026).\n\n"
-                "I specialize in building high-performance mobile applications using Flutter, with a strong focus on clean architecture, scalability, and real-world usability. I also integrate automation workflows using n8n to simplify processes and improve system efficiency.\n\n"
-                "I don’t just write code — I design structured solutions that turn real problems into reliable, maintainable systems.",
+                "I am a Software Engineer and a 2026 graduate of Yarmouk Private University.\n\n"
+                "My expertise lies in developing high-performance mobile apps with Flutter, guided by the principles of clean architecture and scalability. I also leverage n8n to build automation workflows that optimize efficiency and simplify complex systems.\n\n"
+                "I don’t just write code—I design structured, reliable, and maintainable systems that solve real-world problems.",
                 style: TextStyle(fontSize: 18, height: 1.6, color: textColor),
                 textAlign: TextAlign.justify,
               ),
