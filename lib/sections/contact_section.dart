@@ -78,7 +78,8 @@ class ContactSection extends StatelessWidget {
             ),
             SocialBtn(
               icon: FontAwesomeIcons.instagram,
-              url: "https://www.instagram.com/khader._.h?igsh=MTQ2bmw1a21kZ2dscw==",
+              url:
+                  "https://www.instagram.com/khader._.h?igsh=MTQ2bmw1a21kZ2dscw==",
               baseColor: iconColor,
               hoverColor: Colors.purpleAccent,
             ),

@@ -46,6 +46,7 @@ class HeroSection extends StatelessWidget {
             child: AnimatedTextKit(
               repeatForever: true,
               animatedTexts: [
+                TypewriterAnimatedText('CTO at Lumi Rewards'),
                 TypewriterAnimatedText('Software Engineer'),
                 TypewriterAnimatedText('Flutter Developer'),
                 TypewriterAnimatedText('n8n Automation Expert'),
@@ -63,12 +64,15 @@ class HeroSection extends StatelessWidget {
                 onPressed: () {
                   launchUrl(Uri.parse('cv.pdf'));
                 },
-                icon: Icon(Icons.visibility,color: Colors.black,),
+                icon: Icon(Icons.visibility, color: Colors.black),
                 label: const Text("View CV"),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: primaryColor,
                   foregroundColor: Colors.black,
-                  padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 25,
+                    vertical: 15,
+                  ),
                   textStyle: const TextStyle(fontWeight: FontWeight.bold),
                 ),
               ),
@@ -77,12 +81,15 @@ class HeroSection extends StatelessWidget {
                 onPressed: () {
                   launchUrl(Uri.parse('cv.pdf'));
                 },
-                icon:  Icon(Icons.download,color: primaryColor,),
+                icon: Icon(Icons.download, color: primaryColor),
                 label: const Text("Download CV"),
                 style: OutlinedButton.styleFrom(
                   foregroundColor: primaryColor,
                   side: BorderSide(color: primaryColor, width: 2),
-                  padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 25,
+                    vertical: 15,
+                  ),
                   textStyle: const TextStyle(fontWeight: FontWeight.bold),
                 ),
               ),
@@ -96,6 +103,7 @@ class HeroSection extends StatelessWidget {
     );
   }
 }
+
 class SocialIconsRow extends StatelessWidget {
   const SocialIconsRow({super.key});
   @override

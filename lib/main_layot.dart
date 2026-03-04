@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:khaderhash_portfolio/sections/volunteering_section.dart';
 import 'package:provider/provider.dart';
 import 'utils/theme_provider.dart';
 import 'widgets/shared_widgets.dart';
 
-// استيراد الأقسام (تأكد من إنشائك للملفات)
 import 'sections/hero_section.dart';
 import 'sections/about_section.dart';
 import 'sections/education_section.dart';
@@ -95,6 +95,7 @@ class _MainLayoutState extends State<MainLayout> {
               key: educationKey,
               child: const EducationSection(),
             ),
+            SectionContainer(child: const VolunteeringSection()),
             SectionContainer(key: skillsKey, child: const SkillsSection()),
             SectionContainer(key: projectsKey, child: ProjectsSection()),
             SectionContainer(key: contactKey, child: const ContactSection()),

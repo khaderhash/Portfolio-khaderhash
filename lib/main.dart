@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:khaderhash_portfolio/pages/ai_page.dart';
+import 'package:khaderhash_portfolio/pages/cyber_page.dart';
+import 'package:khaderhash_portfolio/pages/front_page.dart';
+import 'package:khaderhash_portfolio/pages/mobile_app_page.dart';
 import 'package:provider/provider.dart';
 import 'main_layot.dart';
 import 'utils/theme_provider.dart';
+import 'pages/roadmap_page.dart';
 
 void main() {
   runApp(
@@ -32,6 +37,7 @@ class MyPortfolioApp extends StatelessWidget {
       title: 'Khader Hwaijeh | Software Engineer',
       debugShowCheckedModeBanner: false,
       themeMode: themeProvider.themeMode,
+      // Dark Theme
       darkTheme: ThemeData.dark().copyWith(
         scaffoldBackgroundColor: darkBg,
         primaryColor: neonGreen,
@@ -40,6 +46,7 @@ class MyPortfolioApp extends StatelessWidget {
         textTheme: GoogleFonts.interTextTheme(ThemeData.dark().textTheme),
         iconTheme: IconThemeData(color: neonGreen),
       ),
+      // Light Theme
       theme: ThemeData.light().copyWith(
         scaffoldBackgroundColor: lightBg,
         primaryColor: forestGreen,
@@ -52,7 +59,16 @@ class MyPortfolioApp extends StatelessWidget {
         textTheme: GoogleFonts.interTextTheme(ThemeData.light().textTheme),
         iconTheme: IconThemeData(color: forestGreen),
       ),
-      home: const MainLayout(),
+      // Routing
+      initialRoute: '/',
+      routes: {
+        '/': (context) => const MainLayout(),
+        '/roadmap': (context) => const RoadmapPage(),
+        '/ai': (context) => const AiPage(),
+        '/cyber': (context) => const CyberPage(),
+        '/front': (context) => const FrontPage(),
+        '/mobile': (context) => const MobileAppPage(),
+      },
     );
   }
 }
