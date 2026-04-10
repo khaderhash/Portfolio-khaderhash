@@ -102,3 +102,32 @@ class SkillChip extends StatelessWidget {
     );
   }
 }
+
+class NeonContainer extends StatelessWidget {
+  final Widget child;
+  final double borderRadius;
+
+  const NeonContainer({super.key, required this.child, this.borderRadius = 15});
+
+  @override
+  Widget build(BuildContext context) {
+    final neonGreen = const Color(0xFF00ff94);
+    final darkSurface = const Color(0xFF0b291f);
+
+    return Container(
+      decoration: BoxDecoration(
+        color: darkSurface,
+        borderRadius: BorderRadius.circular(borderRadius),
+        border: Border.all(color: neonGreen.withOpacity(0.8), width: 1.5),
+        boxShadow: [
+          BoxShadow(
+            color: neonGreen.withOpacity(0.3),
+            blurRadius: 15,
+            spreadRadius: 2,
+          ),
+        ],
+      ),
+      child: child,
+    );
+  }
+}

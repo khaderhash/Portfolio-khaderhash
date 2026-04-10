@@ -21,6 +21,7 @@ class MainLayout extends StatefulWidget {
 }
 
 class _MainLayoutState extends State<MainLayout> {
+  final homeKey = GlobalKey();
   final aboutKey = GlobalKey();
   final educationKey = GlobalKey();
   final skillsKey = GlobalKey();
@@ -39,6 +40,7 @@ class _MainLayoutState extends State<MainLayout> {
   Widget build(BuildContext context) {
     final isDark = Provider.of<ThemeProvider>(context).isDarkMode;
     final primaryColor = Theme.of(context).primaryColor;
+    final screenWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
       appBar: AppBar(
@@ -55,18 +57,18 @@ class _MainLayoutState extends State<MainLayout> {
           ),
         ),
         actions: [
-          if (MediaQuery.of(context).size.width > 800) ...[
+          if (screenWidth > 800) ...[
             NavButton(
               title: "About",
               onPressed: () => scrollToSection(aboutKey),
             ),
             NavButton(
-              title: "Education",
-              onPressed: () => scrollToSection(educationKey),
-            ),
-            NavButton(
               title: "Projects",
               onPressed: () => scrollToSection(projectsKey),
+            ),
+            NavButton(
+              title: "Education",
+              onPressed: () => scrollToSection(educationKey),
             ),
             NavButton(
               title: "Contact",
@@ -89,20 +91,65 @@ class _MainLayoutState extends State<MainLayout> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            const HeroSection(),
+            Container(key: homeKey, child: const HeroSection()),
             SectionContainer(key: aboutKey, child: const AboutSection()),
+            SectionContainer(key: projectsKey, child: ProjectsSection()),
             SectionContainer(
               key: educationKey,
               child: const EducationSection(),
             ),
             SectionContainer(child: const VolunteeringSection()),
             SectionContainer(key: skillsKey, child: const SkillsSection()),
-            SectionContainer(key: projectsKey, child: ProjectsSection()),
             SectionContainer(key: contactKey, child: const ContactSection()),
             const FooterSection(),
           ],
         ),
       ),
+
+      bottomNavigationBar: screenWidth < 800
+          ? Container(
+              decoration: BoxDecoration(
+                color: Theme.of(context).scaffoldBackgroundColor,
+                boxShadow: [
+                  BoxShadow(
+                    color: primaryColor.withOpacity(0.2),
+                    blurRadius: 15,
+                    spreadRadius: 2,
+                  ),
+                ],
+              ),
+              child: BottomNavigationBar(
+                backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+                selectedItemColor: primaryColor,
+                unselectedItemColor: Colors.grey,
+                type: BottomNavigationBarType.fixed,
+                items: const [
+                  BottomNavigationBarItem(
+                    icon: Icon(Icons.home),
+                    label: "Home",
+                  ),
+                  BottomNavigationBarItem(
+                    icon: Icon(Icons.folder),
+                    label: "Projects",
+                  ),
+                  BottomNavigationBarItem(
+                    icon: Icon(Icons.school),
+                    label: "Education",
+                  ),
+                  BottomNavigationBarItem(
+                    icon: Icon(Icons.mail),
+                    label: "Contact",
+                  ),
+                ],
+                onTap: (index) {
+                  if (index == 0) scrollToSection(homeKey);
+                  if (index == 1) scrollToSection(projectsKey);
+                  if (index == 2) scrollToSection(educationKey);
+                  if (index == 3) scrollToSection(contactKey);
+                },
+              ),
+            )
+          : null,
     );
   }
 }

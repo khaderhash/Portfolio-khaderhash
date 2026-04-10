@@ -131,6 +131,28 @@ class ProjectCard extends StatelessWidget {
                       ),
                       Row(
                         children: [
+                          if (project.containsKey('video') &&
+                              project['video'] != "")
+                            ElevatedButton.icon(
+                              onPressed: () =>
+                                  launchUrl(Uri.parse(project['video'])),
+                              icon: const Icon(
+                                Icons.play_circle_fill,
+                                color: Colors.white,
+                              ),
+                              label: const Text(
+                                "Watch Demo",
+                                style: TextStyle(color: Colors.white),
+                              ),
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.redAccent,
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 12,
+                                  vertical: 8,
+                                ),
+                              ),
+                            ),
+                          const SizedBox(width: 10),
                           if (project.containsKey('github'))
                             IconButton(
                               icon: const Icon(

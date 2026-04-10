@@ -1,5 +1,4 @@
 final List<Map<String, dynamic>> projectsData = [
-  // 1. Nibrass Hub (الأقوى تقنياً)
   {
     "title": "Nibrass Hub",
     "desc":
@@ -7,6 +6,7 @@ final List<Map<String, dynamic>> projectsData = [
     "tech": ["Flutter", "RAG AI", "Clean Arch", "Django"],
     "github": "https://github.com/khaderhash/nibrass",
     "image": "assets/nibrass.png",
+    "video": "https://youtu.be/Rk9tBVoOixY",
   },
   {
     "title": "Smart Telegram Bot",
@@ -23,6 +23,7 @@ final List<Map<String, dynamic>> projectsData = [
     "tech": ["Flutter", "GetX", "QR Code", "CTO"],
     "behance": "https://www.behance.net/gallery/238527685/LUMI-REWARDS",
     "image": "assets/lumilogo.jpeg",
+    "video": "https://youtube.com/shorts/boKRrkg6N58?feature=share",
   },
 
   {
@@ -32,6 +33,7 @@ final List<Map<String, dynamic>> projectsData = [
     "tech": ["Flutter", "n8n", "Gemini"],
     "behance": "https://www.behance.net/gallery/241792513/UniVerse",
     "image": "assets/universelogo.png",
+    "video": "https://youtu.be/6jKZEwRWwDo",
   },
 
   {
@@ -44,7 +46,6 @@ final List<Map<String, dynamic>> projectsData = [
     "image": "assets/learning.png",
   },
 
-  // 8. Expen Scope
   {
     "title": "Expen Scope (EXS)",
     "desc":
@@ -53,9 +54,8 @@ final List<Map<String, dynamic>> projectsData = [
     "behance":
         "https://www.behance.net/gallery/231325481/Exs-A-smart-financial",
     "image": "assets/exslogo.png",
+    "video": "https://youtu.be/tZjbgxo0VO0",
   },
-
-  // 9. Abo Najib
   {
     "title": "Abo Najib",
     "desc":
@@ -65,6 +65,7 @@ final List<Map<String, dynamic>> projectsData = [
         "https://www.behance.net/gallery/223675637/Abo-Najib-Personal-Finance-Expense-Management-App",
     "github": "https://github.com/khaderhash/Abo_Najib_front",
     "image": "assets/abonajib.png",
+    "video": "https://youtu.be/nH-WDZCMdpk",
   },
 
   {

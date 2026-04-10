@@ -5,19 +5,19 @@ import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../widgets/shared_widgets.dart';
 
-// ------------------ 1. Hero Section (Updated with CV) ------------------
 class HeroSection extends StatelessWidget {
   const HeroSection({super.key});
 
   @override
   Widget build(BuildContext context) {
     final primaryColor = Theme.of(context).primaryColor;
+    final primarycoloor = Theme.of(context).appBarTheme;
+    final privmcolor = Theme.of(context).badgeTheme;
+    final privn = Theme.of(context).bottomAppBarTheme;
+
     final textColor = Theme.of(context).brightness == Brightness.dark
         ? Colors.white
         : Colors.black87;
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-
-    final iconColor = isDark ? Colors.white70 : Colors.black54;
 
     return Container(
       height: MediaQuery.of(context).size.height * 0.9,
@@ -26,11 +26,27 @@ class HeroSection extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text(
-            "Hello, I am",
-            style: TextStyle(color: primaryColor, fontSize: 20),
+          Container(
+            width: 180,
+            height: 180,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              border: Border.all(color: primaryColor, width: 3),
+              boxShadow: [
+                BoxShadow(
+                  color: primaryColor.withOpacity(0.5),
+                  blurRadius: 40,
+                  spreadRadius: 5,
+                ),
+              ],
+            ),
+            child: const CircleAvatar(
+              radius: 90,
+              backgroundColor: Color(0xFF0b291f),
+              backgroundImage: AssetImage('assets/me.png'),
+            ),
           ),
-          const SizedBox(height: 15),
+          const SizedBox(height: 30),
           Text(
             "KHADER HWAIJEH",
             textAlign: TextAlign.center,
@@ -41,6 +57,7 @@ class HeroSection extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 10),
+
           DefaultTextStyle(
             style: GoogleFonts.firaCode(fontSize: 24, color: Colors.grey),
             child: AnimatedTextKit(
@@ -64,7 +81,7 @@ class HeroSection extends StatelessWidget {
                 onPressed: () {
                   launchUrl(Uri.parse('cv.pdf'));
                 },
-                icon: Icon(Icons.visibility, color: Colors.black),
+                icon: const Icon(Icons.visibility, color: Colors.black),
                 label: const Text("View CV"),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: primaryColor,
@@ -97,6 +114,7 @@ class HeroSection extends StatelessWidget {
           ),
 
           const SizedBox(height: 40),
+
           const SocialIconsRow(),
         ],
       ),
@@ -138,13 +156,13 @@ class SocialIconsRow extends StatelessWidget {
           icon: FontAwesomeIcons.behance,
           url: "https://behance.net/khaderhash",
           baseColor: iconColor,
-          hoverColor: isDark ? Colors.black : Colors.white,
+          hoverColor: isDark ? Colors.white : Colors.black,
         ),
         SocialBtn(
           icon: FontAwesomeIcons.github,
           url: "https://github.com/khaderhash",
           baseColor: iconColor,
-          hoverColor: isDark ? Colors.black : Colors.white,
+          hoverColor: isDark ? Colors.white : Colors.black,
         ),
         SocialBtn(
           icon: FontAwesomeIcons.instagram,
@@ -156,7 +174,7 @@ class SocialIconsRow extends StatelessWidget {
           icon: Icons.email,
           url: "mailto:khaderhuijih@gmail.com",
           baseColor: iconColor,
-          hoverColor: isDark ? Colors.black : Colors.white,
+          hoverColor: isDark ? Colors.white : Colors.black,
         ),
       ],
     );
