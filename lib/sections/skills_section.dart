@@ -14,8 +14,10 @@ class SkillsSection extends StatelessWidget {
       "RESTful APIs Integration",
       "Firebase",
       "Laravel",
+      "Node.js",
       "MySQL (Basic)",
       "n8n Automation Workflows",
+      "WhatsApp Automation",
       "Google Gemini API Integration",
       "WebSocket-based Features",
     ];
@@ -29,40 +31,50 @@ class SkillsSection extends StatelessWidget {
       "Swagger",
       "Figma",
     ];
-    final textColor = Theme.of(context).brightness == Brightness.dark
-        ? Colors.white70
-        : Colors.black87;
-
     return Column(
       children: [
         const SectionTitle(title: "Technical Skills"),
         const SizedBox(height: 40),
-        Align(
-          alignment: Alignment.centerLeft,
-          child: Text(
-            "Environment & Tools",
-            style: TextStyle(fontSize: 20, color: textColor),
+        GlassPanel(
+          padding: const EdgeInsets.all(26),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              _SkillGroup(title: "Environment & Tools", skills: envTools),
+              const SizedBox(height: 28),
+              _SkillGroup(title: "Development Tools", skills: devTools),
+            ],
           ),
         ),
-        const SizedBox(height: 15),
+      ],
+    );
+  }
+}
+
+class _SkillGroup extends StatelessWidget {
+  final String title;
+  final List<String> skills;
+
+  const _SkillGroup({required this.title, required this.skills});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          title,
+          style: TextStyle(
+            fontSize: 20,
+            color: premiumText(context),
+            fontWeight: FontWeight.w900,
+          ),
+        ),
+        const SizedBox(height: 16),
         Wrap(
           spacing: 10,
           runSpacing: 10,
-          children: envTools.map((s) => SkillChip(label: s)).toList(),
-        ),
-        const SizedBox(height: 30),
-        Align(
-          alignment: Alignment.centerLeft,
-          child: Text(
-            "Development Tools",
-            style: TextStyle(fontSize: 20, color: textColor),
-          ),
-        ),
-        const SizedBox(height: 15),
-        Wrap(
-          spacing: 10,
-          runSpacing: 10,
-          children: devTools.map((s) => SkillChip(label: s)).toList(),
+          children: skills.map((s) => SkillChip(label: s)).toList(),
         ),
       ],
     );

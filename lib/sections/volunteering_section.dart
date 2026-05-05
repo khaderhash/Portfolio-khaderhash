@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../widgets/shared_widgets.dart';
 
 class VolunteeringSection extends StatelessWidget {
@@ -6,59 +7,66 @@ class VolunteeringSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final textColor = Theme.of(context).brightness == Brightness.dark
-        ? Colors.white
-        : Colors.black87;
     final primaryColor = Theme.of(context).primaryColor;
 
     return Column(
       children: [
         const SectionTitle(title: "Volunteering"),
         const SizedBox(height: 40),
-        NeonContainer(
-          child: Container(
-            width: double.infinity,
-            padding: const EdgeInsets.all(25),
-            decoration: BoxDecoration(
-              color: Theme.of(context).cardColor,
-              borderRadius: BorderRadius.circular(15),
-              border: Border(left: BorderSide(color: primaryColor, width: 4)),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.05),
-                  blurRadius: 10,
-                ),
-              ],
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "Aga Khan Foundation",
-                  style: TextStyle(
-                    fontSize: 22,
-                    fontWeight: FontWeight.bold,
-                    color: textColor,
+        GlassPanel(
+          padding: const EdgeInsets.all(28),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                width: 56,
+                height: 56,
+                decoration: BoxDecoration(
+                  color: primaryColor.withValues(alpha: 0.10),
+                  borderRadius: BorderRadius.circular(18),
+                  border: Border.all(
+                    color: primaryColor.withValues(alpha: 0.18),
                   ),
                 ),
-                const SizedBox(height: 5),
-                Text(
-                  "Data Management Volunteer | Syria",
-                  style: TextStyle(fontSize: 16, color: primaryColor),
+                child: Icon(Icons.volunteer_activism, color: primaryColor),
+              ),
+              const SizedBox(width: 18),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Aga Khan Foundation",
+                      style: TextStyle(
+                        fontSize: 22,
+                        fontWeight: FontWeight.w900,
+                        color: premiumText(context),
+                      ),
+                    ),
+                    const SizedBox(height: 6),
+                    Text(
+                      "Data Management Volunteer | Syria",
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: primaryColor,
+                        fontWeight: FontWeight.w800,
+                      ),
+                    ),
+                    const SizedBox(height: 16),
+                    Text(
+                      "Managed and organized critical administrative datasets using Excel and Word.\n"
+                      "Streamlined data entry processes while keeping accuracy high.\n"
+                      "Supported the operations team with logistical and data tasks.",
+                      style: TextStyle(
+                        fontSize: 16,
+                        height: 1.7,
+                        color: premiumMutedText(context),
+                      ),
+                    ),
+                  ],
                 ),
-                const SizedBox(height: 15),
-                Text(
-                  "• Managed and organized critical administrative datasets using Excel & Word.\n"
-                  "• Streamlined data entry processes ensuring high accuracy.\n"
-                  "• Supported the operations team in logistical tasks.",
-                  style: const TextStyle(
-                    fontSize: 16,
-                    height: 1.6,
-                    color: Colors.grey,
-                  ),
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ],

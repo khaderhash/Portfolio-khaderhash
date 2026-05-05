@@ -25,39 +25,79 @@ class MyPortfolioApp extends StatelessWidget {
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<ThemeProvider>(context);
 
-    final darkBg = const Color(0xFF021a12);
-    final darkSurface = const Color(0xFF0b291f);
-    final neonGreen = const Color(0xFF00ff94);
+    final darkBg = const Color(0xFF070A12);
+    final darkSurface = const Color(0xFF101624);
+    final neonGreen = const Color(0xFF34F5A6);
+    final blueAccent = const Color(0xFF62D7FF);
 
-    final lightBg = const Color(0xFFF3F5F4);
+    final lightBg = const Color(0xFFF6F8FB);
     final lightSurface = Colors.white;
-    final forestGreen = const Color(0xFF006d4e);
+    final forestGreen = const Color(0xFF087C61);
 
     return MaterialApp(
       title: 'Khader Hwaijeh | Software Engineer',
       debugShowCheckedModeBanner: false,
       themeMode: themeProvider.themeMode,
-      // Dark Theme
-      darkTheme: ThemeData.dark().copyWith(
+      darkTheme: ThemeData(
+        brightness: Brightness.dark,
+        useMaterial3: true,
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: neonGreen,
+          brightness: Brightness.dark,
+          primary: neonGreen,
+          secondary: blueAccent,
+          surface: darkSurface,
+        ),
         scaffoldBackgroundColor: darkBg,
         primaryColor: neonGreen,
         cardColor: darkSurface,
-        appBarTheme: AppBarTheme(backgroundColor: darkBg, elevation: 0),
-        textTheme: GoogleFonts.interTextTheme(ThemeData.dark().textTheme),
+        textTheme: GoogleFonts.cairoTextTheme(ThemeData.dark().textTheme),
+        appBarTheme: AppBarTheme(
+          backgroundColor: darkBg.withValues(alpha: 0.82),
+          surfaceTintColor: Colors.transparent,
+          elevation: 0,
+        ),
         iconTheme: IconThemeData(color: neonGreen),
+        pageTransitionsTheme: const PageTransitionsTheme(
+          builders: {
+            TargetPlatform.android: FadeUpwardsPageTransitionsBuilder(),
+            TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
+            TargetPlatform.windows: FadeUpwardsPageTransitionsBuilder(),
+            TargetPlatform.macOS: CupertinoPageTransitionsBuilder(),
+            TargetPlatform.linux: FadeUpwardsPageTransitionsBuilder(),
+          },
+        ),
       ),
-      // Light Theme
-      theme: ThemeData.light().copyWith(
+      theme: ThemeData(
+        brightness: Brightness.light,
+        useMaterial3: true,
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: forestGreen,
+          brightness: Brightness.light,
+          primary: forestGreen,
+          secondary: const Color(0xFF2563EB),
+          surface: lightSurface,
+        ),
         scaffoldBackgroundColor: lightBg,
         primaryColor: forestGreen,
         cardColor: lightSurface,
+        textTheme: GoogleFonts.cairoTextTheme(ThemeData.light().textTheme),
         appBarTheme: AppBarTheme(
-          backgroundColor: lightBg,
+          backgroundColor: lightBg.withValues(alpha: 0.86),
+          surfaceTintColor: Colors.transparent,
           elevation: 0,
           iconTheme: IconThemeData(color: forestGreen),
         ),
-        textTheme: GoogleFonts.interTextTheme(ThemeData.light().textTheme),
         iconTheme: IconThemeData(color: forestGreen),
+        pageTransitionsTheme: const PageTransitionsTheme(
+          builders: {
+            TargetPlatform.android: FadeUpwardsPageTransitionsBuilder(),
+            TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
+            TargetPlatform.windows: FadeUpwardsPageTransitionsBuilder(),
+            TargetPlatform.macOS: CupertinoPageTransitionsBuilder(),
+            TargetPlatform.linux: FadeUpwardsPageTransitionsBuilder(),
+          },
+        ),
       ),
       // Routing
       initialRoute: '/',

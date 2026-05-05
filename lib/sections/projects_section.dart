@@ -8,26 +8,53 @@ class ProjectsSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double screenWidth = MediaQuery.of(context).size.width;
-
-    double cardWidth = screenWidth < 800 ? screenWidth * 0.9 : 450;
-
     return Column(
+      mainAxisSize: MainAxisSize.min,
       children: [
         const SectionTitle(title: "Featured Projects"),
-        const SizedBox(height: 40),
+        const SizedBox(height: 18),
+        Text(
+          "Selected products and systems spanning Flutter, AI workflows, automation, and business platforms.",
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            color: Theme.of(context).brightness == Brightness.dark
+                ? Colors.white70
+                : const Color(0xFF4B5563),
+            fontSize: 17,
+            height: 1.55,
+          ),
+        ),
+        const SizedBox(height: 44),
+        LayoutBuilder(
+          builder: (context, constraints) {
+            final width = constraints.maxWidth;
+            final crossAxisCount = width < 720
+                ? 1
+                : width < 1080
+                ? 2
+                : 3;
+            final cardHeight = width < 720 ? 444.0 : 452.0;
 
-        Wrap(
-          spacing: 30,
-          runSpacing: 30,
-          alignment: WrapAlignment.center,
-          children: projectsData.map((project) {
-            return SizedBox(
-              width: cardWidth,
-              height: 380,
-              child: NeonContainer(child: ProjectCard(project: project)),
+            return GridView.builder(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              itemCount: projectsData.length,
+              cacheExtent: 900,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: crossAxisCount,
+                mainAxisSpacing: 24,
+                crossAxisSpacing: 24,
+                mainAxisExtent: cardHeight,
+              ),
+              itemBuilder: (context, index) {
+                return RepaintBoundary(
+                  child: NeonContainer(
+                    child: ProjectCard(project: projectsData[index]),
+                  ),
+                );
+              },
             );
-          }).toList(),
+          },
         ),
       ],
     );

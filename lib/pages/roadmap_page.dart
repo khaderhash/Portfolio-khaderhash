@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
-import '../main.dart';
 
 class RoadmapPage extends StatelessWidget {
   const RoadmapPage({super.key});

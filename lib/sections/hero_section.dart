@@ -11,114 +11,269 @@ class HeroSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final primaryColor = Theme.of(context).primaryColor;
-    final primarycoloor = Theme.of(context).appBarTheme;
-    final privmcolor = Theme.of(context).badgeTheme;
-    final privn = Theme.of(context).bottomAppBarTheme;
-
-    final textColor = Theme.of(context).brightness == Brightness.dark
-        ? Colors.white
-        : Colors.black87;
+    final secondary = Theme.of(context).colorScheme.secondary;
+    final textColor = premiumText(context);
+    final mutedText = premiumMutedText(context);
+    final width = MediaQuery.of(context).size.width;
+    final isMobile = width < 860;
+    final minHeroHeight = isMobile ? 780.0 : 760.0;
 
     return Container(
-      height: MediaQuery.of(context).size.height * 0.9,
+      constraints: BoxConstraints(
+        minHeight: MediaQuery.of(context).size.height * 0.92 > minHeroHeight
+            ? MediaQuery.of(context).size.height * 0.92
+            : minHeroHeight,
+      ),
       width: double.infinity,
-      padding: const EdgeInsets.symmetric(horizontal: 20),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Container(
-            width: 180,
-            height: 180,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              border: Border.all(color: primaryColor, width: 3),
-              boxShadow: [
-                BoxShadow(
-                  color: primaryColor.withOpacity(0.5),
-                  blurRadius: 40,
-                  spreadRadius: 5,
-                ),
-              ],
-            ),
-            child: const CircleAvatar(
-              radius: 90,
-              backgroundColor: Color(0xFF0b291f),
-              backgroundImage: AssetImage('assets/me.png'),
+      child: CustomPaint(
+        painter: _HeroLinesPainter(
+          accent: primaryColor,
+          secondary: secondary,
+          isDark: Theme.of(context).brightness == Brightness.dark,
+        ),
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: isMobile ? 22 : 44),
+          child: Center(
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 1160),
+              child: isMobile
+                  ? _HeroContent(
+                      primaryColor: primaryColor,
+                      textColor: textColor,
+                      mutedText: mutedText,
+                      compact: true,
+                    )
+                  : Row(
+                      children: [
+                        Expanded(
+                          flex: 7,
+                          child: _HeroContent(
+                            primaryColor: primaryColor,
+                            textColor: textColor,
+                            mutedText: mutedText,
+                          ),
+                        ),
+                        const SizedBox(width: 50),
+                        Expanded(
+                          flex: 4,
+                          child: _HeroPortrait(primaryColor: primaryColor),
+                        ),
+                      ],
+                    ),
             ),
           ),
-          const SizedBox(height: 30),
+        ),
+      ),
+    );
+  }
+}
+
+class _HeroContent extends StatelessWidget {
+  final Color primaryColor;
+  final Color textColor;
+  final Color mutedText;
+  final bool compact;
+
+  const _HeroContent({
+    required this.primaryColor,
+    required this.textColor,
+    required this.mutedText,
+    this.compact = false,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return ScrollReveal(
+      duration: premiumMedium,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: compact
+            ? CrossAxisAlignment.center
+            : CrossAxisAlignment.start,
+        children: [
+          if (compact) _HeroPortrait(primaryColor: primaryColor, compact: true),
+          if (compact) const SizedBox(height: 28),
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+            decoration: BoxDecoration(
+              color: primaryColor.withValues(alpha: 0.10),
+              borderRadius: BorderRadius.circular(999),
+              border: Border.all(color: primaryColor.withValues(alpha: 0.24)),
+            ),
+            child: Text(
+              "Flutter Developer / Automation Builder / Product Contributor",
+              textAlign: compact ? TextAlign.center : TextAlign.start,
+              style: TextStyle(
+                color: primaryColor,
+                fontSize: 13,
+                fontWeight: FontWeight.w800,
+                letterSpacing: 0,
+              ),
+            ),
+          ),
+          const SizedBox(height: 22),
           Text(
             "KHADER HWAIJEH",
-            textAlign: TextAlign.center,
+            textAlign: compact ? TextAlign.center : TextAlign.start,
             style: GoogleFonts.bebasNeue(
-              fontSize: 80,
-              letterSpacing: 2,
+              fontSize: compact ? 62 : 92,
+              height: 0.92,
+              letterSpacing: 0,
               color: textColor,
             ),
           ),
-          const SizedBox(height: 10),
-
+          const SizedBox(height: 18),
           DefaultTextStyle(
-            style: GoogleFonts.firaCode(fontSize: 24, color: Colors.grey),
+            style: GoogleFonts.firaCode(
+              fontSize: compact ? 18 : 24,
+              color: mutedText,
+              fontWeight: FontWeight.w600,
+            ),
             child: AnimatedTextKit(
               repeatForever: true,
+              pause: const Duration(milliseconds: 1200),
               animatedTexts: [
-                TypewriterAnimatedText('CTO at Lumi Rewards'),
+                TypewriterAnimatedText(
+                  'Flutter Developer & Product Contributor',
+                ),
                 TypewriterAnimatedText('Software Engineer'),
                 TypewriterAnimatedText('Flutter Developer'),
                 TypewriterAnimatedText('n8n Automation Expert'),
               ],
             ),
           ),
-          const SizedBox(height: 30),
-
-          Wrap(
-            spacing: 20,
-            runSpacing: 20,
-            alignment: WrapAlignment.center,
-            children: [
-              ElevatedButton.icon(
-                onPressed: () {
-                  launchUrl(Uri.parse('cv.pdf'));
-                },
-                icon: const Icon(Icons.visibility, color: Colors.black),
-                label: const Text("View CV"),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: primaryColor,
-                  foregroundColor: Colors.black,
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 25,
-                    vertical: 15,
-                  ),
-                  textStyle: const TextStyle(fontWeight: FontWeight.bold),
-                ),
+          const SizedBox(height: 20),
+          ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 660),
+            child: Text(
+              "I design and ship scalable mobile products, AI-assisted workflows, and clean digital experiences with Flutter, automation, and pragmatic engineering.",
+              textAlign: compact ? TextAlign.center : TextAlign.start,
+              style: TextStyle(
+                color: mutedText,
+                fontSize: compact ? 16 : 18,
+                height: 1.7,
+                fontWeight: FontWeight.w500,
               ),
-
-              OutlinedButton.icon(
+            ),
+          ),
+          const SizedBox(height: 34),
+          Wrap(
+            spacing: 14,
+            runSpacing: 14,
+            alignment: compact ? WrapAlignment.center : WrapAlignment.start,
+            children: [
+              PremiumButton(
                 onPressed: () {
                   launchUrl(Uri.parse('cv.pdf'));
                 },
-                icon: Icon(Icons.download, color: primaryColor),
-                label: const Text("Download CV"),
-                style: OutlinedButton.styleFrom(
-                  foregroundColor: primaryColor,
-                  side: BorderSide(color: primaryColor, width: 2),
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 25,
-                    vertical: 15,
-                  ),
-                  textStyle: const TextStyle(fontWeight: FontWeight.bold),
-                ),
+                icon: Icons.visibility,
+                label: "View CV",
+              ),
+              PremiumButton(
+                onPressed: () {
+                  launchUrl(Uri.parse('cv.pdf'));
+                },
+                icon: Icons.download,
+                label: "Download CV",
+                filled: false,
               ),
             ],
           ),
-
-          const SizedBox(height: 40),
-
+          const SizedBox(height: 32),
           const SocialIconsRow(),
         ],
       ),
     );
+  }
+}
+
+class _HeroPortrait extends StatelessWidget {
+  final Color primaryColor;
+  final bool compact;
+  const _HeroPortrait({required this.primaryColor, this.compact = false});
+
+  @override
+  Widget build(BuildContext context) {
+    final size = compact ? 154.0 : 310.0;
+    return HoverLift(
+      y: -8,
+      scale: 1.02,
+      child: NeonContainer(
+        borderRadius: compact ? 999 : 34,
+        child: Container(
+          width: size,
+          height: size,
+          padding: EdgeInsets.all(compact ? 6 : 10),
+          decoration: BoxDecoration(
+            color: premiumSurface(context),
+            borderRadius: BorderRadius.circular(compact ? 999 : 34),
+          ),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(compact ? 999 : 26),
+            child: Image.asset(
+              'assets/me.png',
+              fit: BoxFit.cover,
+              frameBuilder: (context, child, frame, wasSynchronouslyLoaded) {
+                if (wasSynchronouslyLoaded) return child;
+                return AnimatedOpacity(
+                  opacity: frame == null ? 0 : 1,
+                  duration: premiumMedium,
+                  curve: premiumMotion,
+                  child: child,
+                );
+              },
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _HeroLinesPainter extends CustomPainter {
+  final Color accent;
+  final Color secondary;
+  final bool isDark;
+
+  const _HeroLinesPainter({
+    required this.accent,
+    required this.secondary,
+    required this.isDark,
+  });
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final linePaint = Paint()
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 1.2
+      ..color = accent.withValues(alpha: isDark ? 0.07 : 0.045);
+
+    final path = Path()
+      ..moveTo(size.width * 0.08, size.height * 0.295)
+      ..cubicTo(
+        size.width * 0.28,
+        size.height * 0.10,
+        size.width * 0.58,
+        size.height * 0.55,
+        size.width * 0.92,
+        size.height * 0.24,
+      );
+    canvas.drawPath(path, linePaint);
+
+    final secondPaint = Paint()
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 1
+      ..color = secondary.withValues(alpha: isDark ? 0.06 : 0.035);
+    canvas.drawLine(
+      Offset(size.width * 0.68, size.height * 0.2),
+      Offset(size.width * 0.94, size.height * 0.74),
+      secondPaint,
+    );
+  }
+
+  @override
+  bool shouldRepaint(covariant _HeroLinesPainter oldDelegate) {
+    return oldDelegate.accent != accent || oldDelegate.isDark != isDark;
   }
 }
 
@@ -166,7 +321,7 @@ class SocialIconsRow extends StatelessWidget {
         ),
         SocialBtn(
           icon: FontAwesomeIcons.instagram,
-          url: "https://www.instagram.com/khader._.h?igsh=MTQ2bmw1a21kZ2dscw==",
+          url: "https://www.instagram.com/khader._.tech/",
           baseColor: iconColor,
           hoverColor: Colors.purpleAccent,
         ),
