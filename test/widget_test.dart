@@ -16,13 +16,16 @@ void main() {
     );
     await tester.pump(const Duration(milliseconds: 100));
 
-    expect(find.text('KHADER HWAIJEH'), findsOneWidget);
-    expect(find.text('Featured Projects'), findsOneWidget);
-    expect(find.byIcon(Icons.light_mode), findsOneWidget);
+    // Nav wordmark and the hero headline.
+    expect(find.text('Khader Hwaijeh'), findsOneWidget);
+    expect(find.text('Available for new projects'), findsOneWidget);
 
-    await tester.tap(find.byIcon(Icons.light_mode));
+    // App starts in dark mode, so the toggle offers the light-mode icon.
+    expect(find.byIcon(Icons.light_mode_outlined), findsOneWidget);
+
+    await tester.tap(find.byIcon(Icons.light_mode_outlined));
     await tester.pump(const Duration(milliseconds: 300));
 
-    expect(find.byIcon(Icons.dark_mode), findsOneWidget);
+    expect(find.byIcon(Icons.dark_mode_outlined), findsOneWidget);
   });
 }

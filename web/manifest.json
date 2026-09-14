@@ -1,12 +1,12 @@
 {
-    "name": "khaderhash_portfolio",
-    "short_name": "khaderhash_portfolio",
+    "name": "Khader Hassan Hwaijeh — Full-Stack Software Engineer",
+    "short_name": "Khader Hwaijeh",
     "start_url": ".",
     "display": "standalone",
-    "background_color": "#0175C2",
-    "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
-    "orientation": "portrait-primary",
+    "background_color": "#0B0D10",
+    "theme_color": "#0B0D10",
+    "description": "Full-stack software engineer building and operating production web and mobile systems in Flutter, Laravel and React on self-managed Linux/Nginx infrastructure.",
+    "orientation": "any",
     "prefer_related_applications": false,
     "icons": [
         {

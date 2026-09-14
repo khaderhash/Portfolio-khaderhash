@@ -1,42 +1,40 @@
 import 'package:flutter/material.dart';
+
+import '../models/data.dart';
 import '../widgets/cards.dart';
 import '../widgets/shared_widgets.dart';
 
+// Icon keys live in data.dart as strings so the file stays import-free and
+// tool/generate_shell.dart can read the same entries.
+const Map<String, IconData> _educationIcons = {
+  "school": Icons.school_outlined,
+  "code": Icons.code_rounded,
+  "insights": Icons.insights_outlined,
+  "award": Icons.workspace_premium_outlined,
+};
+
 class EducationSection extends StatelessWidget {
   const EducationSection({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const SectionTitle(title: "Education & Courses"),
-        const SizedBox(height: 40),
-        NeonContainer(
-          child: const EducationCard(
-            title: "BS Software Engineering",
-            place: "Yarmouk Private University",
-            date: "2020 - 2026",
-            icon: Icons.school,
-            isMain: true,
-          ),
+        const SectionTitle(
+          kicker: "Background",
+          title: "Education & training",
         ),
-        const SizedBox(height: 20),
-        NeonContainer(
-          child: const EducationCard(
-            title: "App Development",
-            place: "Focal X Agency",
-            date: "2022 - 2023",
-            icon: Icons.code,
+        const SizedBox(height: 28),
+        for (final e in educationData) ...[
+          EducationCard(
+            title: e["title"]!,
+            place: e["place"]!,
+            date: e["date"]!,
+            icon: _educationIcons[e["icon"]] ?? Icons.school_outlined,
           ),
-        ),
-        const SizedBox(height: 15),
-        NeonContainer(
-          child: const EducationCard(
-            title: "Training of Trainers (ToT)",
-            place: "Smart Vision International Academy (UK)",
-            date: "Completed",
-            icon: Icons.workspace_premium,
-          ),
-        ),
+          if (e != educationData.last) const SizedBox(height: 12),
+        ],
       ],
     );
   }

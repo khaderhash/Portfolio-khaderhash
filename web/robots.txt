@@ -1,0 +1,67 @@
+# https://www.khaderhash.me/robots.txt
+#
+# Default: everything is crawlable, by search engines and AI crawlers alike.
+# The AI crawlers below are listed explicitly so the choice is deliberate and
+# easy to reverse — change a group's "Allow: /" to "Disallow: /" to opt out.
+
+User-agent: *
+Allow: /
+
+# ── Search engines ────────────────────────────────────────────────
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+# ── AI / LLM crawlers (currently ALLOWED) ─────────────────────────
+# Google AI Overviews & Gemini training
+User-agent: Google-Extended
+Allow: /
+
+# OpenAI — training corpus
+User-agent: GPTBot
+Allow: /
+
+# OpenAI — live browsing / citations in ChatGPT
+User-agent: OAI-SearchBot
+Allow: /
+User-agent: ChatGPT-User
+Allow: /
+
+# Anthropic — Claude
+User-agent: ClaudeBot
+Allow: /
+User-agent: Claude-Web
+Allow: /
+User-agent: anthropic-ai
+Allow: /
+
+# Perplexity
+User-agent: PerplexityBot
+Allow: /
+User-agent: Perplexity-User
+Allow: /
+
+# Apple Intelligence
+User-agent: Applebot
+Allow: /
+User-agent: Applebot-Extended
+Allow: /
+
+# Meta AI
+User-agent: meta-externalagent
+Allow: /
+
+# Amazon
+User-agent: Amazonbot
+Allow: /
+
+# Common Crawl (feeds many open training sets)
+User-agent: CCBot
+Allow: /
+
+Sitemap: https://www.khaderhash.me/sitemap.xml

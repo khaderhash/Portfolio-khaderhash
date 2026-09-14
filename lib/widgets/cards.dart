@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'shared_widgets.dart';
 
+// ────────────── Education card ──────────────
+
 class EducationCard extends StatelessWidget {
   final String title, place, date;
   final IconData icon;
-  final bool isMain;
 
   const EducationCard({
     super.key,
@@ -16,29 +16,27 @@ class EducationCard extends StatelessWidget {
     required this.place,
     required this.date,
     required this.icon,
-    this.isMain = false,
   });
 
   @override
   Widget build(BuildContext context) {
-    final primaryColor = Theme.of(context).primaryColor;
-
+    final accent = premiumAccent(context);
     return GlassPanel(
-      padding: const EdgeInsets.all(22),
-      radius: 18,
+      padding: const EdgeInsets.all(20),
+      radius: 14,
       child: Row(
         children: [
           Container(
-            width: 54,
-            height: 54,
+            width: 44,
+            height: 44,
             decoration: BoxDecoration(
-              color: primaryColor.withValues(alpha: 0.10),
-              borderRadius: BorderRadius.circular(16),
-              border: Border.all(color: primaryColor.withValues(alpha: 0.20)),
+              color: accent.withValues(alpha: 0.10),
+              borderRadius: BorderRadius.circular(10),
+              border: Border.all(color: accent.withValues(alpha: 0.25)),
             ),
-            child: Icon(icon, size: 28, color: primaryColor),
+            child: Icon(icon, size: 20, color: accent),
           ),
-          const SizedBox(width: 18),
+          const SizedBox(width: 16),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -46,16 +44,17 @@ class EducationCard extends StatelessWidget {
                 Text(
                   title,
                   style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w900,
+                    fontSize: 15.5,
+                    fontWeight: FontWeight.w600,
                     color: premiumText(context),
+                    letterSpacing: -0.2,
                   ),
                 ),
-                const SizedBox(height: 4),
+                const SizedBox(height: 3),
                 Text(
                   place,
                   style: TextStyle(
-                    fontSize: 15,
+                    fontSize: 13.5,
                     color: premiumMutedText(context),
                   ),
                 ),
@@ -65,7 +64,7 @@ class EducationCard extends StatelessWidget {
           const SizedBox(width: 12),
           Text(
             date,
-            style: GoogleFonts.firaCode(fontSize: 13, color: primaryColor),
+            style: monoStyle(context, size: 12, color: accent),
           ),
         ],
       ),
@@ -73,9 +72,25 @@ class EducationCard extends StatelessWidget {
   }
 }
 
+// ────────────── Project card ──────────────
+
 class ProjectCard extends StatefulWidget {
   final Map<String, dynamic> project;
-  const ProjectCard({super.key, required this.project});
+
+  /// Smaller type, tighter padding, shorter visual — used for the
+  /// secondary "Other projects" tier.
+  final bool compact;
+
+  /// Accent-tinted border so production systems read as heavier than
+  /// the secondary tier even before the reader parses the text.
+  final bool featured;
+
+  const ProjectCard({
+    super.key,
+    required this.project,
+    this.compact = false,
+    this.featured = false,
+  });
 
   @override
   State<ProjectCard> createState() => _ProjectCardState();
@@ -86,439 +101,424 @@ class _ProjectCardState extends State<ProjectCard> {
 
   @override
   Widget build(BuildContext context) {
-    final project = widget.project;
-    final primaryColor = Theme.of(context).primaryColor;
+    final p = widget.project;
+    final accent = premiumAccent(context);
     final muted = premiumMutedText(context);
-    final role = project['role'] as String?;
-    final hasVideo = project.containsKey('video') && project['video'] != "";
-    final hasGithub = project.containsKey('github') && project['github'] != "";
-    final hasBehance =
-        project.containsKey('behance') && project['behance'] != "";
-    final hasWebsite =
-        project.containsKey('website') && project['website'] != "";
-    final achievements =
-        (project['achievements'] as List?)?.cast<String>() ?? const <String>[];
-    final leadRole = project['leadRole'] as String? ?? project['desc'];
-    final architecture = project['architecture'] as String? ?? "";
-    final devOpsQa = project['devOpsQa'] as String?;
+    final role = p['role'] as String?;
+    final badges = (p['cardBadges'] as List?)?.cast<String>() ??
+        (p['badges'] as List?)?.cast<String>() ??
+        const <String>[];
+    final isBrandMark = (p['logo'] as bool?) ?? false;
+    final brandColor =
+        p['brandColor'] is int ? Color(p['brandColor'] as int) : null;
+    final compact = widget.compact;
+    final featured = widget.featured;
+
+    final idleBorder = featured
+        ? accent.withValues(alpha: 0.22)
+        : premiumBorder(context);
 
     return MouseRegion(
       cursor: SystemMouseCursors.click,
       onEnter: (_) => setState(() => _hovered = true),
       onExit: (_) => setState(() => _hovered = false),
       child: GestureDetector(
-        onTap: () => _showProjectDetails(
-          context: context,
-          project: project,
-          achievements: achievements,
-          leadRole: leadRole,
-          architecture: architecture,
-          devOpsQa: devOpsQa,
-          hasWebsite: hasWebsite,
-          hasVideo: hasVideo,
-          hasGithub: hasGithub,
-          hasBehance: hasBehance,
-        ),
-        child: AnimatedScale(
-          scale: _hovered ? 1.018 : 1,
+        onTap: () => _openDetails(context, p),
+        child: AnimatedContainer(
           duration: premiumFast,
           curve: premiumMotion,
-          child: AnimatedContainer(
-            duration: premiumFast,
-            curve: premiumMotion,
-            decoration: BoxDecoration(
-              color: premiumSurface(context),
-              borderRadius: BorderRadius.circular(22),
-              boxShadow: [
-                BoxShadow(
-                  color: primaryColor.withValues(alpha: _hovered ? 0.18 : 0.08),
-                  blurRadius: _hovered ? 34 : 20,
-                  offset: Offset(0, _hovered ? 20 : 12),
-                ),
-              ],
+          transform: Matrix4.translationValues(0, _hovered ? -4 : 0, 0),
+          decoration: BoxDecoration(
+            color: premiumSurface(context),
+            borderRadius: BorderRadius.circular(14),
+            border: Border.all(
+              color: _hovered ? accent.withValues(alpha: 0.45) : idleBorder,
             ),
-            clipBehavior: Clip.antiAlias,
-            child: LayoutBuilder(
-              builder: (context, constraints) {
-                final imageHeight = constraints.maxHeight * 0.50;
-                final bodyHeight = constraints.maxHeight - imageHeight;
-
-                return Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
+          ),
+          clipBehavior: Clip.antiAlias,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Image / brand-mark panel
+              AspectRatio(
+                aspectRatio: compact ? 16 / 9 : 16 / 10,
+                child: Stack(
+                  fit: StackFit.expand,
                   children: [
-                    SizedBox(
-                      height: imageHeight,
-                      child: Stack(
-                        fit: StackFit.expand,
+                    _CardVisual(
+                      path: p['image'],
+                      isBrandMark: isBrandMark,
+                      brandColor: brandColor,
+                      cacheWidth: compact ? 360 : 540,
+                      errorColor: muted,
+                      semanticLabel: '${p['title']} — ${p['role']}',
+                    ),
+                    if (badges.isNotEmpty)
+                      Positioned(
+                        top: 10,
+                        left: 10,
+                        right: 10,
+                        child: Wrap(
+                          spacing: 6,
+                          runSpacing: 6,
+                          children: badges
+                              .take(2)
+                              .map((b) => _CardBadge(label: b))
+                              .toList(),
+                        ),
+                      ),
+                  ],
+                ),
+              ),
+              // Body
+              Expanded(
+                child: Padding(
+                  padding: compact
+                      ? const EdgeInsets.fromLTRB(14, 14, 14, 12)
+                      : const EdgeInsets.fromLTRB(18, 18, 18, 16),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        p['title'],
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                          fontSize: compact ? 15 : 17,
+                          fontWeight: FontWeight.w600,
+                          letterSpacing: -0.3,
+                          color: premiumText(context),
+                        ),
+                      ),
+                      if (role != null && role.isNotEmpty) ...[
+                        const SizedBox(height: 4),
+                        Text(
+                          role,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: monoStyle(context,
+                              size: compact ? 10.5 : 11.5, color: accent),
+                        ),
+                      ],
+                      SizedBox(height: compact ? 8 : 10),
+                      // Flexible, not a bare Text: at tight widths or with a
+                      // larger text scale the description would otherwise
+                      // overflow the card instead of dropping a line.
+                      Flexible(
+                        child: Text(
+                          (p['outcome'] as String?) ?? p['desc'],
+                          maxLines: 3,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                            fontSize: compact ? 12.5 : 13.5,
+                            height: 1.5,
+                            color: muted,
+                          ),
+                        ),
+                      ),
+                      const Spacer(),
+                      Wrap(
+                        spacing: 6,
+                        runSpacing: 6,
+                        children: (p['tech'] as List)
+                            .take(compact ? 2 : 3)
+                            .map<Widget>(
+                              (t) => _TechChipSm(label: "$t"),
+                            )
+                            .toList(),
+                      ),
+                      SizedBox(height: compact ? 10 : 14),
+                      Row(
                         children: [
-                          RepaintBoundary(
-                            child: AnimatedScale(
-                              scale: _hovered ? 1.04 : 1,
-                              duration: const Duration(milliseconds: 360),
-                              curve: premiumMotion,
-                              child: ProjectImage(
-                                path: project['image'],
-                                fit: BoxFit.cover,
-                                cacheWidth: 760,
-                                errorColor: muted,
-                              ),
+                          Text(
+                            "See the build",
+                            style: TextStyle(
+                              fontSize: compact ? 12 : 13,
+                              fontWeight: FontWeight.w600,
+                              color: accent,
                             ),
                           ),
-                          DecoratedBox(
-                            decoration: BoxDecoration(
-                              gradient: LinearGradient(
-                                begin: Alignment.topCenter,
-                                end: Alignment.bottomCenter,
-                                colors: [
-                                  Colors.black.withValues(alpha: 0.06),
-                                  Colors.black.withValues(alpha: 0.62),
-                                ],
-                              ),
-                            ),
-                          ),
-                          Positioned(
-                            left: 18,
-                            right: 18,
-                            bottom: 16,
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  project['title'],
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
-                                  style: const TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w900,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                                if (role != null && role.isNotEmpty) ...[
-                                  const SizedBox(height: 5),
-                                  Text(
-                                    role,
-                                    maxLines: 1,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: GoogleFonts.firaCode(
-                                      color: Colors.white.withValues(
-                                        alpha: 0.84,
-                                      ),
-                                      fontSize: 11.3,
-                                      fontWeight: FontWeight.w900,
-                                    ),
-                                  ),
-                                ],
-                              ],
+                          const SizedBox(width: 6),
+                          AnimatedSlide(
+                            offset: Offset(_hovered ? 0.25 : 0, 0),
+                            duration: premiumFast,
+                            curve: premiumMotion,
+                            child: Icon(
+                              Icons.arrow_forward_rounded,
+                              size: 16,
+                              color: accent,
                             ),
                           ),
                         ],
                       ),
-                    ),
-                    SizedBox(
-                      height: bodyHeight,
-                      child: Padding(
-                        padding: const EdgeInsets.fromLTRB(18, 18, 18, 16),
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              project['title'],
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style: TextStyle(
-                                color: premiumText(context),
-                                fontSize: 17,
-                                height: 1.15,
-                                fontWeight: FontWeight.w900,
-                              ),
-                            ),
-                            if (role != null && role.isNotEmpty) ...[
-                              const SizedBox(height: 6),
-                              Text(
-                                role,
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                                style: GoogleFonts.firaCode(
-                                  color: primaryColor,
-                                  fontSize: 11.5,
-                                  fontWeight: FontWeight.w900,
-                                ),
-                              ),
-                            ],
-                            const SizedBox(height: 10),
-                            Text(
-                              project['desc'],
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
-                              style: TextStyle(
-                                fontSize: 14.5,
-                                height: 1.42,
-                                color: muted,
-                              ),
-                            ),
-                            const SizedBox(height: 12),
-                            Wrap(
-                              spacing: 7,
-                              runSpacing: 7,
-                              children: (project['tech'] as List)
-                                  .take(4)
-                                  .map<Widget>(
-                                    (tech) => _CardTechChip(label: "$tech"),
-                                  )
-                                  .toList(),
-                            ),
-                            const Spacer(),
-                            Row(
-                              children: [
-                                Text(
-                                  "View details",
-                                  style: TextStyle(
-                                    color: primaryColor,
-                                    fontWeight: FontWeight.w900,
-                                  ),
-                                ),
-                                const SizedBox(width: 6),
-                                Icon(
-                                  Icons.arrow_forward,
-                                  size: 16,
-                                  color: primaryColor,
-                                ),
-                                const Spacer(),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
-                );
-              },
-            ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
       ),
     );
   }
 
-  void _showProjectDetails({
-    required BuildContext context,
-    required Map<String, dynamic> project,
-    required List<String> achievements,
-    required String leadRole,
-    required String architecture,
-    required String? devOpsQa,
-    required bool hasWebsite,
-    required bool hasVideo,
-    required bool hasGithub,
-    required bool hasBehance,
-  }) {
-    final primaryColor = Theme.of(context).primaryColor;
+  void _openDetails(BuildContext context, Map<String, dynamic> p) {
+    final achievements =
+        (p['achievements'] as List?)?.cast<String>() ?? const <String>[];
+    final leadRole = p['leadRole'] as String? ?? p['desc'];
+    final architecture = p['architecture'] as String? ?? "";
+    final devOpsQa = p['devOpsQa'] as String?;
+    final label = p['label'] as String?;
+    final hasVideo = (p['video'] as String?)?.isNotEmpty ?? false;
+    final hasGithub = (p['github'] as String?)?.isNotEmpty ?? false;
+    final hasBehance = (p['behance'] as String?)?.isNotEmpty ?? false;
+    final hasWebsite = (p['website'] as String?)?.isNotEmpty ?? false;
+
+    final accent = premiumAccent(context);
     final muted = premiumMutedText(context);
-    final label = project['label'] as String?;
 
     showDialog<void>(
       context: context,
-      builder: (dialogContext) {
-        final dialogMaxHeight =
-            MediaQuery.sizeOf(dialogContext).height -
-            const EdgeInsets.symmetric(vertical: 24).vertical;
-
+      barrierColor: Colors.black54,
+      builder: (dialogCtx) {
+        final maxH = MediaQuery.of(dialogCtx).size.height - 48;
         return Dialog(
-          insetPadding: const EdgeInsets.symmetric(
-            horizontal: 18,
-            vertical: 24,
-          ),
+          insetPadding:
+              const EdgeInsets.symmetric(horizontal: 18, vertical: 24),
           backgroundColor: Colors.transparent,
           child: ConstrainedBox(
-            constraints: BoxConstraints(
-              maxWidth: 760,
-              maxHeight: dialogMaxHeight,
-            ),
+            constraints: BoxConstraints(maxWidth: 760, maxHeight: maxH),
             child: GlassPanel(
               padding: EdgeInsets.zero,
-              radius: 22,
+              radius: 16,
               child: ClipRRect(
-                borderRadius: BorderRadius.circular(22),
+                borderRadius: BorderRadius.circular(16),
                 child: SingleChildScrollView(
                   child: Column(
-                    mainAxisSize: MainAxisSize.min,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(24, 24, 24, 22),
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Stack(
-                              children: [
-                                _ProjectShowcase(
-                                  imagePath: project['image'],
-                                  videoUrl: hasVideo
-                                      ? project['video'] as String
-                                      : null,
-                                  errorColor: muted,
-                                ),
-                                Positioned(
-                                  top: 12,
-                                  right: 12,
-                                  child: IconButton(
-                                    onPressed: () =>
-                                        Navigator.pop(dialogContext),
-                                    tooltip: "Close",
-                                    style: IconButton.styleFrom(
-                                      backgroundColor: Colors.black.withValues(
-                                        alpha: 0.42,
-                                      ),
-                                      foregroundColor: Colors.white,
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(12),
+                      Stack(
+                        children: [
+                          AspectRatio(
+                            aspectRatio: 16 / 9,
+                            child: _CardVisual(
+                              path: p['image'],
+                              isBrandMark: (p['logo'] as bool?) ?? false,
+                              brandColor: p['brandColor'] is int
+                                  ? Color(p['brandColor'] as int)
+                                  : null,
+                              cacheWidth: 1200,
+                              errorColor: muted,
+                              semanticLabel:
+                                  '${p['title']} — ${p['role']}',
+                            ),
+                          ),
+                          if (hasVideo)
+                            Positioned.fill(
+                              child: Center(
+                                child: GestureDetector(
+                                  onTap: () =>
+                                      launchUrl(Uri.parse(p['video'])),
+                                  child: Container(
+                                    width: 64,
+                                    height: 64,
+                                    decoration: BoxDecoration(
+                                      color:
+                                          Colors.black.withValues(alpha: 0.5),
+                                      shape: BoxShape.circle,
+                                      border: Border.all(
+                                        color: Colors.white
+                                            .withValues(alpha: 0.4),
                                       ),
                                     ),
-                                    icon: const Icon(Icons.close_rounded),
+                                    child: const Icon(
+                                      Icons.play_arrow_rounded,
+                                      color: Colors.white,
+                                      size: 36,
+                                    ),
                                   ),
                                 ),
-                              ],
+                              ),
                             ),
-                            const SizedBox(height: 22),
+                          Positioned(
+                            top: 12,
+                            right: 12,
+                            child: Material(
+                              color: Colors.black.withValues(alpha: 0.5),
+                              shape: const CircleBorder(),
+                              child: IconButton(
+                                tooltip: "Close",
+                                icon: const Icon(Icons.close_rounded,
+                                    color: Colors.white, size: 20),
+                                onPressed: () => Navigator.pop(dialogCtx),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(24, 22, 24, 22),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            if ((p['badges'] as List?)?.isNotEmpty ?? false) ...[
+                              Wrap(
+                                spacing: 6,
+                                runSpacing: 6,
+                                children: ((p['badges'] as List).cast<String>())
+                                    .map((b) => _CardBadge(label: b))
+                                    .toList(),
+                              ),
+                              const SizedBox(height: 14),
+                            ],
                             if (label != null && label.isNotEmpty) ...[
-                              _ProjectBadge(label: label),
+                              Container(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 10, vertical: 5),
+                                decoration: BoxDecoration(
+                                  color: accent.withValues(alpha: 0.12),
+                                  borderRadius: BorderRadius.circular(999),
+                                  border: Border.all(
+                                    color: accent.withValues(alpha: 0.4),
+                                  ),
+                                ),
+                                child: Text(
+                                  label,
+                                  style: TextStyle(
+                                    fontSize: 11,
+                                    color: accent,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                              ),
                               const SizedBox(height: 12),
                             ],
                             Text(
-                              project['title'],
+                              p['title'],
                               style: TextStyle(
+                                fontSize: 24,
+                                fontWeight: FontWeight.w700,
+                                letterSpacing: -0.6,
                                 color: premiumText(context),
-                                fontSize: 25,
-                                height: 1.18,
-                                fontWeight: FontWeight.w900,
                               ),
                             ),
-                            if ((project['role'] as String?)?.isNotEmpty ??
+                            if ((p['role'] as String?)?.isNotEmpty ??
                                 false) ...[
-                              const SizedBox(height: 8),
+                              const SizedBox(height: 6),
                               Text(
-                                project['role'],
-                                style: GoogleFonts.firaCode(
-                                  color: primaryColor,
-                                  fontSize: 13,
-                                  fontWeight: FontWeight.w900,
-                                ),
+                                p['role'],
+                                style: monoStyle(context,
+                                    size: 12, color: accent),
                               ),
                             ],
-                            const SizedBox(height: 12),
+                            const SizedBox(height: 14),
                             Text(
-                              project['desc'],
+                              leadRole,
                               style: TextStyle(
-                                color: muted,
-                                height: 1.48,
                                 fontSize: 14.5,
+                                height: 1.6,
+                                color: muted,
                               ),
                             ),
                             const SizedBox(height: 18),
                             Wrap(
-                              spacing: 8,
-                              runSpacing: 8,
-                              children: (project['tech'] as List)
+                              spacing: 6,
+                              runSpacing: 6,
+                              children: (p['tech'] as List)
                                   .map<Widget>(
-                                    (tech) => _TechPill(label: "$tech"),
+                                    (t) => _TechChipSm(label: "$t"),
                                   )
                                   .toList(),
                             ),
-                            const SizedBox(height: 20),
+                            const SizedBox(height: 22),
                             if (devOpsQa != null && devOpsQa.isNotEmpty) ...[
                               _DetailBlock(
-                                title: "DevOps & QA",
-                                child: devOpsQa,
-                                strong: true,
-                              ),
+                                  title: "DevOps & QA",
+                                  body: devOpsQa,
+                                  strong: true),
                               const SizedBox(height: 20),
                             ],
-                            Text(
-                              "Achievements",
-                              style: GoogleFonts.firaCode(
-                                fontSize: 12,
-                                color: primaryColor,
-                                fontWeight: FontWeight.w900,
+                            if (achievements.isNotEmpty) ...[
+                              Text(
+                                "Highlights",
+                                style: monoStyle(context,
+                                    size: 11.5,
+                                    color: accent,
+                                    weight: FontWeight.w600),
                               ),
-                            ),
-                            const SizedBox(height: 10),
-                            ...achievements.map(
-                              (achievement) => Padding(
-                                padding: const EdgeInsets.only(bottom: 10),
-                                child: Row(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.only(top: 8),
-                                      child: Container(
-                                        width: 5,
-                                        height: 5,
-                                        decoration: BoxDecoration(
-                                          color: primaryColor,
-                                          shape: BoxShape.circle,
+                              const SizedBox(height: 10),
+                              ...achievements.map(
+                                (a) => Padding(
+                                  padding: const EdgeInsets.only(bottom: 10),
+                                  child: Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.only(top: 8),
+                                        child: Container(
+                                          width: 4,
+                                          height: 4,
+                                          decoration: BoxDecoration(
+                                            color: accent,
+                                            shape: BoxShape.circle,
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                    const SizedBox(width: 10),
-                                    Expanded(
-                                      child: Text(
-                                        achievement,
-                                        style: TextStyle(
-                                          color: muted,
-                                          height: 1.45,
-                                          fontSize: 14.2,
+                                      const SizedBox(width: 10),
+                                      Expanded(
+                                        child: Text(
+                                          a,
+                                          style: TextStyle(
+                                            color: muted,
+                                            fontSize: 13.5,
+                                            height: 1.55,
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                  ],
+                                    ],
+                                  ),
                                 ),
                               ),
-                            ),
-                            const SizedBox(height: 10),
-                            _DetailBlock(
-                              title: "Tech Stack & Architecture",
-                              child: architecture,
-                              strong: true,
-                            ),
+                              const SizedBox(height: 10),
+                            ],
+                            if (architecture.isNotEmpty)
+                              _DetailBlock(
+                                  title: "Stack & Architecture",
+                                  body: architecture,
+                                  strong: false),
                             const SizedBox(height: 22),
                             Wrap(
                               spacing: 8,
                               runSpacing: 8,
-                              alignment: WrapAlignment.end,
                               children: [
                                 if (hasWebsite)
-                                  _DialogAction(
+                                  _ActionBtn(
                                     icon: Icons.public_rounded,
-                                    label: "Website",
-                                    onPressed: () => launchUrl(
-                                      Uri.parse(project['website']),
-                                    ),
+                                    label: "Visit Live Platform",
+                                    onTap: () =>
+                                        launchUrl(Uri.parse(p['website'])),
                                   ),
                                 if (hasVideo)
-                                  _DialogAction(
+                                  _ActionBtn(
                                     icon: Icons.play_arrow_rounded,
                                     label: "Demo",
-                                    onPressed: () =>
-                                        launchUrl(Uri.parse(project['video'])),
+                                    onTap: () =>
+                                        launchUrl(Uri.parse(p['video'])),
                                   ),
                                 if (hasGithub)
-                                  _DialogAction(
+                                  _ActionBtn(
                                     icon: FontAwesomeIcons.github,
                                     label: "GitHub",
-                                    onPressed: () =>
-                                        launchUrl(Uri.parse(project['github'])),
+                                    onTap: () =>
+                                        launchUrl(Uri.parse(p['github'])),
                                   ),
                                 if (hasBehance)
-                                  _DialogAction(
+                                  _ActionBtn(
                                     icon: FontAwesomeIcons.behance,
                                     label: "Behance",
-                                    onPressed: () => launchUrl(
-                                      Uri.parse(project['behance']),
-                                    ),
+                                    onTap: () =>
+                                        launchUrl(Uri.parse(p['behance'])),
                                   ),
                               ],
                             ),
@@ -537,11 +537,17 @@ class _ProjectCardState extends State<ProjectCard> {
   }
 }
 
+// ────────────── Image ──────────────
+
 class ProjectImage extends StatelessWidget {
   final String path;
   final BoxFit fit;
   final int cacheWidth;
   final Color errorColor;
+
+  /// Alt text. Flutter paints to a canvas, so this is the only thing a
+  /// screen reader can announce for the image.
+  final String? semanticLabel;
 
   const ProjectImage({
     super.key,
@@ -549,6 +555,7 @@ class ProjectImage extends StatelessWidget {
     required this.fit,
     required this.cacheWidth,
     required this.errorColor,
+    this.semanticLabel,
   });
 
   @override
@@ -557,149 +564,138 @@ class ProjectImage extends StatelessWidget {
         ? Image.network(
             '/${path.substring(4)}',
             fit: fit,
+            semanticLabel: semanticLabel,
             cacheWidth: cacheWidth,
             filterQuality: FilterQuality.low,
             gaplessPlayback: true,
-            errorBuilder: _errorBuilder,
+            errorBuilder: _err,
           )
         : Image.asset(
             path,
             fit: fit,
+            semanticLabel: semanticLabel,
             cacheWidth: cacheWidth,
             filterQuality: FilterQuality.low,
             gaplessPlayback: true,
-            frameBuilder: (context, child, frame, wasSynchronouslyLoaded) {
-              if (wasSynchronouslyLoaded) return child;
+            frameBuilder: (c, child, frame, sync) {
+              if (sync) return child;
               return AnimatedOpacity(
                 opacity: frame == null ? 0 : 1,
                 duration: const Duration(milliseconds: 220),
-                curve: premiumMotion,
                 child: child,
               );
             },
-            errorBuilder: _errorBuilder,
+            errorBuilder: _err,
           );
-
-    return RepaintBoundary(child: image);
+    return image;
   }
 
-  Widget _errorBuilder(BuildContext context, Object error, StackTrace? stack) {
-    return Container(
-      color: Colors.grey[850],
-      child: Icon(Icons.image, size: 52, color: errorColor),
+  Widget _err(BuildContext c, Object e, StackTrace? s) =>
+      Container(color: Colors.transparent, child: Icon(Icons.image_outlined, size: 40, color: errorColor));
+}
+
+// ────────────── Helpers ──────────────
+
+class _DetailBlock extends StatelessWidget {
+  final String title;
+  final String body;
+  final bool strong;
+  const _DetailBlock(
+      {required this.title, required this.body, this.strong = false});
+
+  @override
+  Widget build(BuildContext context) {
+    final accent = premiumAccent(context);
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          title,
+          style: monoStyle(context,
+              size: 11.5, color: accent, weight: FontWeight.w600),
+        ),
+        const SizedBox(height: 8),
+        Text(
+          body,
+          style: TextStyle(
+            color: strong ? premiumText(context) : premiumMutedText(context),
+            fontSize: 13.5,
+            height: 1.6,
+            fontWeight: strong ? FontWeight.w600 : FontWeight.w400,
+          ),
+        ),
+      ],
     );
   }
 }
 
-class _ProjectShowcase extends StatelessWidget {
-  final String imagePath;
-  final String? videoUrl;
-  final Color errorColor;
-
-  const _ProjectShowcase({
-    required this.imagePath,
-    required this.videoUrl,
-    required this.errorColor,
-  });
+class _TechChipSm extends StatelessWidget {
+  final String label;
+  const _TechChipSm({required this.label});
 
   @override
   Widget build(BuildContext context) {
-    final primaryColor = Theme.of(context).primaryColor;
-    final hasVideo = videoUrl != null && videoUrl!.isNotEmpty;
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 9, vertical: 4),
+      decoration: BoxDecoration(
+        color: premiumSurfaceAlt(context),
+        borderRadius: BorderRadius.circular(6),
+        border: Border.all(color: premiumBorder(context)),
+      ),
+      child: Text(
+        label,
+        style: TextStyle(
+          fontSize: 11.5,
+          fontWeight: FontWeight.w500,
+          color: premiumMutedText(context),
+        ),
+      ),
+    );
+  }
+}
 
-    return RepaintBoundary(
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(18),
-        child: AspectRatio(
-          aspectRatio: 16 / 9,
-          child: Stack(
-            fit: StackFit.expand,
+class _ActionBtn extends StatefulWidget {
+  final IconData icon;
+  final String label;
+  final VoidCallback onTap;
+  const _ActionBtn({required this.icon, required this.label, required this.onTap});
+
+  @override
+  State<_ActionBtn> createState() => _ActionBtnState();
+}
+
+class _ActionBtnState extends State<_ActionBtn> {
+  bool _h = false;
+  @override
+  Widget build(BuildContext context) {
+    final accent = premiumAccent(context);
+    return MouseRegion(
+      cursor: SystemMouseCursors.click,
+      onEnter: (_) => setState(() => _h = true),
+      onExit: (_) => setState(() => _h = false),
+      child: GestureDetector(
+        onTap: widget.onTap,
+        child: AnimatedContainer(
+          duration: premiumFast,
+          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+          decoration: BoxDecoration(
+            color: _h ? accent.withValues(alpha: 0.10) : Colors.transparent,
+            borderRadius: BorderRadius.circular(8),
+            border: Border.all(color: accent.withValues(alpha: 0.4)),
+          ),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
             children: [
-              ProjectImage(
-                path: imagePath,
-                fit: BoxFit.cover,
-                cacheWidth: 1200,
-                errorColor: errorColor,
-              ),
-              DecoratedBox(
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                    colors: [
-                      Colors.black.withValues(alpha: hasVideo ? 0.10 : 0.02),
-                      Colors.black.withValues(alpha: hasVideo ? 0.56 : 0.14),
-                    ],
-                  ),
+              FaIcon(widget.icon, size: 13, color: accent),
+              const SizedBox(width: 7),
+              Text(
+                widget.label,
+                style: TextStyle(
+                  fontSize: 13,
+                  fontWeight: FontWeight.w600,
+                  color: accent,
                 ),
               ),
-              if (hasVideo)
-                Center(
-                  child: InkWell(
-                    onTap: () => launchUrl(Uri.parse(videoUrl!)),
-                    borderRadius: BorderRadius.circular(999),
-                    child: Container(
-                      width: 76,
-                      height: 76,
-                      decoration: BoxDecoration(
-                        color: Colors.black.withValues(alpha: 0.46),
-                        shape: BoxShape.circle,
-                        border: Border.all(
-                          color: Colors.white.withValues(alpha: 0.28),
-                        ),
-                        boxShadow: [
-                          BoxShadow(
-                            color: primaryColor.withValues(alpha: 0.22),
-                            blurRadius: 28,
-                            offset: const Offset(0, 14),
-                          ),
-                        ],
-                      ),
-                      child: const Icon(
-                        Icons.play_arrow_rounded,
-                        color: Colors.white,
-                        size: 46,
-                      ),
-                    ),
-                  ),
-                ),
-              if (hasVideo)
-                Positioned(
-                  left: 16,
-                  bottom: 14,
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 11,
-                      vertical: 7,
-                    ),
-                    decoration: BoxDecoration(
-                      color: Colors.black.withValues(alpha: 0.48),
-                      borderRadius: BorderRadius.circular(999),
-                      border: Border.all(
-                        color: Colors.white.withValues(alpha: 0.18),
-                      ),
-                    ),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Icon(
-                          Icons.play_circle_outline_rounded,
-                          color: primaryColor,
-                          size: 16,
-                        ),
-                        const SizedBox(width: 6),
-                        const Text(
-                          "Watch demo",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 12,
-                            fontWeight: FontWeight.w900,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
             ],
           ),
         ),
@@ -708,158 +704,119 @@ class _ProjectShowcase extends StatelessWidget {
   }
 }
 
-class _DetailBlock extends StatelessWidget {
-  final String title;
-  final String child;
-  final bool strong;
+// ────────────── Visual: screenshot OR brand-mark panel ──────────────
+//
+// Brand-mark mode renders the logo as a contained mark on a soft
+// tinted backdrop derived from the project's brand color. Same frame
+// as screenshot mode, so visual rhythm across cards is preserved.
 
-  const _DetailBlock({
-    required this.title,
-    required this.child,
-    this.strong = false,
+class _CardVisual extends StatelessWidget {
+  final String path;
+  final bool isBrandMark;
+  final Color? brandColor;
+  final int cacheWidth;
+  final Color errorColor;
+  final String? semanticLabel;
+
+  const _CardVisual({
+    required this.path,
+    required this.isBrandMark,
+    required this.brandColor,
+    required this.cacheWidth,
+    required this.errorColor,
+    this.semanticLabel,
   });
 
   @override
   Widget build(BuildContext context) {
-    final primaryColor = Theme.of(context).primaryColor;
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          title,
-          style: GoogleFonts.firaCode(
-            fontSize: 12,
-            color: primaryColor,
-            fontWeight: FontWeight.w900,
-          ),
+    if (!isBrandMark) {
+      return Container(
+        color: premiumSurfaceAlt(context),
+        child: ProjectImage(
+          path: path,
+          fit: BoxFit.cover,
+          cacheWidth: cacheWidth,
+          errorColor: errorColor,
+          semanticLabel: semanticLabel,
         ),
-        const SizedBox(height: 9),
-        Text(
-          child,
-          style: TextStyle(
-            color: strong ? premiumText(context) : premiumMutedText(context),
-            fontSize: 14.5,
-            height: 1.48,
-            fontWeight: strong ? FontWeight.w800 : FontWeight.w500,
-          ),
-        ),
-      ],
-    );
-  }
-}
+      );
+    }
 
-class _ProjectBadge extends StatelessWidget {
-  final String label;
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final base = brandColor ?? premiumAccent(context);
+    // Soft tinted backdrop — mark sits on a calm brand-coloured panel.
+    final bg = isDark
+        ? Color.lerp(base, Colors.black, 0.70)!
+        : Color.lerp(base, Colors.white, 0.92)!;
 
-  const _ProjectBadge({required this.label});
-
-  @override
-  Widget build(BuildContext context) {
-    final primaryColor = Theme.of(context).primaryColor;
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
       decoration: BoxDecoration(
-        color: primaryColor.withValues(alpha: 0.18),
-        borderRadius: BorderRadius.circular(999),
-        border: Border.all(color: primaryColor.withValues(alpha: 0.42)),
-      ),
-      child: Text(
-        label,
-        style: TextStyle(
-          color: primaryColor,
-          fontSize: 11,
-          fontWeight: FontWeight.w900,
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [
+            bg,
+            Color.lerp(bg, isDark ? Colors.black : Colors.white, 0.35)!,
+          ],
         ),
       ),
-    );
-  }
-}
-
-class _CardTechChip extends StatelessWidget {
-  final String label;
-
-  const _CardTechChip({required this.label});
-
-  @override
-  Widget build(BuildContext context) {
-    final primaryColor = Theme.of(context).primaryColor;
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-      decoration: BoxDecoration(
-        color: primaryColor.withValues(alpha: 0.08),
-        borderRadius: BorderRadius.circular(999),
-        border: Border.all(color: primaryColor.withValues(alpha: 0.14)),
-      ),
-      child: Text(
-        label,
-        maxLines: 1,
-        overflow: TextOverflow.ellipsis,
-        style: TextStyle(
-          fontSize: 11.3,
-          color: primaryColor,
-          fontWeight: FontWeight.w800,
-        ),
-      ),
-    );
-  }
-}
-
-class _TechPill extends StatelessWidget {
-  final String label;
-
-  const _TechPill({required this.label});
-
-  @override
-  Widget build(BuildContext context) {
-    final primaryColor = Theme.of(context).primaryColor;
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-      decoration: BoxDecoration(
-        color: primaryColor.withValues(alpha: 0.10),
-        borderRadius: BorderRadius.circular(999),
-        border: Border.all(color: primaryColor.withValues(alpha: 0.16)),
-      ),
-      child: Text(
-        label,
-        style: TextStyle(
-          fontSize: 12,
-          color: primaryColor,
-          fontWeight: FontWeight.w800,
-        ),
-      ),
-    );
-  }
-}
-
-class _DialogAction extends StatelessWidget {
-  final IconData icon;
-  final String label;
-  final VoidCallback onPressed;
-
-  const _DialogAction({
-    required this.icon,
-    required this.label,
-    required this.onPressed,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(left: 8),
-      child: OutlinedButton.icon(
-        onPressed: onPressed,
-        icon: FaIcon(icon, size: 15),
-        label: Text(label),
-        style: OutlinedButton.styleFrom(
-          foregroundColor: Theme.of(context).primaryColor,
-          side: BorderSide(
-            color: Theme.of(context).primaryColor.withValues(alpha: 0.35),
-          ),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10),
+      child: Center(
+        child: Padding(
+          padding: const EdgeInsets.all(28),
+          child: ProjectImage(
+            path: path,
+            fit: BoxFit.contain,
+            cacheWidth: cacheWidth,
+            errorColor: errorColor,
+            semanticLabel: semanticLabel,
           ),
         ),
+      ),
+    );
+  }
+}
+
+// ────────────── Badge pill (Live Production / Founder / …) ──────────────
+
+class _CardBadge extends StatelessWidget {
+  final String label;
+  const _CardBadge({required this.label});
+
+  @override
+  Widget build(BuildContext context) {
+    final isLive = label.toLowerCase().contains("live");
+    final isFounder = label.toLowerCase().contains("founder");
+    final accent = premiumAccent(context);
+    final dot = isLive
+        ? const Color(0xFF22C55E)
+        : (isFounder ? accent : accent);
+
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 9, vertical: 5),
+      decoration: BoxDecoration(
+        color: Colors.black.withValues(alpha: 0.55),
+        borderRadius: BorderRadius.circular(999),
+        border: Border.all(color: Colors.white.withValues(alpha: 0.18)),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Container(
+            width: 6,
+            height: 6,
+            decoration: BoxDecoration(color: dot, shape: BoxShape.circle),
+          ),
+          const SizedBox(width: 6),
+          Text(
+            label,
+            style: const TextStyle(
+              fontSize: 10.5,
+              fontWeight: FontWeight.w600,
+              color: Colors.white,
+              letterSpacing: 0.1,
+            ),
+          ),
+        ],
       ),
     );
   }

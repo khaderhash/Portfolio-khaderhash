@@ -1,0 +1,101 @@
+# Khader Hassan Hwaijeh
+
+> Full-stack software engineer in Damascus, Syria. Builds, deploys and personally
+> operates production web and mobile systems — Flutter and Laravel, on self-managed
+> Linux/Nginx VPS infrastructure. Available for new projects.
+
+<!-- LINKS:BEGIN generated -->
+- **Site:** https://www.khaderhash.me/
+- **Email:** khaderhuijih@gmail.com
+- **GitHub:** https://github.com/khaderhash
+- **LinkedIn:** https://www.linkedin.com/in/khader-hwaijeh-a8bb3629a/
+- **Résumé (PDF):** https://www.khaderhash.me/cv.pdf
+<!-- LINKS:END -->
+
+## Summary
+
+Full-Stack Software Engineer who ships products to production and keeps them running.
+Four production systems built, deployed and operated on self-managed VPS infrastructure:
+a university services platform officially adopted by Al Sham Private University's housing
+department, a marketplace founded from scratch, a legal foundation's bilingual public site,
+and a classifieds platform in pre-launch. Flutter mobile development, Laravel REST backends,
+Linux/Nginx operations with monitoring and automated backups, and AI automation with n8n.
+
+Freelance full-stack software engineer since January 2024. Flutter developer and product
+contributor at Lumi Coin Syria since September 2025.
+
+## Production systems
+
+### WeinKorsi — https://www.wein-korsi.com/
+Founder & Full-Stack Engineer. Educational marketplace connecting students, training
+institutes and course providers. In production since launch: 12 training institutes
+onboarded, 100+ registered users. Role-based access for students, institutes and
+administrators; OTP authentication, authorization middleware, rate limiting, and Arabic
+RTL course discovery and reservation flows.
+Stack: React (Vite), Laravel 12, Flutter, PostgreSQL, Cloudflare R2, VPS (Nginx).
+
+### EduPal — https://edu-pal.tech/
+Sole Full-Stack Engineer. Adopted by Al Sham Private University as the operational system
+for its student housing department, serving 100+ students plus housing staff and managers.
+Mobile app, web dashboard and backend delivered single-handedly. Digitizes room assignments,
+contracts, deposits, room inventory and payment tracking, with a dual-wallet finance system
+and a real-time ledger.
+Stack: Flutter, GetX, Clean Architecture, PostgreSQL, JWT, VPS (Nginx).
+
+### Foundation for the Support & Protection of Citizens Abroad — https://syru-legal.up.railway.app/ar
+Backend Developer & Maintainer. Public platform of a non-profit legal advisory foundation
+serving Russian nationals in Syria. Bilingual Arabic/Russian interface with full RTL and
+Cyrillic support, and a consultation request workflow routed to the legal team. Bot and
+abuse protection via Cloudflare Turnstile, honeypot fields and strict security headers.
+Built in one month, maintained in production since, ~500 monthly visitors.
+Stack: Laravel 11, Cloudflare Turnstile, Brevo API, hosted on Railway.
+
+### OboSyria — https://obosyria.com/
+Sole Engineer. Moderated classifieds platform for real estate and vehicle listings, where
+every listing is reviewed and approved before publication. Laravel REST API serving a React
+single-page application from the same origin, delivered as an installable PWA with a service
+worker. Passwordless WhatsApp OTP login, administrator MFA, and rate limiting at both the
+application and Nginx layers. Deployed and operating in pre-launch — not yet publicly launched.
+Stack: Laravel, React (Vite), PWA / Service Workers, Cloudflare R2, WhatsApp OTP (Wasender),
+Resend, VPS (Nginx).
+
+## Other projects
+
+- **Lumi Rewards** — Flutter Developer & Product Contributor. B2B loyalty product for the
+  Syrian market built in Flutter with GetX and Clean Architecture: vendor-facing menus,
+  offers and rewards, a merchant partner directory, and CI/CD-gated releases.
+- **UniVerse** — Graduation project. Smart campus app with a hybrid AI scheduler (n8n +
+  Gemini) generating personalised academic schedules from GPA and prerequisite rules, a RAG
+  AI chatbot answering student queries in real time, and live bus tracking over WebSockets
+  on OpenStreetMap. Flutter, GetX, Clean Architecture, Socket.IO, Firebase FCM.
+- **Nibrass Hub** — Personal project. Clean Architecture Flutter build with an assistant
+  answering housing and transport questions. Not a production system.
+  Flutter, GetX, Clean Architecture, n8n, Gemini, JWT.
+- **Expen Scope (EXS)** — Personal project. Dual-personality finance assistant for business
+  and individual flows, with n8n + Gemini automation.
+- **SSSD Mobile App** — Flutter Developer. Mobile service-request and news platform for the
+  Syrian Society for Social Development.
+- **Smart Telegram Bot / WhatsApp Automation Bot** — Automation Engineer. n8n workflows
+  routing Telegram support queries into structured Google Sheets logs; a Node.js WhatsApp
+  service handling repeatable customer responses.
+
+## Skills
+
+- **Mobile:** Flutter, Dart, GetX, Bloc, Clean Architecture, MVVM, Firebase, FCM, PWA
+- **Backend & APIs:** Laravel, PHP, REST API design, JWT, OTP, MFA, WebSockets, queues & task scheduling
+- **Frontend:** React, Vite, TailwindCSS, JavaScript, service workers, technical SEO, responsive and RTL (Arabic) interfaces
+- **Infrastructure & Security:** Linux, VPS administration, Nginx, HTTPS/TLS, CI/CD, GitHub Actions, Docker, Cloudflare R2, PostgreSQL, MySQL, uptime monitoring, automated backups, rate limiting, security headers, input validation
+- **Automation, AI & Data:** n8n, Google Gemini API, RAG chatbots, Telegram Bot API, WhatsApp automation, Google Sheets API, webhooks, Power BI
+- **Tools:** Git, GitHub, Postman, Swagger, Android Studio, VS Code, Agile
+
+## Education & training
+
+- B.Sc. in Software Engineering — Yarmouk Private University, 2020–2026
+- Flutter Development Training Program — Focal X Agency, 2023–2024
+- Data Analysis Using Power BI — Bytes4Future, Syrian Computer Society, in partnership
+  with the Aga Khan Foundation, August 2026
+- Training of Trainers (ToT) — Smart Vision International Academy (UK)
+
+## Languages
+
+Arabic (native), English (B2 — professional working proficiency)

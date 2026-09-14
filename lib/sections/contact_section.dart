@@ -1,137 +1,90 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../models/data.dart';
 import '../widgets/shared_widgets.dart';
+import 'hero_section.dart' show SocialIconsRow;
 
 class ContactSection extends StatelessWidget {
   const ContactSection({super.key});
 
-  Future<void> _sendEmail() async {
-    final emailLaunchUri = Uri(
+  Future<void> _emailBrief() async {
+    final uri = Uri(
       scheme: 'mailto',
-      path: 'khaderhuijih@gmail.com',
-      queryParameters: {'subject': 'Portfolio inquiry'},
+      path: contactEmail,
+      queryParameters: {
+        'subject': 'Project brief — Khader Hwaijeh',
+        'body':
+            'Hi Khader,\n\nProject:\nTimeline:\nBudget range:\nStack / constraints:\n\nShort context:\n',
+      },
     );
-    if (await canLaunchUrl(emailLaunchUri)) {
-      await launchUrl(emailLaunchUri);
-    }
+    if (await canLaunchUrl(uri)) await launchUrl(uri);
   }
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-    final iconColor = isDark ? Colors.white70 : Colors.black54;
-
+    final accent = premiumAccent(context);
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        const SectionTitle(title: "Get In Touch"),
-        const SizedBox(height: 18),
-        Text(
-          "For project inquiries or collaboration, contact me directly through email or social channels.",
-          textAlign: TextAlign.center,
-          style: TextStyle(
-            fontSize: 17,
-            height: 1.55,
-            color: premiumMutedText(context),
-          ),
+        const SectionTitle(
+          kicker: "Get in touch",
+          title: "Got a platform to build? Let's scope it.",
+          subtitle:
+              "I reply within 24 hours. Send a short brief and I'll help you clarify scope, timeline, and technical direction — no pitch deck required.",
+          align: CrossAxisAlignment.center,
         ),
-        const SizedBox(height: 42),
-        ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 720),
-          child: GlassPanel(
-            padding: const EdgeInsets.all(28),
-            child: Column(
-              children: [
-                Text(
-                  "Direct contact",
-                  style: TextStyle(
-                    color: premiumText(context),
-                    fontSize: 22,
-                    fontWeight: FontWeight.w900,
+        const SizedBox(height: 32),
+        GlassPanel(
+          padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 28),
+          child: Column(
+            children: [
+              MouseRegion(
+                cursor: SystemMouseCursors.click,
+                child: GestureDetector(
+                  onTap: _emailBrief,
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Icon(Icons.alternate_email_rounded,
+                          color: accent, size: 20),
+                      const SizedBox(width: 10),
+                      Text(
+                        contactEmail,
+                        style: TextStyle(
+                          fontSize: 17,
+                          fontWeight: FontWeight.w600,
+                          letterSpacing: -0.2,
+                          color: premiumText(context),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-                const SizedBox(height: 14),
-                InkWell(
-                  onTap: _sendEmail,
-                  borderRadius: BorderRadius.circular(14),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 14,
-                      vertical: 12,
-                    ),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Icon(
-                          Icons.email_outlined,
-                          color: Theme.of(context).primaryColor,
-                        ),
-                        const SizedBox(width: 10),
-                        Text(
-                          "khaderhuijih@gmail.com",
-                          style: TextStyle(
-                            color: premiumText(context),
-                            fontSize: 17,
-                            fontWeight: FontWeight.w800,
-                          ),
-                        ),
-                      ],
-                    ),
+              ),
+              const SizedBox(height: 18),
+              Wrap(
+                spacing: 12,
+                runSpacing: 12,
+                alignment: WrapAlignment.center,
+                children: [
+                  PremiumButton(
+                    onPressed: _emailBrief,
+                    icon: Icons.mail_outline_rounded,
+                    label: "Email a Project Brief",
                   ),
-                ),
-                const SizedBox(height: 24),
-                Wrap(
-                  alignment: WrapAlignment.center,
-                  spacing: 14,
-                  runSpacing: 14,
-                  children: [
-                    SocialBtn(
-                      icon: FontAwesomeIcons.whatsapp,
-                      url: "https://wa.me/963981949180",
-                      baseColor: iconColor,
-                      hoverColor: Colors.green,
-                    ),
-                    SocialBtn(
-                      icon: FontAwesomeIcons.linkedin,
-                      url: "https://linkedin.com/in/khaderhash",
-                      baseColor: iconColor,
-                      hoverColor: Colors.blue,
-                    ),
-                    SocialBtn(
-                      icon: FontAwesomeIcons.telegram,
-                      url: "https://t.me/khaderhash",
-                      baseColor: iconColor,
-                      hoverColor: Colors.blue,
-                    ),
-                    SocialBtn(
-                      icon: FontAwesomeIcons.behance,
-                      url: "https://behance.net/khaderhash",
-                      baseColor: iconColor,
-                      hoverColor: isDark ? Colors.white : Colors.black,
-                    ),
-                    SocialBtn(
-                      icon: FontAwesomeIcons.github,
-                      url: "https://github.com/khaderhash",
-                      baseColor: iconColor,
-                      hoverColor: isDark ? Colors.white : Colors.black,
-                    ),
-                    SocialBtn(
-                      icon: FontAwesomeIcons.instagram,
-                      url: "https://www.instagram.com/khader._.tech/",
-                      baseColor: iconColor,
-                      hoverColor: Colors.purpleAccent,
-                    ),
-                    SocialBtn(
-                      icon: Icons.email,
-                      url: "mailto:khaderhuijih@gmail.com",
-                      baseColor: iconColor,
-                      hoverColor: isDark ? Colors.white : Colors.black,
-                    ),
-                  ],
-                ),
-              ],
-            ),
+                  PremiumButton(
+                    onPressed: () => launchUrl(
+                        Uri.parse(whatsappUrl)),
+                    icon: Icons.chat_bubble_outline_rounded,
+                    label: "Message on WhatsApp",
+                    filled: false,
+                  ),
+                ],
+              ),
+              const SizedBox(height: 22),
+              const SocialIconsRow(),
+            ],
           ),
         ),
       ],
