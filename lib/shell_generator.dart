@@ -62,6 +62,13 @@ String projectBlock(Map<String, dynamic> p) {
     }
     b.writeln('</p>');
   }
+
+  final download = p['download'] as String?;
+  if (download != null) {
+    final info = p['downloadInfo'] as String?;
+    b.writeln('      <p class="stack"><a href="${esc(download)}">Download for Android</a>'
+        '${info == null ? '' : ' — ${esc(info)}'}</p>');
+  }
   return b.toString();
 }
 
@@ -178,10 +185,10 @@ String buildJsonLd() {
     b.writeln('      {');
     b.writeln('        "@type": "$type",');
     b.writeln('        "name": "${jsonEsc(name)}",');
-    b.writeln('        "url": "${p['website']}",');
+    b.writeln('        "url": "${p['website'] ?? p['download']}",');
     if (type == 'SoftwareApplication') {
-      b.writeln('        "applicationCategory": "BusinessApplication",');
-      b.writeln('        "operatingSystem": "Web",');
+      b.writeln('        "applicationCategory": "${p['applicationCategory'] ?? 'BusinessApplication'}",');
+      b.writeln('        "operatingSystem": "${p['operatingSystem'] ?? 'Web'}",');
     }
     b.writeln('        "description": "${jsonEsc(desc)}",');
     b.writeln('        "author": { "@id": "$siteUrl#person" }');

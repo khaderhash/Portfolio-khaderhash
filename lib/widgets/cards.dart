@@ -273,6 +273,9 @@ class _ProjectCardState extends State<ProjectCard> {
     final hasGithub = (p['github'] as String?)?.isNotEmpty ?? false;
     final hasBehance = (p['behance'] as String?)?.isNotEmpty ?? false;
     final hasWebsite = (p['website'] as String?)?.isNotEmpty ?? false;
+    final hasDownload = (p['download'] as String?)?.isNotEmpty ?? false;
+    final downloadInfo = p['downloadInfo'] as String?;
+    final downloadHint = p['downloadHint'] as String?;
 
     final accent = premiumAccent(context);
     final muted = premiumMutedText(context);
@@ -499,6 +502,13 @@ class _ProjectCardState extends State<ProjectCard> {
                                     onTap: () =>
                                         launchUrl(Uri.parse(p['website'])),
                                   ),
+                                if (hasDownload)
+                                  _ActionBtn(
+                                    icon: FontAwesomeIcons.android,
+                                    label: "Download for Android",
+                                    onTap: () =>
+                                        launchUrl(Uri.parse(p['download'])),
+                                  ),
                                 if (hasVideo)
                                   _ActionBtn(
                                     icon: Icons.play_arrow_rounded,
@@ -522,6 +532,24 @@ class _ProjectCardState extends State<ProjectCard> {
                                   ),
                               ],
                             ),
+                            if (hasDownload &&
+                                (downloadInfo != null ||
+                                    downloadHint != null)) ...[
+                              const SizedBox(height: 10),
+                              if (downloadInfo != null)
+                                Text(
+                                  downloadInfo,
+                                  style:
+                                      TextStyle(fontSize: 12.5, color: muted),
+                                ),
+                              if (downloadHint != null)
+                                Text(
+                                  downloadHint,
+                                  textDirection: TextDirection.rtl,
+                                  style:
+                                      TextStyle(fontSize: 12.5, color: muted),
+                                ),
+                            ],
                           ],
                         ),
                       ),

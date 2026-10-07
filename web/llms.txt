@@ -59,6 +59,14 @@ application and Nginx layers. Deployed and operating in pre-launch — not yet p
 Stack: Laravel, React (Vite), PWA / Service Workers, Cloudflare R2, WhatsApp OTP (Wasender),
 Resend, VPS (Nginx).
 
+### مطمورتي (Matmurti) — https://www.khaderhash.me/matmurti
+Creator & Sole Developer. Arabic money tracker for everyday life in Syria, released as a
+signed Android app (v1.0.0). Expenses and income in new Syrian pounds and US dollars, with
+old-pound input converted automatically, currency exchanges, and an "All" view in pounds at
+each day's rate. Fully offline with no account and no internet permission — data never
+leaves the phone. Excel backup and restore. Backed by 218 automated tests.
+Stack: Flutter, Dart, GetX, SQLite, Excel (xlsx) backup, Android.
+
 ## Other projects
 
 - **Lumi Rewards** — Flutter Developer & Product Contributor. B2B loyalty product for the

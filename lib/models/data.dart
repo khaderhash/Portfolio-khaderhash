@@ -10,6 +10,11 @@
 //   brandColor  — accent color for the brand-mark backdrop (hex int)
 //   badges      — short status pills shown on card (max 2 render)
 //   outcome     — one-line, outcome-led summary shown above description
+//   download    — optional: page to download the app from (a
+//                 "Download for Android" button next to the others)
+//   downloadInfo, downloadHint — optional: shown under that button
+//   operatingSystem, applicationCategory — optional: JSON-LD for a
+//                 SoftwareApplication (default "Web", "BusinessApplication")
 //
 final List<Map<String, dynamic>> projectsData = [
   // ═════════════════════════════════════════════════════════════
@@ -152,6 +157,41 @@ final List<Map<String, dynamic>> projectsData = [
     "image": "assets/obosyria_logo.png",
     "logo": true,
     "brandColor": 0xFF0B4F6C,
+  },
+
+  // ─────────────────────────────────────────────────────────────
+  // مطمورتي (Matmurti) — offline Android app, public release
+  // ─────────────────────────────────────────────────────────────
+  {
+    "tier": "production",
+    "title": "مطمورتي",
+    "schemaType": "SoftwareApplication",
+    "schemaName": "Matmurti (مطمورتي)",
+    "operatingSystem": "Android",
+    "applicationCategory": "FinanceApplication",
+    "role": "Creator & Sole Developer",
+    "cardBadges": ["Android App", "Fully Offline"],
+    "badges": ["Android App", "Fully Offline", "Privacy-First", "Sole Developer"],
+    "outcome":
+        "Arabic money tracker for everyday life in Syria — expenses and income in Syrian pounds and dollars, fully offline, and your data never leaves your phone.",
+    "leadRole":
+        "Designed, built, and released single-handedly: the Arabic interface, the on-phone data layer, backups, and the signed Android release.",
+    "achievements": [
+      "Track expenses and income in new Syrian pounds and US dollars — type amounts in old or new pounds and the app converts them (100 old = 1 new).",
+      "Record exchanges between dollars and pounds; an \"All\" view totals everything in pounds at each day's own rate.",
+      "Works fully offline with no account: the app has no internet permission at all, so your data never leaves your phone.",
+      "Back up to an Excel file and restore it later, merging with or replacing what is on the phone.",
+      "Released as a signed Android app, backed by 218 automated tests covering upgrades, backups, very large amounts, small screens, and large text.",
+    ],
+    "architecture":
+        "Stack & Architecture: Flutter, Dart, GetX, SQLite, Excel (xlsx) backup, Android. Offline-first, versioned schema migrations, no network permission.",
+    "desc":
+        "Offline Arabic money tracker in Syrian pounds and dollars — your data never leaves your phone.",
+    "tech": ["Flutter", "SQLite", "Offline", "Android"],
+    "download": "https://www.khaderhash.me/matmurti",
+    "downloadInfo": "Version 1.0.0 · 16.5 MB · Android only",
+    "downloadHint": "فعّل التثبيت من مصادر غير معروفة إذا طلب منك",
+    "image": "assets/matmurti.webp",
   },
 
   // ═════════════════════════════════════════════════════════════
