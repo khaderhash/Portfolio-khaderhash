@@ -44,6 +44,8 @@ ol li{margin:6px 0}
 b.q{color:var(--clay)}
 .sum{margin-top:24px;font-size:.75rem;color:var(--text2);word-break:break-all;direction:ltr;text-align:left}
 .sum span{display:block;direction:rtl;text-align:right}
+.alt{margin:8px 0 0;text-align:center;font-size:.9rem;color:var(--text2)}
+.alt a{color:var(--primary);font-weight:700}
 footer{margin-top:28px;text-align:center}
 footer a{color:var(--primary);font-weight:700;text-decoration:none}
 </style>
@@ -70,12 +72,14 @@ footer a{color:var(--primary);font-weight:700;text-decoration:none}
   بياناتك محفوظة على موبايلك بس، وما بتطلع على الإنترنت.
 </p>
 
-<a class="btn dl" href="/downloads/matmurti.apk" download="matmurti.apk">
+<a class="btn dl" href="https://github.com/khaderhash/matmurti/releases/download/v1.0.0/matmurti.apk">
   نزّل التطبيق
   <small>الإصدار 1.0.0 · 16.5 ميغا · أندرويد فقط</small>
 </a>
-<!-- ✏️ رابط تيليجرام: ضع رابط القناة أو المنشور مكان TELEGRAM_LINK_HERE -->
-<a class="btn tg" href="TELEGRAM_LINK_HERE" rel="noopener">تنزيل من تيليجرام</a>
+<p class="alt">إذا ما اشتغل التنزيل، <a id="tg-alt" href="#tg">نزّل من تيليجرام</a></p>
+<!-- ✏️ رابط تيليجرام: ضع رابط القناة أو المنشور مكان TELEGRAM_LINK_HERE (السطر اللي فوق بياخد نفس الرابط من هون) -->
+<a class="btn tg" id="tg" href="TELEGRAM_LINK_HERE" rel="noopener">تنزيل من تيليجرام</a>
+<script>document.getElementById('tg-alt').href = document.getElementById('tg').href;</script>
 
 <h2>طريقة التثبيت</h2>
 <ol>

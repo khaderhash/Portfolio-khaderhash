@@ -185,7 +185,10 @@ String buildJsonLd() {
     b.writeln('      {');
     b.writeln('        "@type": "$type",');
     b.writeln('        "name": "${jsonEsc(name)}",');
-    b.writeln('        "url": "${p['website'] ?? p['download']}",');
+    b.writeln('        "url": "${p['website'] ?? p['page'] ?? p['download']}",');
+    if (p['download'] != null) {
+      b.writeln('        "downloadUrl": "${p['download']}",');
+    }
     if (type == 'SoftwareApplication') {
       b.writeln('        "applicationCategory": "${p['applicationCategory'] ?? 'BusinessApplication'}",');
       b.writeln('        "operatingSystem": "${p['operatingSystem'] ?? 'Web'}",');

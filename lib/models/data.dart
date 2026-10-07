@@ -10,8 +10,10 @@
 //   brandColor  — accent color for the brand-mark backdrop (hex int)
 //   badges      — short status pills shown on card (max 2 render)
 //   outcome     — one-line, outcome-led summary shown above description
-//   download    — optional: page to download the app from (a
-//                 "Download for Android" button next to the others)
+//   page        — optional: the project's own page (JSON-LD url when
+//                 there is no website)
+//   download    — optional: the app file to download (a "Download for
+//                 Android" button next to the others; JSON-LD downloadUrl)
 //   downloadInfo, downloadHint — optional: shown under that button
 //   gallery     — optional: screenshots shown in a row in the details
 //                 dialog ("web/…" paths are served files, not bundled)
@@ -190,7 +192,8 @@ final List<Map<String, dynamic>> projectsData = [
     "desc":
         "Offline Arabic money tracker in Syrian pounds and dollars — your data never leaves your phone.",
     "tech": ["Flutter", "SQLite", "Offline", "Android"],
-    "download": "https://www.khaderhash.me/matmurti",
+    "page": "https://www.khaderhash.me/matmurti",
+    "download": "https://github.com/khaderhash/matmurti/releases/download/v1.0.0/matmurti.apk",
     "downloadInfo": "Version 1.0.0 · 16.5 MB · Android only",
     "downloadHint": "فعّل التثبيت من مصادر غير معروفة إذا طلب منك",
     "image": "assets/matmurti.webp",
