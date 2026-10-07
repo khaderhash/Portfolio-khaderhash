@@ -276,6 +276,7 @@ class _ProjectCardState extends State<ProjectCard> {
     final hasDownload = (p['download'] as String?)?.isNotEmpty ?? false;
     final downloadInfo = p['downloadInfo'] as String?;
     final downloadHint = p['downloadHint'] as String?;
+    final gallery = (p['gallery'] as List?)?.cast<String>() ?? const <String>[];
 
     final accent = premiumAccent(context);
     final muted = premiumMutedText(context);
@@ -434,6 +435,14 @@ class _ProjectCardState extends State<ProjectCard> {
                                   .toList(),
                             ),
                             const SizedBox(height: 22),
+                            if (gallery.isNotEmpty) ...[
+                              _Gallery(
+                                paths: gallery,
+                                title: p['title'] as String,
+                                errorColor: muted,
+                              ),
+                              const SizedBox(height: 22),
+                            ],
                             if (devOpsQa != null && devOpsQa.isNotEmpty) ...[
                               _DetailBlock(
                                   title: "DevOps & QA",
@@ -561,6 +570,50 @@ class _ProjectCardState extends State<ProjectCard> {
           ),
         );
       },
+    );
+  }
+}
+
+// ────────────── Gallery: a row of phone screenshots ──────────────
+//
+// Optional `gallery` field: screenshots shown in the details dialog, in a
+// row that scrolls sideways when it does not fit.
+
+class _Gallery extends StatelessWidget {
+  final List<String> paths;
+  final String title;
+  final Color errorColor;
+
+  const _Gallery({
+    required this.paths,
+    required this.title,
+    required this.errorColor,
+  });
+
+  static const _height = 260.0;
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: _height,
+      child: ListView.separated(
+        scrollDirection: Axis.horizontal,
+        itemCount: paths.length,
+        separatorBuilder: (_, __) => const SizedBox(width: 10),
+        itemBuilder: (context, i) => ClipRRect(
+          borderRadius: BorderRadius.circular(12),
+          child: AspectRatio(
+            aspectRatio: 9 / 20,
+            child: ProjectImage(
+              path: paths[i],
+              fit: BoxFit.cover,
+              cacheWidth: 360,
+              errorColor: errorColor,
+              semanticLabel: '$title — screenshot ${i + 1}',
+            ),
+          ),
+        ),
+      ),
     );
   }
 }

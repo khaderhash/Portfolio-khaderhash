@@ -13,6 +13,8 @@
 //   download    — optional: page to download the app from (a
 //                 "Download for Android" button next to the others)
 //   downloadInfo, downloadHint — optional: shown under that button
+//   gallery     — optional: screenshots shown in a row in the details
+//                 dialog ("web/…" paths are served files, not bundled)
 //   operatingSystem, applicationCategory — optional: JSON-LD for a
 //                 SoftwareApplication (default "Web", "BusinessApplication")
 //
@@ -192,6 +194,12 @@ final List<Map<String, dynamic>> projectsData = [
     "downloadInfo": "Version 1.0.0 · 16.5 MB · Android only",
     "downloadHint": "فعّل التثبيت من مصادر غير معروفة إذا طلب منك",
     "image": "assets/matmurti.webp",
+    "gallery": [
+      "web/matmurti/home.webp",
+      "web/matmurti/add.webp",
+      "web/matmurti/transactions.webp",
+      "web/matmurti/settings.webp",
+    ],
   },
 
   // ═════════════════════════════════════════════════════════════
