@@ -69,7 +69,7 @@ between Android and iPhone.
 Two ways to get it, both free:
 - Android: signed APK (v1.0.0) from the landing page or
   https://github.com/khaderhash/matmurti/releases
-- iPhone: a web app (PWA) at https://app.khaderhash.me/ — open it in Safari and use
+- iPhone: a web app (PWA) at https://khaderhash.github.io/matmurti/ — open it in Safari and use
   Share > Add to Home Screen (iOS 16.4 or later); after the first visit it works offline.
   The web app makes no request to any other host.
 Same Flutter code for both; on the web, SQLite runs as WebAssembly in the browser.
