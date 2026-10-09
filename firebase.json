@@ -8,7 +8,9 @@
       "**/node_modules/**"
     ],
     "redirects": [
-      { "source": "/matmurti", "destination": "/matmurti/", "type": 301 }
+      { "source": "/matmurti", "destination": "https://khaderhash.github.io/matmurti/", "type": 301 },
+      { "source": "/matmurti/", "destination": "https://khaderhash.github.io/matmurti/", "type": 301 },
+      { "source": "/matmurti/index.html", "destination": "https://khaderhash.github.io/matmurti/", "type": 301 }
     ],
     "rewrites": [
       { "source": "**", "destination": "/index.html" }
@@ -22,12 +24,6 @@
       },
       {
         "source": "**/*.@(html|json)",
-        "headers": [
-          { "key": "Cache-Control", "value": "no-cache" }
-        ]
-      },
-      {
-        "source": "/matmurti/",
         "headers": [
           { "key": "Cache-Control", "value": "no-cache" }
         ]
