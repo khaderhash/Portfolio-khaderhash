@@ -164,37 +164,37 @@ final List<Map<String, dynamic>> projectsData = [
   },
 
   // ─────────────────────────────────────────────────────────────
-  // مطمورتي (Matmurti) — offline Android app, public release
+  // مطمورتي (Matmurti) — offline Android app + iPhone web app
   // ─────────────────────────────────────────────────────────────
   {
     "tier": "production",
     "title": "مطمورتي",
     "schemaType": "SoftwareApplication",
     "schemaName": "Matmurti (مطمورتي)",
-    "operatingSystem": "Android",
+    "operatingSystem": "Android, iOS (web app)",
     "applicationCategory": "FinanceApplication",
     "role": "Creator & Sole Developer",
-    "cardBadges": ["Android App", "Fully Offline"],
-    "badges": ["Android App", "Fully Offline", "Privacy-First", "Sole Developer"],
+    "cardBadges": ["Android & iPhone", "Fully Offline"],
+    "badges": ["Android & iPhone", "Fully Offline", "Privacy-First", "Sole Developer"],
     "outcome":
         "Arabic money tracker for everyday life in Syria — expenses and income in Syrian pounds and dollars, fully offline, and your data never leaves your phone.",
     "leadRole":
-        "Designed, built, and released single-handedly: the Arabic interface, the on-phone data layer, backups, and the signed Android release.",
+        "Designed, built, and released single-handedly: the Arabic interface, the on-phone data layer, backups, the signed Android release, and the installable iPhone web app.",
     "achievements": [
       "Track expenses and income in new Syrian pounds and US dollars — type amounts in old or new pounds and the app converts them (100 old = 1 new).",
       "Record exchanges between dollars and pounds; an \"All\" view totals everything in pounds at each day's own rate.",
       "Works fully offline with no account: the app has no internet permission at all, so your data never leaves your phone.",
       "Back up to an Excel file and restore it later, merging with or replacing what is on the phone.",
-      "Released as a signed Android app, backed by 218 automated tests covering upgrades, backups, very large amounts, small screens, and large text.",
+      "Released as a signed Android app and, from the same code, an iPhone web app that installs from Safari and works offline — backed by 240 automated tests plus browser tests in Chromium and WebKit.",
     ],
     "architecture":
-        "Stack & Architecture: Flutter, Dart, GetX, SQLite, Excel (xlsx) backup, Android. Offline-first, versioned schema migrations, no network permission.",
+        "Stack & Architecture: Flutter, Dart, GetX, SQLite (native and WebAssembly), service worker, Excel (xlsx) backup, Android and iOS web app. Offline-first, versioned schema migrations, no network access.",
     "desc":
         "Offline Arabic money tracker in Syrian pounds and dollars — your data never leaves your phone.",
-    "tech": ["Flutter", "SQLite", "Offline", "Android"],
-    "page": "https://www.khaderhash.me/matmurti",
+    "tech": ["Flutter", "SQLite", "Offline", "Android + iPhone"],
+    "page": "https://www.khaderhash.me/matmurti/",
     "download": "https://github.com/khaderhash/matmurti/releases/download/v1.0.0/matmurti.apk",
-    "downloadInfo": "Version 1.0.0 · 16.5 MB · Android only",
+    "downloadInfo": "Version 1.0.0 · 16.5 MB · iPhone version on the page",
     "downloadHint": "فعّل التثبيت من مصادر غير معروفة إذا طلب منك",
     "image": "assets/matmurti.webp",
     "gallery": [
