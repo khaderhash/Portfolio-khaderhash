@@ -165,6 +165,11 @@ class _HeroContent extends StatelessWidget {
               ),
             ),
           ),
+          const SizedBox(height: 14),
+          // Identity statement — same sentences as the HTML shell.
+          const _IntroLine(line: introAr, rtl: true),
+          const SizedBox(height: 4),
+          const _IntroLine(line: introEn),
           const SizedBox(height: 32),
           // CTAs
           Wrap(
@@ -190,6 +195,72 @@ class _HeroContent extends StatelessWidget {
           const SizedBox(height: 28),
           const SocialIconsRow(),
         ],
+      ),
+    );
+  }
+}
+
+class _IntroLine extends StatelessWidget {
+  final ({String before, String link, String after}) line;
+  final bool rtl;
+  const _IntroLine({required this.line, this.rtl = false});
+
+  @override
+  Widget build(BuildContext context) {
+    final muted = premiumMutedText(context);
+    return Text.rich(
+      TextSpan(
+        style: TextStyle(fontSize: 14.5, height: 1.6, color: muted),
+        children: [
+          TextSpan(text: line.before),
+          WidgetSpan(
+            alignment: PlaceholderAlignment.baseline,
+            baseline: TextBaseline.alphabetic,
+            child: _InlineLink(label: line.link, url: weinKorsiUrl),
+          ),
+          TextSpan(text: line.after),
+        ],
+      ),
+      textDirection: rtl ? TextDirection.rtl : TextDirection.ltr,
+    );
+  }
+}
+
+class _InlineLink extends StatefulWidget {
+  final String label;
+  final String url;
+  const _InlineLink({required this.label, required this.url});
+  @override
+  State<_InlineLink> createState() => _InlineLinkState();
+}
+
+class _InlineLinkState extends State<_InlineLink> {
+  bool _h = false;
+  @override
+  Widget build(BuildContext context) {
+    final accent = premiumAccent(context);
+    return Semantics(
+      link: true,
+      linkUrl: Uri.parse(widget.url),
+      child: MouseRegion(
+        cursor: SystemMouseCursors.click,
+        onEnter: (_) => setState(() => _h = true),
+        onExit: (_) => setState(() => _h = false),
+        child: GestureDetector(
+          onTap: () => launchUrl(Uri.parse(widget.url)),
+          child: Text(
+            widget.label,
+            style: TextStyle(
+              fontSize: 14.5,
+              height: 1.6,
+              fontWeight: FontWeight.w600,
+              color: accent,
+              decoration:
+                  _h ? TextDecoration.underline : TextDecoration.none,
+              decorationColor: accent,
+            ),
+          ),
+        ),
       ),
     );
   }
@@ -276,8 +347,7 @@ class _HeroPortrait extends StatelessWidget {
               child: Image.asset(
                 'assets/me.jpg',
                 fit: BoxFit.cover,
-                semanticLabel:
-                    'Khader Hassan Hwaijeh, Software Engineer and Full-Stack Developer',
+                semanticLabel: photoAlt,
                 cacheWidth: compact ? 280 : 720,
                 filterQuality: FilterQuality.medium,
                 gaplessPlayback: true,
@@ -318,6 +388,11 @@ class SocialIconsRow extends StatelessWidget {
           icon: FontAwesomeIcons.linkedin,
           url: linkedInUrl,
           tooltip: "LinkedIn",
+        ),
+        SocialBtn(
+          icon: FontAwesomeIcons.instagram,
+          url: instagramUrl,
+          tooltip: "Instagram",
         ),
         SocialBtn(
           icon: FontAwesomeIcons.whatsapp,

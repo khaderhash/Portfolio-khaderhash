@@ -1,11 +1,11 @@
 {
-    "name": "Khader Hassan Hwaijeh — Full-Stack Software Engineer",
+    "name": "خضر حويجة | Khader Hwaijeh — Software Engineer",
     "short_name": "Khader Hwaijeh",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0B0D10",
     "theme_color": "#0B0D10",
-    "description": "Full-stack software engineer building and operating production web and mobile systems in Flutter, Laravel and React on self-managed Linux/Nginx infrastructure.",
+    "description": "خضر حويجة (Khader Hwaijeh) — software engineer and founder of WeinKorsi (وين كورسي).",
     "orientation": "any",
     "prefer_related_applications": false,
     "icons": [

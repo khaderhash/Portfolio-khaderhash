@@ -34,6 +34,10 @@ String stackLine(Map<String, dynamic> p) {
   return s.replaceAll(RegExp(r'\.$'), '');
 }
 
+/// One identity sentence, with its WeinKorsi part as a real link.
+String introLine(({String before, String link, String after}) s) =>
+    '${esc(s.before)}<a href="${esc(weinKorsiUrl)}">${esc(s.link)}</a>${esc(s.after)}';
+
 String projectBlock(Map<String, dynamic> p) {
   final b = StringBuffer();
   final site = p['website'] as String?;
@@ -78,8 +82,11 @@ String buildShell() {
   b.writeln('  <div id="shell">');
   b.writeln('    <div class="shell-inner">');
   b.writeln('      <p class="shell-note" id="shell-note">Loading the interactive version…</p>');
-  b.writeln('      <h1>${esc(fullName)}</h1>');
+  b.writeln('      <img class="photo" src="khader-hwaijeh.jpg" alt="${esc(photoAlt)}" width="96" height="96" decoding="async">');
+  b.writeln('      <h1><span lang="ar" dir="rtl">${esc(nameAr)}</span> · ${esc(nameEn)}</h1>');
   b.writeln('      <p class="role">${esc(siteTagline)}</p>');
+  b.writeln('      <p lang="ar" dir="rtl">${introLine(introAr)}</p>');
+  b.writeln('      <p>${introLine(introEn)}</p>');
   b.writeln('      <p>${esc(bioParagraph)}</p>');
 
   b.writeln();
@@ -121,6 +128,11 @@ String buildShell() {
   }
   b.writeln('      <p>Résumé: <a href="cv.pdf">Download résumé (PDF)</a></p>');
 
+  b.writeln();
+  b.writeln('      <footer>');
+  b.writeln('        <p>${footerLinks.map((l) => '<a href="${esc(l['url']!)}">${esc(l['label']!)}</a>').join(' · ')}</p>');
+  b.writeln('        <p>${esc(footerCopyright)}</p>');
+  b.writeln('      </footer>');
   b.writeln('    </div>');
   b.writeln('  </div>');
   b.write(endMarker);
@@ -143,15 +155,41 @@ String buildJsonLd() {
   b.writeln('    "@context": "https://schema.org",');
   b.writeln('    "@graph": [');
   b.writeln('      {');
+  b.writeln('        "@type": "ProfilePage",');
+  b.writeln('        "@id": "$siteUrl#profilepage",');
+  b.writeln('        "url": "$siteUrl",');
+  b.writeln('        "name": "${jsonEsc(siteTitle)}",');
+  b.writeln('        "inLanguage": "en",');
+  b.writeln('        "isPartOf": { "@id": "$siteUrl#website" },');
+  b.writeln('        "mainEntity": { "@id": "$siteUrl#person" }');
+  b.writeln('      },');
+  b.writeln('      {');
+  b.writeln('        "@type": "WebSite",');
+  b.writeln('        "@id": "$siteUrl#website",');
+  b.writeln('        "url": "$siteUrl",');
+  b.writeln('        "name": "${jsonEsc(nameEn)}",');
+  b.writeln('        "alternateName": ["${jsonEsc(nameAr)}", "${jsonEsc(fullName)}"],');
+  b.writeln('        "publisher": { "@id": "$siteUrl#person" }');
+  b.writeln('      },');
+  b.writeln('      {');
   b.writeln('        "@type": "Person",');
   b.writeln('        "@id": "$siteUrl#person",');
-  b.writeln('        "name": "${jsonEsc(fullName)}",');
-  b.writeln('        "alternateName": "Khader Hwaijeh",');
-  b.writeln('        "jobTitle": "Full-Stack Software Engineer",');
-  b.writeln('        "description": "${jsonEsc(bioParagraph)}",');
+  b.writeln('        "name": "${jsonEsc(nameAr)}",');
+  b.writeln('        "alternateName": ["${jsonEsc(nameEn)}", "${jsonEsc(fullName)}"],');
+  b.writeln('        "givenName": "Khader",');
+  b.writeln('        "familyName": "Hwaijeh",');
+  b.writeln('        "jobTitle": "Software Engineer",');
+  b.writeln('        "description": "${jsonEsc('${introEn.before}${introEn.link}${introEn.after} $bioParagraph')}",');
   b.writeln('        "url": "$siteUrl",');
   b.writeln('        "email": "$emailUrl",');
-  b.writeln('        "image": "${siteUrl}og-image.jpg",');
+  b.writeln('        "image": {');
+  b.writeln('          "@type": "ImageObject",');
+  b.writeln('          "url": "$photoUrl",');
+  b.writeln('          "caption": "${jsonEsc(photoAlt)}",');
+  b.writeln('          "width": 600,');
+  b.writeln('          "height": 600');
+  b.writeln('        },');
+  b.writeln('        "worksFor": { "@id": "$weinKorsiOrgId" },');
   b.writeln('        "address": {');
   b.writeln('          "@type": "PostalAddress",');
   b.writeln('          "addressLocality": "Damascus",');
@@ -172,9 +210,20 @@ String buildJsonLd() {
   }
   b.writeln('        ],');
   b.writeln('        "sameAs": [');
-  b.writeln('          "$githubUrl",');
-  b.writeln('          "$linkedInUrl"');
+  for (var i = 0; i < profileLinks.length; i++) {
+    final comma = i == profileLinks.length - 1 ? '' : ',';
+    b.writeln('          "${profileLinks[i]['url']}"$comma');
+  }
   b.writeln('        ]');
+  b.writeln('      },');
+  b.writeln('      {');
+  b.writeln('        "@type": "Organization",');
+  b.writeln('        "@id": "$weinKorsiOrgId",');
+  b.writeln('        "name": "${jsonEsc(weinKorsiNameAr)}",');
+  b.writeln('        "alternateName": "${jsonEsc(weinKorsiNameEn)}",');
+  b.writeln('        "url": "$weinKorsiUrl",');
+  b.writeln('        "sameAs": ["$weinKorsiInstagramUrl"],');
+  b.writeln('        "founder": { "@id": "$siteUrl#person" }');
   b.write('      }');
 
   for (final p in productionProjects) {
@@ -194,6 +243,9 @@ String buildJsonLd() {
       b.writeln('        "operatingSystem": "${p['operatingSystem'] ?? 'Web'}",');
     }
     b.writeln('        "description": "${jsonEsc(desc)}",');
+    if (p['publisherId'] != null) {
+      b.writeln('        "publisher": { "@id": "${p['publisherId']}" },');
+    }
     b.writeln('        "author": { "@id": "$siteUrl#person" }');
     b.write('      }');
   }

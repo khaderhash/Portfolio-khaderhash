@@ -51,7 +51,8 @@ final List<Map<String, dynamic>> projectsData = [
     "desc":
         "Educational marketplace I founded and run — connecting students, institutes, and providers under a multi-role architecture.",
     "tech": ["React", "Laravel", "PostgreSQL", "VPS"],
-    "website": "https://www.wein-korsi.com/",
+    "website": weinKorsiUrl,
+    "publisherId": weinKorsiOrgId,
     "image": "assets/weinkorsi_logo.png",
     "logo": true,
     "brandColor": 0xFF1F3A2A,
@@ -415,6 +416,43 @@ final List<Map<String, dynamic>> otherProjects =
 
 const String siteUrl = "https://www.khaderhash.me/";
 const String fullName = "Khader Hassan Hwaijeh";
+
+// The two spellings people actually search for. Arabic first: it is the
+// name as written at home, and the one the WeinKorsi audience searches.
+const String nameAr = "خضر حويجة";
+const String nameEn = "Khader Hwaijeh";
+
+/// Browser tab and search-result title. Also the MaterialApp title, which
+/// Flutter Web writes back into document.title once the app has loaded.
+const String siteTitle =
+    "خضر حويجة | Khader Hwaijeh — مهندس برمجيات ومؤسس وين كورسي";
+
+/// Profile photo at a stable root URL (web/khader-hwaijeh.jpg), for the
+/// JSON-LD, the HTML shell and image search.
+const String photoUrl = "${siteUrl}khader-hwaijeh.jpg";
+const String photoAlt = "$nameAr - $nameEn";
+
+// ── WeinKorsi ────────────────────────────────────────────────────
+// wein-korsi.com is canonical (www redirects to it). The @id is the one
+// WeinKorsi's own JSON-LD declares, so both sites describe ONE entity.
+const String weinKorsiUrl = "https://wein-korsi.com/";
+const String weinKorsiOrgId = "https://wein-korsi.com/#organization";
+const String weinKorsiNameAr = "وين كورسي";
+const String weinKorsiNameEn = "WeinKorsi";
+
+/// The one-sentence identity statement, shown in the hero and the shell.
+/// `link` is rendered as a link to WeinKorsi.
+const ({String before, String link, String after}) introAr = (
+  before: "أنا خضر حويجة، مهندس برمجيات ومؤسس منصة ",
+  link: weinKorsiNameAr,
+  after: ".",
+);
+const ({String before, String link, String after}) introEn = (
+  before: "I'm Khader Hwaijeh, a software engineer and the founder of ",
+  link: "WeinKorsi (وين كورسي)",
+  after: ".",
+);
+
 const String siteTagline =
     "Software Engineer · Full-Stack Developer · Mobile & Web Applications · Damascus, Syria";
 
@@ -513,10 +551,23 @@ const String linkedInUrl =
     "https://www.linkedin.com/in/khader-hwaijeh-a8bb3629a/";
 const String whatsappUrl = "https://wa.me/963991199846";
 const String telegramUrl = "https://t.me/khaderhash";
+const String instagramUrl = "https://www.instagram.com/khader._.hwaijeh";
+const String weinKorsiInstagramUrl = "https://www.instagram.com/wein_korsi";
 const String emailUrl = "mailto:$contactEmail";
 
-/// Profile links rendered in the shell. Keep in step with SocialIconsRow.
+/// Personal profiles: rendered in the shell, listed as the Person's sameAs
+/// in the JSON-LD. Keep in step with SocialIconsRow.
 const List<Map<String, String>> profileLinks = [
   {"label": "GitHub", "url": githubUrl},
   {"label": "LinkedIn", "url": linkedInUrl},
+  {"label": "Instagram", "url": instagramUrl},
 ];
+
+/// Footer links, in the app footer and the shell footer alike.
+const List<Map<String, String>> footerLinks = [
+  ...profileLinks,
+  {"label": "WeinKorsi", "url": weinKorsiUrl},
+  {"label": "WeinKorsi on Instagram", "url": weinKorsiInstagramUrl},
+];
+
+const String footerCopyright = "© 2026 $fullName";

@@ -1,6 +1,7 @@
-# Khader Hassan Hwaijeh
+# خضر حويجة — Khader Hwaijeh (Khader Hassan Hwaijeh)
 
-> Full-stack software engineer in Damascus, Syria. Builds, deploys and personally
+> أنا خضر حويجة، مهندس برمجيات ومؤسس منصة وين كورسي (WeinKorsi, https://wein-korsi.com/).
+> Software engineer and founder of WeinKorsi (وين كورسي). Full-stack engineer in Damascus, Syria. Builds, deploys and personally
 > operates production web and mobile systems — Flutter and Laravel, on self-managed
 > Linux/Nginx VPS infrastructure. Available for new projects.
 
@@ -9,6 +10,7 @@
 - **Email:** khaderhuijih@gmail.com
 - **GitHub:** https://github.com/khaderhash
 - **LinkedIn:** https://www.linkedin.com/in/khader-hwaijeh-a8bb3629a/
+- **Instagram:** https://www.instagram.com/khader._.hwaijeh
 - **Résumé (PDF):** https://www.khaderhash.me/cv.pdf
 <!-- LINKS:END -->
 
@@ -26,7 +28,7 @@ contributor at Lumi Coin Syria since September 2025.
 
 ## Production systems
 
-### WeinKorsi — https://www.wein-korsi.com/
+### WeinKorsi (وين كورسي) — https://wein-korsi.com/
 Founder & Full-Stack Engineer. Educational marketplace connecting students, training
 institutes and course providers. In production since launch: 12 training institutes
 onboarded, 100+ registered users. Role-based access for students, institutes and

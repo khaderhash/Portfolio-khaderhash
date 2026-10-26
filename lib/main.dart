@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'main_layot.dart';
+import 'models/data.dart';
 import 'utils/theme_provider.dart';
 import 'pages/ai_page.dart';
 import 'pages/cyber_page.dart';
@@ -25,7 +26,8 @@ class MyPortfolioApp extends StatelessWidget {
   Widget build(BuildContext context) {
     final themeProvider = context.watch<ThemeProvider>();
     return MaterialApp(
-      title: 'Khader Hwaijeh — Software Engineer',
+      // Flutter Web writes this into document.title — keep it the SEO title.
+      title: siteTitle,
       debugShowCheckedModeBanner: false,
       themeMode: themeProvider.themeMode,
       theme: buildLightTheme(),

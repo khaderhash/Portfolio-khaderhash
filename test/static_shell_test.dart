@@ -8,6 +8,7 @@
 //
 //   flutter test test/static_shell_test.dart
 
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
@@ -129,6 +130,59 @@ void main() {
         reason: 'og:image must be an absolute URL.');
   });
 
+  group('name & founder SEO', () {
+    test('head title, MaterialApp title and siteTitle agree', () {
+      // Flutter Web overwrites document.title with MaterialApp.title, so a
+      // mismatch would swap the title out from under Googlebot.
+      expect(html, contains('<title>$siteTitle</title>'));
+      expect(File('lib/main.dart').readAsStringSync(),
+          contains('title: siteTitle'));
+    });
+
+    test('exactly one h1, carrying both spellings of the name', () {
+      final h1s = RegExp(r'<h1[ >](.*?)</h1>').allMatches(html).toList();
+      expect(h1s, hasLength(1));
+      expect(h1s.single.group(1), allOf(contains(nameAr), contains(nameEn)));
+    });
+
+    test('visible founder sentence links to WeinKorsi in both languages', () {
+      for (final s in [introAr, introEn]) {
+        expect(shell, contains(gen.introLine(s)));
+      }
+      expect(shell, contains('<a href="$weinKorsiUrl">'));
+    });
+
+    test('shell footer links every profile and WeinKorsi', () {
+      final footer = shell.substring(shell.indexOf('<footer>'));
+      for (final l in footerLinks) {
+        expect(footer, contains('href="${gen.esc(l['url']!)}"'));
+      }
+    });
+
+    test('JSON-LD parses and ties the Person to WeinKorsi both ways', () {
+      final start = html.indexOf('<script type="application/ld+json">');
+      final end = html.indexOf('</script>', start);
+      final ld = jsonDecode(html.substring(
+              start + '<script type="application/ld+json">'.length, end))
+          as Map<String, dynamic>;
+      final graph = (ld['@graph'] as List).cast<Map<String, dynamic>>();
+      final person = graph.singleWhere((n) => n['@type'] == 'Person');
+      final org = graph.singleWhere((n) => n['@type'] == 'Organization');
+      expect(person['@id'], '$siteUrl#person');
+      expect(person['name'], nameAr);
+      expect(person['alternateName'], contains(nameEn));
+      expect(person['worksFor'], {'@id': weinKorsiOrgId});
+      expect(person['sameAs'], containsAll(profileLinks.map((l) => l['url'])));
+      expect(org['@id'], weinKorsiOrgId);
+      expect(org['founder'], {'@id': '$siteUrl#person'});
+    });
+
+    test('photo referenced by the shell and JSON-LD exists', () {
+      expect(File('web/khader-hwaijeh.jpg').existsSync(), isTrue);
+      expect(shell, contains('alt="${gen.esc(photoAlt)}"'));
+    });
+  });
+
   // llms.txt is prose, so it is not generated — but it is a second surface
   // that AI readers trust, and it must not contradict the app either.
   group('llms.txt', () {
@@ -219,9 +273,13 @@ void main() {
     }
   });
 
-  test('shell is removed once the app paints, and only then', () {
+  test('shell is hidden (not removed) once the app paints, and only then', () {
     expect(html, contains("addEventListener('flutter-first-frame'"),
-        reason: 'Nothing removes the shell — it would cover the app forever.');
+        reason: 'Nothing hides the shell — it would cover the app forever.');
     expect(html, contains("getElementById('shell')"));
+    expect(html, contains("classList.add('hydrated')"));
+    expect(html, isNot(contains('el.remove()')),
+        reason: 'Removing the shell leaves a crawler that runs the app '
+            'with an empty canvas and no text to index.');
   });
 }
