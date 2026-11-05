@@ -12,9 +12,6 @@
 //   outcome     — one-line, outcome-led summary shown above description
 //   page        — optional: the project's own page (JSON-LD url when
 //                 there is no website)
-//   download    — optional: the app file to download (a "Download for
-//                 Android" button next to the others; JSON-LD downloadUrl)
-//   downloadInfo, downloadHint — optional: shown under that button
 //   gallery     — optional: screenshots shown in a row in the details
 //                 dialog ("web/…" paths are served files, not bundled)
 //   operatingSystem, applicationCategory — optional: JSON-LD for a
@@ -193,10 +190,7 @@ final List<Map<String, dynamic>> projectsData = [
     "desc":
         "Offline Arabic money tracker in Syrian pounds and dollars — your data never leaves your phone.",
     "tech": ["Flutter", "SQLite", "Offline", "Android + iPhone"],
-    "page": "https://khaderhash.github.io/matmurti/",
-    "download": "https://github.com/khaderhash/matmurti/releases/latest/download/matmurti.apk",
-    "downloadInfo": "16.5 MB · iPhone version on the page",
-    "downloadHint": "فعّل التثبيت من مصادر غير معروفة إذا طلب منك",
+    "website": "https://khaderhash.github.io/matmurti/",
     "image": "assets/matmurti.webp",
     "gallery": [
       "web/matmurti/home.webp",

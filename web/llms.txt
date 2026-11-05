@@ -68,14 +68,12 @@ Syrian pounds and dollars, with old-pound input converted automatically (100 old
 currency exchanges, and an "All" view in pounds at each day's rate. Fully offline with no
 account: data stays on the phone. Excel backup and restore, with the same file moving
 between Android and iPhone.
-Two ways to get it, both free:
-- Android: signed APK, latest version at
-  https://github.com/khaderhash/matmurti/releases/latest/download/matmurti.apk
-  (all versions: https://github.com/khaderhash/matmurti/releases)
+Two ways to get it, both free, from the welcome page https://khaderhash.github.io/matmurti/
+(its iPhone and Android buttons; the old address https://www.khaderhash.me/matmurti
+redirects there):
+- Android: a signed APK (all versions: https://github.com/khaderhash/matmurti/releases).
 - iPhone: a web app (PWA) at https://khaderhash.github.io/matmurti/app/ — open it and use
   Share > Add to Home Screen (iOS 16.4 or later); after the first visit it works offline.
-Both are on the welcome page https://khaderhash.github.io/matmurti/ (the old address
-https://www.khaderhash.me/matmurti redirects there).
   The web app makes no request to any other host.
 Same Flutter code for both; on the web, SQLite runs as WebAssembly in the browser.
 Backed by 240 automated tests plus browser tests in Chromium and WebKit.
