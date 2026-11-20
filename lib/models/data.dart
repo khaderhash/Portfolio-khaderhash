@@ -210,22 +210,24 @@ final List<Map<String, dynamic>> projectsData = [
   {
     "tier": "other",
     "title": "Lumi Rewards",
-    "role": "Flutter Developer & Product Contributor",
-    "badges": ["Product Work", "Mobile"],
+    "role": "Full-Stack Developer & Product Contributor",
+    "badges": ["Full Stack", "Live Production"],
     "outcome":
-        "B2B loyalty product built in Flutter with GetX and Clean Architecture — vendor-facing menus, offers, and rewards, with CI/CD-gated releases.",
+        "B2B loyalty platform for the Syrian market, live in production — worked across the full stack: Laravel backend, server deployment, React admin panel and landing page, and the Flutter mobile app.",
     "leadRole":
-        "Flutter Developer and Product Contributor on Lumi Rewards — a B2B loyalty platform built for the Syrian market, contributing to product planning and feature prioritization alongside mobile delivery.",
+        "Full-Stack Developer and Product Contributor on Lumi Rewards — a B2B loyalty platform built for the Syrian market. Worked on the full stack — backend, server deployment, frontend, and the mobile app — alongside product planning and feature prioritization.",
     "achievements": [
-      "Develop the Flutter app using GetX and Clean Architecture, contributing to product planning and feature prioritization.",
-      "Build vendor-facing features for menus, offers, and rewards, plus a merchant partner directory.",
-      "Configure CI/CD workflows for automated builds and release preparation.",
+      "Backend: Laravel API work including security fixes, account management, and the admin panel backend.",
+      "Server & infrastructure: production deployment, a staging environment, and CI-style deploy and rollback scripts.",
+      "Frontend: a React-based admin panel and the public-facing landing page.",
+      "Mobile: develop the Flutter app using GetX and Clean Architecture — vendor-facing menus, offers, and rewards, plus a merchant partner directory, with CI/CD workflows for automated builds and releases.",
     ],
     "architecture":
-        "Stack & Architecture: Flutter, Dart, GetX, Clean Architecture, REST integration, CI/CD.",
+        "Stack & Architecture: Laravel, React, Flutter, Dart, GetX, Clean Architecture, REST API, staging and production servers, CI/CD.",
     "desc":
-        "B2B loyalty product built in Flutter with GetX and Clean Architecture — vendor-facing menus, offers, and rewards, with CI/CD-gated releases.",
-    "tech": ["Flutter", "GetX", "Clean Arch"],
+        "B2B loyalty platform, live in production — full-stack work across the Laravel backend, server deployment, React admin panel and landing page, and the Flutter app.",
+    "tech": ["Laravel", "React", "Flutter", "DevOps"],
+    "website": "https://lumi-rewards.app",
     "behance": "https://www.behance.net/gallery/238527685/LUMI-REWARDS",
     "image": "assets/lumilogo.jpeg",
     "video": "https://youtube.com/shorts/boKRrkg6N58?feature=share",

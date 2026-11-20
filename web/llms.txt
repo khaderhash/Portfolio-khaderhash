@@ -23,7 +23,7 @@ department, a marketplace founded from scratch, a legal foundation's bilingual p
 and a classifieds platform in pre-launch. Flutter mobile development, Laravel REST backends,
 Linux/Nginx operations with monitoring and automated backups, and AI automation with n8n.
 
-Freelance full-stack software engineer since January 2024. Flutter developer and product
+Freelance full-stack software engineer since January 2024. Full-stack developer and product
 contributor at Lumi Coin Syria since September 2025.
 
 ## Production systems
@@ -82,9 +82,11 @@ backup, Android, iOS web app.
 
 ## Other projects
 
-- **Lumi Rewards** — Flutter Developer & Product Contributor. B2B loyalty product for the
-  Syrian market built in Flutter with GetX and Clean Architecture: vendor-facing menus,
-  offers and rewards, a merchant partner directory, and CI/CD-gated releases.
+- **Lumi Rewards** — https://lumi-rewards.app — Full-Stack Developer & Product Contributor.
+  B2B loyalty platform for the Syrian market, live in production. Full-stack work: Laravel
+  API (security fixes, account management, admin panel backend), production deployment with
+  a staging environment and deploy/rollback scripts, a React admin panel and public landing
+  page, and the Flutter mobile app (GetX, Clean Architecture, CI/CD-gated releases).
 - **UniVerse** — Graduation project. Smart campus app with a hybrid AI scheduler (n8n +
   Gemini) generating personalised academic schedules from GPA and prerequisite rules, a RAG
   AI chatbot answering student queries in real time, and live bus tracking over WebSockets
