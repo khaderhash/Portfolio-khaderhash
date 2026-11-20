@@ -80,13 +80,17 @@ Backed by 240 automated tests plus browser tests in Chromium and WebKit.
 Stack: Flutter, Dart, GetX, SQLite (native and WebAssembly), service worker, Excel (xlsx)
 backup, Android, iOS web app.
 
+### Lumi Rewards — https://lumi-rewards.app
+Full-Stack Developer & Product Contributor (Lumi Coin Syria). B2B loyalty platform for the
+Syrian market, live in production and actively operated. Laravel API (security fixes,
+account management, admin panel backend); production deployment with a staging environment
+and deploy/rollback scripts; a React admin panel and public landing page; and the Flutter
+mobile app (GetX, Clean Architecture, CI/CD-gated releases).
+Stack: Laravel, React, Flutter, Dart, GetX, Clean Architecture, REST API, staging and
+production servers, CI/CD.
+
 ## Other projects
 
-- **Lumi Rewards** — https://lumi-rewards.app — Full-Stack Developer & Product Contributor.
-  B2B loyalty platform for the Syrian market, live in production. Full-stack work: Laravel
-  API (security fixes, account management, admin panel backend), production deployment with
-  a staging environment and deploy/rollback scripts, a React admin panel and public landing
-  page, and the Flutter mobile app (GetX, Clean Architecture, CI/CD-gated releases).
 - **UniVerse** — Graduation project. Smart campus app with a hybrid AI scheduler (n8n +
   Gemini) generating personalised academic schedules from GPA and prerequisite rules, a RAG
   AI chatbot answering student queries in real time, and live bus tracking over WebSockets

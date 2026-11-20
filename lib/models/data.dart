@@ -200,18 +200,15 @@ final List<Map<String, dynamic>> projectsData = [
     ],
   },
 
-  // ═════════════════════════════════════════════════════════════
-  // OTHER PROJECTS — product, academic, and personal work
-  // ═════════════════════════════════════════════════════════════
-
   // ─────────────────────────────────────────────────────────────
-  // 5. Lumi Rewards — B2B loyalty product (Lumi Coin Syria)
+  // Lumi Rewards — B2B loyalty platform (Lumi Coin Syria), full stack, live
   // ─────────────────────────────────────────────────────────────
   {
-    "tier": "other",
+    "tier": "production",
     "title": "Lumi Rewards",
     "role": "Full-Stack Developer & Product Contributor",
-    "badges": ["Full Stack", "Live Production"],
+    "cardBadges": ["Live Production", "Full Stack"],
+    "badges": ["Live Production", "Full Stack", "Product Contributor"],
     "outcome":
         "B2B loyalty platform for the Syrian market, live in production — worked across the full stack: Laravel backend, server deployment, React admin panel and landing page, and the Flutter mobile app.",
     "leadRole":
@@ -232,6 +229,10 @@ final List<Map<String, dynamic>> projectsData = [
     "image": "assets/lumilogo.jpeg",
     "video": "https://youtube.com/shorts/boKRrkg6N58?feature=share",
   },
+
+  // ═════════════════════════════════════════════════════════════
+  // OTHER PROJECTS — product, academic, and personal work
+  // ═════════════════════════════════════════════════════════════
 
   // ─────────────────────────────────────────────────────────────
   // 6. UniVerse — graduation project (AI scheduler, RAG, tracking)
