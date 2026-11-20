@@ -3,7 +3,8 @@
 > أنا خضر حويجة، مهندس برمجيات ومؤسس منصة وين كورسي (WeinKorsi, https://wein-korsi.com/).
 > Software engineer and founder of WeinKorsi (وين كورسي). Full-stack engineer in Damascus, Syria. Builds, deploys and personally
 > operates production web and mobile systems in Flutter and Laravel, on self-managed
-> Linux/Nginx VPS infrastructure. Available for new projects.
+> Linux/Nginx VPS infrastructure. Available for new freelance projects: send a short
+> project brief to khaderhuijih@gmail.com.
 
 <!-- LINKS:BEGIN generated -->
 - **Site:** https://www.khaderhash.me/
