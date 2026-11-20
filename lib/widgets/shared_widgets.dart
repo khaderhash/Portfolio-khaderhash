@@ -80,21 +80,14 @@ class SectionTitle extends StatelessWidget {
     return Column(
       crossAxisAlignment: align,
       children: [
-        Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Container(width: 22, height: 1.5, color: accent),
-            const SizedBox(width: 10),
-            Text(
-              kicker.toUpperCase(),
-              style: monoStyle(
-                context,
-                size: 11.5,
-                weight: FontWeight.w600,
-                color: accent,
-              ).copyWith(letterSpacing: 1.4),
-            ),
-          ],
+        Text(
+          kicker.toUpperCase(),
+          style: monoStyle(
+            context,
+            size: 11.5,
+            weight: FontWeight.w600,
+            color: accent,
+          ).copyWith(letterSpacing: 1.4),
         ),
         const SizedBox(height: 14),
         Text(

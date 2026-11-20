@@ -36,6 +36,15 @@ administrators; OTP authentication, authorization middleware, rate limiting, and
 RTL course discovery and reservation flows.
 Stack: React (Vite), Laravel 12, Flutter, PostgreSQL, Cloudflare R2, VPS (Nginx).
 
+### Lumi Rewards — https://lumi-rewards.app
+Full-Stack Developer & Product Contributor (Lumi Coin Syria). B2B loyalty platform for the
+Syrian market, live in production and actively operated. Laravel API (security fixes,
+account management, admin panel backend); production deployment with a staging environment
+and deploy/rollback scripts; a React admin panel and public landing page; and the Flutter
+mobile app (GetX, Clean Architecture, CI/CD-gated releases).
+Stack: Laravel, React, Flutter, Dart, GetX, Clean Architecture, REST API, staging and
+production servers, CI/CD.
+
 ### EduPal — https://edu-pal.tech/
 Sole Full-Stack Engineer. Adopted by Al Sham Private University as the operational system
 for its student housing department, serving 100+ students plus housing staff and managers.
@@ -79,15 +88,6 @@ Same Flutter code for both; on the web, SQLite runs as WebAssembly in the browse
 Backed by 240 automated tests plus browser tests in Chromium and WebKit.
 Stack: Flutter, Dart, GetX, SQLite (native and WebAssembly), service worker, Excel (xlsx)
 backup, Android, iOS web app.
-
-### Lumi Rewards — https://lumi-rewards.app
-Full-Stack Developer & Product Contributor (Lumi Coin Syria). B2B loyalty platform for the
-Syrian market, live in production and actively operated. Laravel API (security fixes,
-account management, admin panel backend); production deployment with a staging environment
-and deploy/rollback scripts; a React admin panel and public landing page; and the Flutter
-mobile app (GetX, Clean Architecture, CI/CD-gated releases).
-Stack: Laravel, React, Flutter, Dart, GetX, Clean Architecture, REST API, staging and
-production servers, CI/CD.
 
 ## Other projects
 

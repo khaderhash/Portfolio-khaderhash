@@ -18,7 +18,7 @@ void main() {
 
     // Nav wordmark and the hero headline.
     expect(find.text('Khader Hwaijeh'), findsOneWidget);
-    expect(find.text('Available for new projects'), findsOneWidget);
+    expect(find.text('Available for new projects'), findsNothing);
 
     // App starts in dark mode, so the toggle offers the light-mode icon.
     expect(find.byIcon(Icons.light_mode_outlined), findsOneWidget);

@@ -56,6 +56,36 @@ final List<Map<String, dynamic>> projectsData = [
   },
 
   // ─────────────────────────────────────────────────────────────
+  // Lumi Rewards — B2B loyalty platform (Lumi Coin Syria), full stack, live
+  // ─────────────────────────────────────────────────────────────
+  {
+    "tier": "production",
+    "title": "Lumi Rewards",
+    "role": "Full-Stack Developer & Product Contributor",
+    "cardBadges": ["Live Production", "Full Stack"],
+    "badges": ["Live Production", "Full Stack", "Product Contributor"],
+    "outcome":
+        "B2B loyalty platform for the Syrian market, live in production — worked across the full stack: Laravel backend, server deployment, React admin panel and landing page, and the Flutter mobile app.",
+    "leadRole":
+        "Full-Stack Developer and Product Contributor on Lumi Rewards — a B2B loyalty platform built for the Syrian market. Worked on the full stack — backend, server deployment, frontend, and the mobile app — alongside product planning and feature prioritization.",
+    "achievements": [
+      "Backend: Laravel API work including security fixes, account management, and the admin panel backend.",
+      "Server & infrastructure: production deployment, a staging environment, and CI-style deploy and rollback scripts.",
+      "Frontend: a React-based admin panel and the public-facing landing page.",
+      "Mobile: develop the Flutter app using GetX and Clean Architecture — vendor-facing menus, offers, and rewards, plus a merchant partner directory, with CI/CD workflows for automated builds and releases.",
+    ],
+    "architecture":
+        "Stack & Architecture: Laravel, React, Flutter, Dart, GetX, Clean Architecture, REST API, staging and production servers, CI/CD.",
+    "desc":
+        "B2B loyalty platform, live in production — full-stack work across the Laravel backend, server deployment, React admin panel and landing page, and the Flutter app.",
+    "tech": ["Laravel", "React", "Flutter", "DevOps"],
+    "website": "https://lumi-rewards.app",
+    "behance": "https://www.behance.net/gallery/238527685/LUMI-REWARDS",
+    "image": "assets/lumilogo.jpeg",
+    "video": "https://youtube.com/shorts/boKRrkg6N58?feature=share",
+  },
+
+  // ─────────────────────────────────────────────────────────────
   // 2. EduPal — operational system at Al Sham Private University
   // ─────────────────────────────────────────────────────────────
   {
@@ -198,36 +228,6 @@ final List<Map<String, dynamic>> projectsData = [
       "web/matmurti/transactions.webp",
       "web/matmurti/settings.webp",
     ],
-  },
-
-  // ─────────────────────────────────────────────────────────────
-  // Lumi Rewards — B2B loyalty platform (Lumi Coin Syria), full stack, live
-  // ─────────────────────────────────────────────────────────────
-  {
-    "tier": "production",
-    "title": "Lumi Rewards",
-    "role": "Full-Stack Developer & Product Contributor",
-    "cardBadges": ["Live Production", "Full Stack"],
-    "badges": ["Live Production", "Full Stack", "Product Contributor"],
-    "outcome":
-        "B2B loyalty platform for the Syrian market, live in production — worked across the full stack: Laravel backend, server deployment, React admin panel and landing page, and the Flutter mobile app.",
-    "leadRole":
-        "Full-Stack Developer and Product Contributor on Lumi Rewards — a B2B loyalty platform built for the Syrian market. Worked on the full stack — backend, server deployment, frontend, and the mobile app — alongside product planning and feature prioritization.",
-    "achievements": [
-      "Backend: Laravel API work including security fixes, account management, and the admin panel backend.",
-      "Server & infrastructure: production deployment, a staging environment, and CI-style deploy and rollback scripts.",
-      "Frontend: a React-based admin panel and the public-facing landing page.",
-      "Mobile: develop the Flutter app using GetX and Clean Architecture — vendor-facing menus, offers, and rewards, plus a merchant partner directory, with CI/CD workflows for automated builds and releases.",
-    ],
-    "architecture":
-        "Stack & Architecture: Laravel, React, Flutter, Dart, GetX, Clean Architecture, REST API, staging and production servers, CI/CD.",
-    "desc":
-        "B2B loyalty platform, live in production — full-stack work across the Laravel backend, server deployment, React admin panel and landing page, and the Flutter app.",
-    "tech": ["Laravel", "React", "Flutter", "DevOps"],
-    "website": "https://lumi-rewards.app",
-    "behance": "https://www.behance.net/gallery/238527685/LUMI-REWARDS",
-    "image": "assets/lumilogo.jpeg",
-    "video": "https://youtube.com/shorts/boKRrkg6N58?feature=share",
   },
 
   // ═════════════════════════════════════════════════════════════

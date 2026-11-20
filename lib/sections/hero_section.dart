@@ -69,7 +69,6 @@ class _HeroContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final accent = premiumAccent(context);
     final text = premiumText(context);
     final muted = premiumMutedText(context);
     final width = MediaQuery.of(context).size.width;
@@ -80,44 +79,6 @@ class _HeroContent extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Availability badge
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 7),
-            decoration: BoxDecoration(
-              color: premiumSurfaceAlt(context),
-              borderRadius: BorderRadius.circular(999),
-              border: Border.all(color: premiumBorder(context)),
-            ),
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Container(
-                  width: 7,
-                  height: 7,
-                  decoration: BoxDecoration(
-                    color: accent,
-                    shape: BoxShape.circle,
-                    boxShadow: [
-                      BoxShadow(
-                        color: accent.withValues(alpha: 0.55),
-                        blurRadius: 6,
-                      ),
-                    ],
-                  ),
-                ),
-                const SizedBox(width: 8),
-                Text(
-                  "Available for new projects",
-                  style: TextStyle(
-                    color: muted,
-                    fontSize: 12.5,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          const SizedBox(height: 22),
           // Headline
           Text(
             "I build production-grade web and mobile platforms for teams that need to ship right.",

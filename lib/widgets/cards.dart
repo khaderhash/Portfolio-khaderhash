@@ -113,6 +113,9 @@ class _ProjectCardState extends State<ProjectCard> {
         p['brandColor'] is int ? Color(p['brandColor'] as int) : null;
     final compact = widget.compact;
     final featured = widget.featured;
+    final website = (p['website'] as String?)?.isNotEmpty == true
+        ? p['website'] as String
+        : null;
 
     final idleBorder = featured
         ? accent.withValues(alpha: 0.22)
@@ -139,35 +142,41 @@ class _ProjectCardState extends State<ProjectCard> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Image / brand-mark panel
-              AspectRatio(
-                aspectRatio: compact ? 16 / 9 : 16 / 10,
-                child: Stack(
-                  fit: StackFit.expand,
-                  children: [
-                    _CardVisual(
-                      path: p['image'],
-                      isBrandMark: isBrandMark,
-                      brandColor: brandColor,
-                      cacheWidth: compact ? 360 : 540,
-                      errorColor: muted,
-                      semanticLabel: '${p['title']} — ${p['role']}',
-                    ),
-                    if (badges.isNotEmpty)
-                      Positioned(
-                        top: 10,
-                        left: 10,
-                        right: 10,
-                        child: Wrap(
-                          spacing: 6,
-                          runSpacing: 6,
-                          children: badges
-                              .take(2)
-                              .map((b) => _CardBadge(label: b))
-                              .toList(),
-                        ),
+              // Image / brand-mark panel — opens the live site when the
+              // project has one; the rest of the card opens the details.
+              GestureDetector(
+                onTap: website == null
+                    ? null
+                    : () => launchUrl(Uri.parse(website)),
+                child: AspectRatio(
+                  aspectRatio: compact ? 16 / 9 : 16 / 10,
+                  child: Stack(
+                    fit: StackFit.expand,
+                    children: [
+                      _CardVisual(
+                        path: p['image'],
+                        isBrandMark: isBrandMark,
+                        brandColor: brandColor,
+                        cacheWidth: compact ? 360 : 540,
+                        errorColor: muted,
+                        semanticLabel: '${p['title']} — ${p['role']}',
                       ),
-                  ],
+                      if (badges.isNotEmpty)
+                        Positioned(
+                          top: 10,
+                          left: 10,
+                          right: 10,
+                          child: Wrap(
+                            spacing: 6,
+                            runSpacing: 6,
+                            children: badges
+                                .take(2)
+                                .map((b) => _CardBadge(label: b))
+                                .toList(),
+                          ),
+                        ),
+                    ],
+                  ),
                 ),
               ),
               // Body
@@ -300,18 +309,28 @@ class _ProjectCardState extends State<ProjectCard> {
                     children: [
                       Stack(
                         children: [
-                          AspectRatio(
-                            aspectRatio: 16 / 9,
-                            child: _CardVisual(
-                              path: p['image'],
-                              isBrandMark: (p['logo'] as bool?) ?? false,
-                              brandColor: p['brandColor'] is int
-                                  ? Color(p['brandColor'] as int)
-                                  : null,
-                              cacheWidth: 1200,
-                              errorColor: muted,
-                              semanticLabel:
-                                  '${p['title']} — ${p['role']}',
+                          GestureDetector(
+                            onTap: hasWebsite
+                                ? () => launchUrl(Uri.parse(p['website']))
+                                : null,
+                            child: MouseRegion(
+                              cursor: hasWebsite
+                                  ? SystemMouseCursors.click
+                                  : MouseCursor.defer,
+                              child: AspectRatio(
+                                aspectRatio: 16 / 9,
+                                child: _CardVisual(
+                                  path: p['image'],
+                                  isBrandMark: (p['logo'] as bool?) ?? false,
+                                  brandColor: p['brandColor'] is int
+                                      ? Color(p['brandColor'] as int)
+                                      : null,
+                                  cacheWidth: 1200,
+                                  errorColor: muted,
+                                  semanticLabel:
+                                      '${p['title']} — ${p['role']}',
+                                ),
+                              ),
                             ),
                           ),
                           if (hasVideo)
