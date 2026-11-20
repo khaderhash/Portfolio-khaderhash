@@ -465,6 +465,10 @@
       setTimeout(function () { el.classList.add('hydrated'); }, 400);
     });
   </script>
-  <script src="flutter_bootstrap.js" async></script>
+  <!-- Bootstrap inlined at build time (web/flutter_bootstrap.js), so it is
+       never served from a stale cache. -->
+  <script>
+    {{flutter_bootstrap_js}}
+  </script>
 </body>
 </html>
