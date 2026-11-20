@@ -56,28 +56,29 @@ final List<Map<String, dynamic>> projectsData = [
   },
 
   // ─────────────────────────────────────────────────────────────
-  // Lumi Rewards — B2B loyalty platform (Lumi Coin Syria), full stack, live
+  // Lumi Rewards — B2B loyalty platform (Lumi Coin Syria); technical partner
   // ─────────────────────────────────────────────────────────────
   {
     "tier": "production",
     "title": "Lumi Rewards",
-    "role": "Full-Stack Developer & Product Contributor",
-    "cardBadges": ["Live Production", "Full Stack"],
-    "badges": ["Live Production", "Full Stack", "Product Contributor"],
+    "role": "Technical Partner & Full-Stack Developer",
+    "cardBadges": ["Live Production", "Technical Partner"],
+    "badges": ["Live Production", "Technical Partner", "Full Stack"],
     "outcome":
-        "B2B loyalty platform for the Syrian market, live in production — worked across the full stack: Laravel backend, server deployment, React admin panel and landing page, and the Flutter mobile app.",
+        "B2B loyalty platform for the Syrian market, live in production. As technical partner I own the technical direction and built and operate the full stack: Laravel backend, servers, React admin panel and landing page, and the Flutter app.",
     "leadRole":
-        "Full-Stack Developer and Product Contributor on Lumi Rewards — a B2B loyalty platform built for the Syrian market. Worked on the full stack — backend, server deployment, frontend, and the mobile app — alongside product planning and feature prioritization.",
+        "Technical Partner at Lumi Coin Syria — a partner in the business, not a contractor. I own the technical direction of Lumi Rewards, a B2B loyalty platform for the Syrian market, and have built and operate the full stack: backend, infrastructure, frontend, and the mobile app.",
     "achievements": [
-      "Backend: Laravel API work including security fixes, account management, and the admin panel backend.",
-      "Server & infrastructure: production deployment, a staging environment, and CI-style deploy and rollback scripts.",
-      "Frontend: a React-based admin panel and the public-facing landing page.",
+      "Own the technical decisions as a partner in the business: architecture, stack, infrastructure, and release process, alongside product planning.",
+      "Backend: Laravel API, including security fixes, account management, and the admin panel backend.",
+      "Infrastructure: production and staging servers on a self-managed VPS — server configuration over SSH, database administration, and deploy and rollback scripts.",
+      "Frontend: a React admin panel with role-based permissions, and the public-facing landing page.",
       "Mobile: develop the Flutter app using GetX and Clean Architecture — vendor-facing menus, offers, and rewards, plus a merchant partner directory, with CI/CD workflows for automated builds and releases.",
     ],
     "architecture":
-        "Stack & Architecture: Laravel, React, Flutter, Dart, GetX, Clean Architecture, REST API, staging and production servers, CI/CD.",
+        "Stack & Architecture: Laravel, React, Flutter, Dart, GetX, Clean Architecture, REST API, VPS (staging and production), CI/CD.",
     "desc":
-        "B2B loyalty platform, live in production — full-stack work across the Laravel backend, server deployment, React admin panel and landing page, and the Flutter app.",
+        "B2B loyalty platform, live in production — as technical partner I own the technical direction and run the full stack: Laravel backend, servers, React admin panel and landing page, and the Flutter app.",
     "tech": ["Laravel", "React", "Flutter", "DevOps"],
     "website": "https://lumi-rewards.app",
     "behance": "https://www.behance.net/gallery/238527685/LUMI-REWARDS",
@@ -455,11 +456,12 @@ const String siteTagline =
 
 const String bioParagraph =
     "Full-stack software engineer who ships products to production and keeps them "
-    "running. I build, deploy and personally operate four production systems on "
-    "self-managed VPS infrastructure: a university services platform officially "
+    "running. I build, deploy and personally operate four production systems, each "
+    "on its own self-managed VPS: a university services platform officially "
     "adopted by Al Sham Private University's housing department, a marketplace I "
-    "founded from scratch, a legal foundation's bilingual public site, and a "
-    "classifieds platform in pre-launch. Day to day that means Flutter mobile "
+    "founded from scratch, a B2B loyalty platform where I am technical partner, and "
+    "a classifieds platform in pre-launch. I also maintain a legal foundation's "
+    "bilingual public site. Day to day that means Flutter mobile "
     "development, Laravel REST backends, Linux and Nginx operations with monitoring "
     "and automated backups, and AI automation with n8n.";
 
@@ -497,6 +499,8 @@ const List<Map<String, Object>> skillGroups = [
     "title": "Infrastructure & Security",
     "skills": [
       "Linux", "VPS Administration", "Nginx", "HTTPS/TLS",
+      "SSH & Server Config", "Staging Environments",
+      "Deploy & Rollback Scripts", "Database Administration",
       "CI/CD", "GitHub Actions", "Docker", "Cloudflare R2",
       "Uptime Monitoring", "Automated Backups",
     ],

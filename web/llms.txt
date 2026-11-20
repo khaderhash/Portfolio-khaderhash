@@ -17,14 +17,15 @@
 ## Summary
 
 Full-Stack Software Engineer who ships products to production and keeps them running.
-Four production systems built, deployed and operated on self-managed VPS infrastructure:
+Four production systems built, deployed and operated, each on its own self-managed VPS:
 a university services platform officially adopted by Al Sham Private University's housing
-department, a marketplace founded from scratch, a legal foundation's bilingual public site,
-and a classifieds platform in pre-launch. Flutter mobile development, Laravel REST backends,
+department (EduPal), a marketplace founded from scratch (WeinKorsi), a B2B loyalty platform
+where he is technical partner (Lumi Rewards), and a classifieds platform in pre-launch
+(OboSyria). Also maintains a legal foundation's bilingual public site, hosted on Railway. Flutter mobile development, Laravel REST backends,
 Linux/Nginx operations with monitoring and automated backups, and AI automation with n8n.
 
-Freelance full-stack software engineer since January 2024. Full-stack developer and product
-contributor at Lumi Coin Syria since September 2025.
+Freelance full-stack software engineer since January 2024. At Lumi Coin Syria since
+September 2025, now as technical partner owning the technical direction of Lumi Rewards.
 
 ## Production systems
 
@@ -37,13 +38,15 @@ RTL course discovery and reservation flows.
 Stack: React (Vite), Laravel 12, Flutter, PostgreSQL, Cloudflare R2, VPS (Nginx).
 
 ### Lumi Rewards — https://lumi-rewards.app
-Full-Stack Developer & Product Contributor (Lumi Coin Syria). B2B loyalty platform for the
-Syrian market, live in production and actively operated. Laravel API (security fixes,
-account management, admin panel backend); production deployment with a staging environment
-and deploy/rollback scripts; a React admin panel and public landing page; and the Flutter
-mobile app (GetX, Clean Architecture, CI/CD-gated releases).
-Stack: Laravel, React, Flutter, Dart, GetX, Clean Architecture, REST API, staging and
-production servers, CI/CD.
+Technical Partner & Full-Stack Developer (Lumi Coin Syria) — a partner in the business,
+not a contractor. Owns the technical direction of this B2B loyalty platform for the Syrian
+market, live in production, and built and operates the full stack: Laravel API (security
+fixes, account management, admin panel backend); production and staging servers on a
+self-managed VPS, with SSH server configuration, database administration and deploy/rollback
+scripts; a React admin panel with role-based permissions and the public landing page; and
+the Flutter mobile app (GetX, Clean Architecture, CI/CD-gated releases).
+Stack: Laravel, React, Flutter, Dart, GetX, Clean Architecture, REST API, VPS (staging and
+production), CI/CD.
 
 ### EduPal — https://edu-pal.tech/
 Sole Full-Stack Engineer. Adopted by Al Sham Private University as the operational system
