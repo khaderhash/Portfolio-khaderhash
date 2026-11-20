@@ -84,6 +84,11 @@ class AboutSection extends StatelessWidget {
                   ),
                   SizedBox(height: 12),
                   _Stat(
+                    value: "4 self-managed VPS systems",
+                    label: "WeinKorsi · Lumi Rewards · EduPal · OboSyria",
+                  ),
+                  SizedBox(height: 12),
+                  _Stat(
                     value: "Laravel · React · Flutter · n8n",
                     label: "Core stack",
                   ),

@@ -9,7 +9,8 @@
 //                 tinted backdrop (instead of cover-cropping image)
 //   brandColor  — accent color for the brand-mark backdrop (hex int)
 //   badges      — short status pills shown on card (max 2 render)
-//   outcome     — one-line, outcome-led summary shown above description
+//   outcome     — outcome-led summary (details dialog, shell, JSON-LD)
+//   cardSummary — short card text, written to fit two lines on the card
 //   page        — optional: the project's own page (JSON-LD url when
 //                 there is no website)
 //   gallery     — optional: screenshots shown in a row in the details
@@ -28,9 +29,10 @@ final List<Map<String, dynamic>> projectsData = [
   {
     "tier": "production",
     "title": "WeinKorsi",
+    "cardSummary": "Educational marketplace I founded — 12 institutes and 100+ users since launch.",
     "schemaType": "SoftwareApplication",
     "role": "Founder & Full-Stack Engineer",
-    "cardBadges": ["Founder", "Live Production"],
+    "cardBadges": ["Founder"],
     "badges": ["Founder", "Full Stack", "Live Production", "Marketplace"],
     "outcome":
         "Educational marketplace I founded and run — 12 training institutes onboarded and 100+ registered users since launch.",
@@ -61,8 +63,9 @@ final List<Map<String, dynamic>> projectsData = [
   {
     "tier": "production",
     "title": "Lumi Rewards",
+    "cardSummary": "Live B2B loyalty platform — I own the technical direction and run the full stack.",
     "role": "Technical Partner & Full-Stack Developer",
-    "cardBadges": ["Live Production", "Technical Partner"],
+    "cardBadges": ["Technical Partner"],
     "badges": ["Live Production", "Technical Partner", "Full Stack"],
     "outcome":
         "B2B loyalty platform for the Syrian market, live in production. As technical partner I own the technical direction and built and operate the full stack: Laravel backend, servers, React admin panel and landing page, and the Flutter app.",
@@ -92,9 +95,10 @@ final List<Map<String, dynamic>> projectsData = [
   {
     "tier": "production",
     "title": "EduPal",
+    "cardSummary": "Student housing system adopted by Al Sham Private University — 100+ students.",
     "schemaType": "SoftwareApplication",
     "role": "Sole Full-Stack Engineer",
-    "cardBadges": ["Live Production", "Sole Engineer"],
+    "cardBadges": ["Sole Engineer"],
     "badges": ["Live Production", "Sole Engineer", "Full Stack"],
     "outcome":
         "The operational system Al Sham Private University adopted for its student housing department — serving 100+ students plus housing staff and managers.",
@@ -126,12 +130,13 @@ final List<Map<String, dynamic>> projectsData = [
   {
     "tier": "production",
     "title": "Citizens Abroad — Legal Support Platform",
+    "cardSummary": "Bilingual Arabic/Russian legal-aid platform — ~500 visitors a month.",
     "schemaType": "WebSite",
     "schemaName":
         "Foundation for the Support & Protection of Citizens Abroad",
     "label": "Secure Project",
     "role": "Backend Developer & Maintainer",
-    "cardBadges": ["Live Production", "Security"],
+    "cardBadges": ["Live Production"],
     "badges": ["Live Production", "Security", "Backend"],
     "outcome":
         "Bilingual Arabic/Russian platform for a non-profit legal advisory foundation — built in one month, maintained in production since, ~500 monthly visitors.",
@@ -160,9 +165,10 @@ final List<Map<String, dynamic>> projectsData = [
   {
     "tier": "production",
     "title": "OboSyria",
+    "cardSummary": "Moderated classifieds for property and vehicles — every listing reviewed first.",
     "schemaType": "SoftwareApplication",
     "role": "Sole Engineer",
-    "cardBadges": ["Full Stack", "Pre-Launch"],
+    "cardBadges": ["Pre-Launch"],
     "badges": ["Full Stack", "Pre-Launch", "Sole Engineer"],
     "outcome":
         "Moderated classifieds platform for real estate and vehicle listings — every listing is reviewed and approved before publication.",
@@ -198,12 +204,13 @@ final List<Map<String, dynamic>> projectsData = [
   {
     "tier": "production",
     "title": "مطمورتي",
+    "cardSummary": "Offline Arabic money tracker in pounds and dollars — data never leaves the phone.",
     "schemaType": "SoftwareApplication",
     "schemaName": "Matmurti (مطمورتي)",
     "operatingSystem": "Android, iOS (web app)",
     "applicationCategory": "FinanceApplication",
     "role": "Creator & Sole Developer",
-    "cardBadges": ["Android & iPhone", "Fully Offline"],
+    "cardBadges": ["Android & iPhone"],
     "badges": ["Android & iPhone", "Fully Offline", "Privacy-First", "Sole Developer"],
     "outcome":
         "Arabic money tracker for everyday life in Syria — expenses and income in Syrian pounds and dollars, fully offline, and your data never leaves your phone.",
@@ -241,6 +248,7 @@ final List<Map<String, dynamic>> projectsData = [
   {
     "tier": "other",
     "title": "UniVerse",
+    "cardSummary": "Smart campus app: AI chatbot, AI scheduler, and live bus tracking.",
     "role": "Lead Flutter Developer",
     "badges": ["Graduation Project", "AI Integration"],
     "outcome":
@@ -269,6 +277,7 @@ final List<Map<String, dynamic>> projectsData = [
   {
     "tier": "other",
     "title": "Nibrass Hub",
+    "cardSummary": "Flutter app with an assistant for housing and transport questions.",
     "role": "Flutter Developer",
     "badges": ["Personal Project", "AI Integration"],
     "outcome":
@@ -296,7 +305,8 @@ final List<Map<String, dynamic>> projectsData = [
   {
     "tier": "other",
     "title": "Expen Scope (EXS)",
-    "role": "Lead Flutter Developer",
+    "cardSummary": "Finance assistant for business and personal use, with AI workflows.",
+    "role": "Creator",
     "badges": ["Personal Project", "AI Integration"],
     "outcome":
         "Dual-personality finance assistant — one product serving business and individual flows, with AI-driven workflows.",
@@ -324,6 +334,7 @@ final List<Map<String, dynamic>> projectsData = [
   {
     "tier": "other",
     "title": "SSSD Mobile App",
+    "cardSummary": "SSSD's app for service requests and news updates.",
     "role": "Flutter Developer",
     "badges": [],
     "outcome":
@@ -349,6 +360,7 @@ final List<Map<String, dynamic>> projectsData = [
   {
     "tier": "other",
     "title": "Smart Telegram Bot",
+    "cardSummary": "n8n bot that routes support queries and logs complaints to Sheets.",
     "role": "Automation Engineer",
     "badges": ["Automation"],
     "outcome":
@@ -374,6 +386,7 @@ final List<Map<String, dynamic>> projectsData = [
   {
     "tier": "other",
     "title": "WhatsApp Automation Bot",
+    "cardSummary": "Node.js bot for repeat customer replies and inquiry routing.",
     "role": "Automation Engineer",
     "badges": ["Automation"],
     "outcome":

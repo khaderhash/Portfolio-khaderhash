@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -50,14 +51,28 @@ class _MainLayoutState extends State<MainLayout> {
     if (await canLaunchUrl(uri)) await launchUrl(uri);
   }
 
+  /// Height of the fixed top bar; the page scrolls underneath it.
+  static const double _navHeight = 68;
+
+  /// Scrolls so the section's heading lands just below the top bar.
+  ///
+  /// `ensureVisible` aligned the section's outer edge to the very top of the
+  /// screen, under the bar, and the target section's own top padding pushed
+  /// the heading further down; this computes the heading position instead.
   void scrollToSection(GlobalKey key) {
     final ctx = key.currentContext;
-    if (ctx == null) return;
-    Scrollable.ensureVisible(
-      ctx,
+    final box = ctx?.findRenderObject();
+    if (box == null || !_scrollController.hasClients) return;
+    final viewport = RenderAbstractViewport.maybeOf(box);
+    if (viewport == null) return;
+    final sectionTop = viewport.getOffsetToReveal(box, 0).offset;
+    final position = _scrollController.position;
+    final target = (sectionTop + sectionVerticalPadding - _navHeight - 20)
+        .clamp(position.minScrollExtent, position.maxScrollExtent);
+    _scrollController.animateTo(
+      target,
       duration: const Duration(milliseconds: 540),
       curve: premiumMotion,
-      alignment: 0.02,
     );
   }
 
@@ -115,11 +130,28 @@ class _MainLayoutState extends State<MainLayout> {
                     child: const EducationSection(),
                   ),
                   const SectionContainer(child: VolunteeringSection()),
-                  SectionContainer(
-                    key: contactKey,
-                    child: const ContactSection(),
+                  // Contact is the last section, so the page used to run out
+                  // of scroll before its heading reached the top and the nav
+                  // link stopped on Volunteering. Giving Contact + footer at
+                  // least a screen of height lets the heading reach the bar.
+                  ConstrainedBox(
+                    constraints: BoxConstraints(
+                      minHeight: MediaQuery.of(context).size.height -
+                          _navHeight -
+                          20 +
+                          sectionVerticalPadding,
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        SectionContainer(
+                          key: contactKey,
+                          child: const ContactSection(),
+                        ),
+                        const FooterSection(),
+                      ],
+                    ),
                   ),
-                  const FooterSection(),
                 ],
               ),
             ),

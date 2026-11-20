@@ -40,6 +40,10 @@ TextStyle monoStyle(BuildContext c, {double size = 12, FontWeight? weight, Color
 
 // ────────────── Section scaffolding ──────────────
 
+/// Space above and below each section's content. Nav scrolling uses it to
+/// land a section's heading just below the top bar.
+const double sectionVerticalPadding = 48;
+
 class SectionContainer extends StatelessWidget {
   final Widget child;
   final bool wide;
@@ -52,7 +56,10 @@ class SectionContainer extends StatelessWidget {
       child: ConstrainedBox(
         constraints: BoxConstraints(maxWidth: wide ? 1200 : 1060),
         child: Padding(
-          padding: EdgeInsets.symmetric(vertical: 64, horizontal: hPad),
+          padding: EdgeInsets.symmetric(
+            vertical: sectionVerticalPadding,
+            horizontal: hPad,
+          ),
           child: ScrollReveal(child: child),
         ),
       ),

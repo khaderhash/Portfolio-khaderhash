@@ -74,7 +74,6 @@ String buildShell() {
   b.writeln(beginMarker);
   b.writeln('  <div id="shell">');
   b.writeln('    <div class="shell-inner">');
-  b.writeln('      <p class="shell-note" id="shell-note">Loading the interactive version…</p>');
   b.writeln('      <img class="photo" src="khader-hwaijeh.jpg" alt="${esc(photoAlt)}" width="96" height="96" decoding="async">');
   b.writeln('      <h1><span lang="ar" dir="rtl">${esc(nameAr)}</span> · ${esc(nameEn)}</h1>');
   b.writeln('      <p class="role">${esc(siteTagline)}</p>');

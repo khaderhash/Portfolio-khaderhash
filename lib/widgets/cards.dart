@@ -170,7 +170,7 @@ class _ProjectCardState extends State<ProjectCard> {
                             spacing: 6,
                             runSpacing: 6,
                             children: badges
-                                .take(2)
+                                .take(1)
                                 .map((b) => _CardBadge(label: b))
                                 .toList(),
                           ),
@@ -215,8 +215,10 @@ class _ProjectCardState extends State<ProjectCard> {
                       // overflow the card instead of dropping a line.
                       Flexible(
                         child: Text(
-                          (p['outcome'] as String?) ?? p['desc'],
-                          maxLines: 3,
+                          (p['cardSummary'] as String?) ??
+                              (p['outcome'] as String?) ??
+                              p['desc'],
+                          maxLines: 2,
                           overflow: TextOverflow.ellipsis,
                           style: TextStyle(
                             fontSize: compact ? 12.5 : 13.5,
@@ -801,21 +803,12 @@ class _CardVisual extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (!isBrandMark) {
-      return Container(
-        color: premiumSurfaceAlt(context),
-        child: ProjectImage(
-          path: path,
-          fit: BoxFit.cover,
-          cacheWidth: cacheWidth,
-          errorColor: errorColor,
-          semanticLabel: semanticLabel,
-        ),
-      );
-    }
-
+    // Every project image sits on the same kind of tinted panel, so the
+    // grid reads as one set whatever background each image brings. Brand
+    // marks use their brand colour; everything else a shared neutral slate.
     final isDark = Theme.of(context).brightness == Brightness.dark;
-    final base = brandColor ?? premiumAccent(context);
+    final base = brandColor ??
+        (isBrandMark ? premiumAccent(context) : const Color(0xFF334155));
     // Soft tinted backdrop — mark sits on a calm brand-coloured panel.
     final bg = isDark
         ? Color.lerp(base, Colors.black, 0.70)!
@@ -834,13 +827,19 @@ class _CardVisual extends StatelessWidget {
       ),
       child: Center(
         child: Padding(
-          padding: const EdgeInsets.all(28),
-          child: ProjectImage(
-            path: path,
-            fit: BoxFit.contain,
-            cacheWidth: cacheWidth,
-            errorColor: errorColor,
-            semanticLabel: semanticLabel,
+          // Framed images keep clear of the badge pinned top-left.
+          padding: isBrandMark
+              ? const EdgeInsets.all(28)
+              : const EdgeInsets.fromLTRB(20, 40, 20, 14),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(isBrandMark ? 0 : 10),
+            child: ProjectImage(
+              path: path,
+              fit: BoxFit.contain,
+              cacheWidth: cacheWidth,
+              errorColor: errorColor,
+              semanticLabel: semanticLabel,
+            ),
           ),
         ),
       ),
@@ -856,13 +855,6 @@ class _CardBadge extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isLive = label.toLowerCase().contains("live");
-    final isFounder = label.toLowerCase().contains("founder");
-    final accent = premiumAccent(context);
-    final dot = isLive
-        ? const Color(0xFF22C55E)
-        : (isFounder ? accent : accent);
-
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 9, vertical: 5),
       decoration: BoxDecoration(
@@ -870,25 +862,14 @@ class _CardBadge extends StatelessWidget {
         borderRadius: BorderRadius.circular(999),
         border: Border.all(color: Colors.white.withValues(alpha: 0.18)),
       ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Container(
-            width: 6,
-            height: 6,
-            decoration: BoxDecoration(color: dot, shape: BoxShape.circle),
-          ),
-          const SizedBox(width: 6),
-          Text(
-            label,
-            style: const TextStyle(
-              fontSize: 10.5,
-              fontWeight: FontWeight.w600,
-              color: Colors.white,
-              letterSpacing: 0.1,
-            ),
-          ),
-        ],
+      child: Text(
+        label,
+        style: const TextStyle(
+          fontSize: 10.5,
+          fontWeight: FontWeight.w600,
+          color: Colors.white,
+          letterSpacing: 0.1,
+        ),
       ),
     );
   }
