@@ -31,7 +31,7 @@ class AboutSection extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "I build production platforms — not demos.",
+                      "I build production platforms, not demos.",
                       style: TextStyle(
                         fontSize: 18,
                         height: 1.45,
@@ -42,7 +42,7 @@ class AboutSection extends StatelessWidget {
                     ),
                     const SizedBox(height: 18),
                     Text(
-                      "Day-to-day I architect and ship Laravel + React or Flutter products: schema design, REST APIs, authentication, and full admin panels with role-based permissions, like the React admin panel behind Lumi Rewards — and I run the infrastructure they sit on. WeinKorsi, Lumi Rewards, OboSyria, and EduPal each run on their own self-managed Linux VPS behind Nginx: provisioning, SSH and server config, HTTPS/TLS, staging and deploy/rollback, migrations, scheduled jobs, automated backups, and uptime monitoring. Media storage is on Cloudflare R2; the Citizens Abroad platform runs on Railway.",
+                      "Day-to-day I architect and ship Laravel + React or Flutter products: schema design, REST APIs, authentication, and full admin panels with role-based permissions, like the React admin panel behind Lumi Rewards. I run the infrastructure they sit on, too. WeinKorsi, Lumi Rewards, OboSyria, and EduPal each run on their own self-managed Linux VPS behind Nginx: provisioning, SSH and server config, HTTPS/TLS, staging and deploy/rollback, migrations, scheduled jobs, automated backups, and uptime monitoring. Media storage is on Cloudflare R2; the Citizens Abroad platform runs on Railway.",
                       style: TextStyle(
                         fontSize: 15,
                         height: 1.7,
@@ -51,7 +51,7 @@ class AboutSection extends StatelessWidget {
                     ),
                     const SizedBox(height: 14),
                     Text(
-                      "I also build AI-assisted automations with n8n and Gemini — RAG workflows, support bots, and finance/ops automations that remove repetitive work without rewriting the stack.",
+                      "I also build AI-assisted automations with n8n and Gemini, including RAG workflows, support bots, and finance/ops automations that remove repetitive work without rewriting the stack.",
                       style: TextStyle(
                         fontSize: 15,
                         height: 1.7,
@@ -69,18 +69,18 @@ class AboutSection extends StatelessWidget {
                 children: const [
                   _Stat(
                     value: "Founder",
-                    label: "WeinKorsi — production marketplace",
+                    label: "WeinKorsi, a production marketplace",
                   ),
                   SizedBox(height: 12),
                   _Stat(
                     value: "Sole Engineer",
                     label:
-                        "EduPal — adopted by Al Sham Private University",
+                        "EduPal, adopted by Al Sham Private University",
                   ),
                   SizedBox(height: 12),
                   _Stat(
                     value: "Technical Partner",
-                    label: "Lumi Rewards — live B2B loyalty platform",
+                    label: "Lumi Rewards, a live B2B loyalty platform",
                   ),
                   SizedBox(height: 12),
                   _Stat(

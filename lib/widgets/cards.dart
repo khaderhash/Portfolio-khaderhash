@@ -159,7 +159,7 @@ class _ProjectCardState extends State<ProjectCard> {
                         brandColor: brandColor,
                         cacheWidth: compact ? 360 : 540,
                         errorColor: muted,
-                        semanticLabel: '${p['title']} — ${p['role']}',
+                        semanticLabel: '${p['title']}, ${p['role']}',
                       ),
                       if (badges.isNotEmpty)
                         Positioned(
@@ -330,7 +330,7 @@ class _ProjectCardState extends State<ProjectCard> {
                                   cacheWidth: 1200,
                                   errorColor: muted,
                                   semanticLabel:
-                                      '${p['title']} — ${p['role']}',
+                                      '${p['title']}, ${p['role']}',
                                 ),
                               ),
                             ),
@@ -602,7 +602,7 @@ class _Gallery extends StatelessWidget {
               fit: BoxFit.cover,
               cacheWidth: 360,
               errorColor: errorColor,
-              semanticLabel: '$title — screenshot ${i + 1}',
+              semanticLabel: '$title, screenshot ${i + 1}',
             ),
           ),
         ),

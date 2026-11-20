@@ -1,8 +1,8 @@
-# خضر حويجة — Khader Hwaijeh (Khader Hassan Hwaijeh)
+# خضر حويجة · Khader Hwaijeh (Khader Hassan Hwaijeh)
 
 > أنا خضر حويجة، مهندس برمجيات ومؤسس منصة وين كورسي (WeinKorsi, https://wein-korsi.com/).
 > Software engineer and founder of WeinKorsi (وين كورسي). Full-stack engineer in Damascus, Syria. Builds, deploys and personally
-> operates production web and mobile systems — Flutter and Laravel, on self-managed
+> operates production web and mobile systems in Flutter and Laravel, on self-managed
 > Linux/Nginx VPS infrastructure. Available for new projects.
 
 <!-- LINKS:BEGIN generated -->
@@ -29,7 +29,8 @@ September 2025, now as technical partner owning the technical direction of Lumi 
 
 ## Production systems
 
-### WeinKorsi (وين كورسي) — https://wein-korsi.com/
+### WeinKorsi (وين كورسي)
+https://wein-korsi.com/
 Founder & Full-Stack Engineer. Educational marketplace connecting students, training
 institutes and course providers. In production since launch: 12 training institutes
 onboarded, 100+ registered users. Role-based access for students, institutes and
@@ -37,8 +38,9 @@ administrators; OTP authentication, authorization middleware, rate limiting, and
 RTL course discovery and reservation flows.
 Stack: React (Vite), Laravel 12, Flutter, PostgreSQL, Cloudflare R2, VPS (Nginx).
 
-### Lumi Rewards — https://lumi-rewards.app
-Technical Partner & Full-Stack Developer (Lumi Coin Syria) — a partner in the business,
+### Lumi Rewards
+https://lumi-rewards.app
+Technical Partner & Full-Stack Developer (Lumi Coin Syria), a partner in the business,
 not a contractor. Owns the technical direction of this B2B loyalty platform for the Syrian
 market, live in production, and built and operates the full stack: Laravel API (security
 fixes, account management, admin panel backend); production and staging servers on a
@@ -48,7 +50,8 @@ the Flutter mobile app (GetX, Clean Architecture, CI/CD-gated releases).
 Stack: Laravel, React, Flutter, Dart, GetX, Clean Architecture, REST API, VPS (staging and
 production), CI/CD.
 
-### EduPal — https://edu-pal.tech/
+### EduPal
+https://edu-pal.tech/
 Sole Full-Stack Engineer. Adopted by Al Sham Private University as the operational system
 for its student housing department, serving 100+ students plus housing staff and managers.
 Mobile app, web dashboard and backend delivered single-handedly. Digitizes room assignments,
@@ -56,7 +59,8 @@ contracts, deposits, room inventory and payment tracking, with a dual-wallet fin
 and a real-time ledger.
 Stack: Flutter, GetX, Clean Architecture, PostgreSQL, JWT, VPS (Nginx).
 
-### Foundation for the Support & Protection of Citizens Abroad — https://syru-legal.up.railway.app/ar
+### Foundation for the Support & Protection of Citizens Abroad
+https://syru-legal.up.railway.app/ar
 Backend Developer & Maintainer. Public platform of a non-profit legal advisory foundation
 serving Russian nationals in Syria. Bilingual Arabic/Russian interface with full RTL and
 Cyrillic support, and a consultation request workflow routed to the legal team. Bot and
@@ -64,16 +68,18 @@ abuse protection via Cloudflare Turnstile, honeypot fields and strict security h
 Built in one month, maintained in production since, ~500 monthly visitors.
 Stack: Laravel 11, Cloudflare Turnstile, Brevo API, hosted on Railway.
 
-### OboSyria — https://obosyria.com/
+### OboSyria
+https://obosyria.com/
 Sole Engineer. Moderated classifieds platform for real estate and vehicle listings, where
 every listing is reviewed and approved before publication. Laravel REST API serving a React
 single-page application from the same origin, delivered as an installable PWA with a service
 worker. Passwordless WhatsApp OTP login, administrator MFA, and rate limiting at both the
-application and Nginx layers. Deployed and operating in pre-launch — not yet publicly launched.
+application and Nginx layers. Deployed and operating in pre-launch. Not yet publicly launched.
 Stack: Laravel, React (Vite), PWA / Service Workers, Cloudflare R2, WhatsApp OTP (Wasender),
 Resend, VPS (Nginx).
 
-### مطمورتي (Matmurti) — https://khaderhash.github.io/matmurti/
+### مطمورتي (Matmurti)
+https://khaderhash.github.io/matmurti/
 Creator & Sole Developer. Free Arabic money tracker for everyday life in Syria (an expense
 app in Syrian pounds and US dollars that works without internet). Expenses and income in new
 Syrian pounds and dollars, with old-pound input converted automatically (100 old = 1 new),
@@ -84,7 +90,7 @@ Two ways to get it, both free, from the welcome page https://khaderhash.github.i
 (its iPhone and Android buttons; the old address https://www.khaderhash.me/matmurti
 redirects there):
 - Android: a signed APK (all versions: https://github.com/khaderhash/matmurti/releases).
-- iPhone: a web app (PWA) at https://khaderhash.github.io/matmurti/app/ — open it and use
+- iPhone: a web app (PWA) at https://khaderhash.github.io/matmurti/app/. Open it and use
   Share > Add to Home Screen (iOS 16.4 or later); after the first visit it works offline.
   The web app makes no request to any other host.
 Same Flutter code for both; on the web, SQLite runs as WebAssembly in the browser.
@@ -94,18 +100,18 @@ backup, Android, iOS web app.
 
 ## Other projects
 
-- **UniVerse** — Graduation project. Smart campus app with a hybrid AI scheduler (n8n +
+- **UniVerse.** Graduation project. Smart campus app with a hybrid AI scheduler (n8n +
   Gemini) generating personalised academic schedules from GPA and prerequisite rules, a RAG
   AI chatbot answering student queries in real time, and live bus tracking over WebSockets
   on OpenStreetMap. Flutter, GetX, Clean Architecture, Socket.IO, Firebase FCM.
-- **Nibrass Hub** — Personal project. Clean Architecture Flutter build with an assistant
+- **Nibrass Hub.** Personal project. Clean Architecture Flutter build with an assistant
   answering housing and transport questions. Not a production system.
   Flutter, GetX, Clean Architecture, n8n, Gemini, JWT.
-- **Expen Scope (EXS)** — Personal project. Dual-personality finance assistant for business
+- **Expen Scope (EXS).** Personal project. Dual-personality finance assistant for business
   and individual flows, with n8n + Gemini automation.
-- **SSSD Mobile App** — Flutter Developer. Mobile service-request and news platform for the
+- **SSSD Mobile App.** Flutter Developer. Mobile service-request and news platform for the
   Syrian Society for Social Development.
-- **Smart Telegram Bot / WhatsApp Automation Bot** — Automation Engineer. n8n workflows
+- **Smart Telegram Bot / WhatsApp Automation Bot.** Automation Engineer. n8n workflows
   routing Telegram support queries into structured Google Sheets logs; a Node.js WhatsApp
   service handling repeatable customer responses.
 
@@ -120,12 +126,12 @@ backup, Android, iOS web app.
 
 ## Education & training
 
-- B.Sc. in Software Engineering — Yarmouk Private University, 2020–2026
-- Flutter Development Training Program — Focal X Agency, 2023–2024
-- Data Analysis Using Power BI — Bytes4Future, Syrian Computer Society, in partnership
+- B.Sc. in Software Engineering, Yarmouk Private University, 2020–2026
+- Flutter Development Training Program, Focal X Agency, 2023–2024
+- Data Analysis Using Power BI, Bytes4Future, Syrian Computer Society, in partnership
   with the Aga Khan Foundation, August 2026
-- Training of Trainers (ToT) — Smart Vision International Academy (UK)
+- Training of Trainers (ToT), Smart Vision International Academy (UK)
 
 ## Languages
 
-Arabic (native), English (B2 — professional working proficiency)
+Arabic (native), English (B2, professional working proficiency)

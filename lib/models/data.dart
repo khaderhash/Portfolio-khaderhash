@@ -29,26 +29,26 @@ final List<Map<String, dynamic>> projectsData = [
   {
     "tier": "production",
     "title": "WeinKorsi",
-    "cardSummary": "Educational marketplace I founded — 12 institutes and 100+ users since launch.",
+    "cardSummary": "Educational marketplace I founded. 12 institutes and 100+ users since launch.",
     "schemaType": "SoftwareApplication",
     "role": "Founder & Full-Stack Engineer",
     "cardBadges": ["Founder"],
     "badges": ["Founder", "Full Stack", "Live Production", "Marketplace"],
     "outcome":
-        "Educational marketplace I founded and run — 12 training institutes onboarded and 100+ registered users since launch.",
+        "Educational marketplace I founded and run. 12 training institutes onboarded and 100+ registered users since launch.",
     "leadRole":
-        "Founder and sole engineer of WeinKorsi — owning product strategy, system architecture, frontend, backend, infrastructure, security, deployment, and day-to-day operations.",
+        "Founder and sole engineer of WeinKorsi, owning product strategy, system architecture, frontend, backend, infrastructure, security, deployment, and day-to-day operations.",
     "achievements": [
       "In production since launch: 12 training institutes onboarded and 100+ registered users.",
       "Founded the venture and built the product: field market research, then personally pitched and onboarded 12 training institutes before the full technical build.",
       "React frontend, Laravel REST API, and a companion Flutter mobile app with role-based access for students, institutes, and administrators.",
       "OTP authentication, authorization middleware, rate limiting, and Arabic RTL course discovery, filtering, and reservation flows.",
-      "Runs on a self-managed VPS behind Nginx — provisioning, HTTPS/TLS, migrations, scheduled jobs, automated backups, and uptime monitoring are all mine.",
+      "Runs on a self-managed VPS behind Nginx. Provisioning, HTTPS/TLS, migrations, scheduled jobs, automated backups, and uptime monitoring are all mine.",
     ],
     "architecture":
         "Stack & Architecture: React (Vite), Laravel 12, Flutter, PostgreSQL, Cloudflare R2, VPS (Nginx). Role-based access control, OTP authentication, REST API, scoped admin dashboards, Arabic RTL interfaces.",
     "desc":
-        "Educational marketplace I founded and run — connecting students, institutes, and providers under a multi-role architecture.",
+        "Educational marketplace I founded and run, connecting students, institutes, and providers under a multi-role architecture.",
     "tech": ["React", "Laravel", "PostgreSQL", "VPS"],
     "website": weinKorsiUrl,
     "publisherId": weinKorsiOrgId,
@@ -63,25 +63,25 @@ final List<Map<String, dynamic>> projectsData = [
   {
     "tier": "production",
     "title": "Lumi Rewards",
-    "cardSummary": "Live B2B loyalty platform — I own the technical direction and run the full stack.",
+    "cardSummary": "Live B2B loyalty platform. I own the technical direction and run the full stack.",
     "role": "Technical Partner & Full-Stack Developer",
     "cardBadges": ["Technical Partner"],
     "badges": ["Live Production", "Technical Partner", "Full Stack"],
     "outcome":
         "B2B loyalty platform for the Syrian market, live in production. As technical partner I own the technical direction and built and operate the full stack: Laravel backend, servers, React admin panel and landing page, and the Flutter app.",
     "leadRole":
-        "Technical Partner at Lumi Coin Syria — a partner in the business, not a contractor. I own the technical direction of Lumi Rewards, a B2B loyalty platform for the Syrian market, and have built and operate the full stack: backend, infrastructure, frontend, and the mobile app.",
+        "Technical Partner at Lumi Coin Syria, a partner in the business, not a contractor. I own the technical direction of Lumi Rewards, a B2B loyalty platform for the Syrian market, and have built and operate the full stack: backend, infrastructure, frontend, and the mobile app.",
     "achievements": [
       "Own the technical decisions as a partner in the business: architecture, stack, infrastructure, and release process, alongside product planning.",
       "Backend: Laravel API, including security fixes, account management, and the admin panel backend.",
-      "Infrastructure: production and staging servers on a self-managed VPS — server configuration over SSH, database administration, and deploy and rollback scripts.",
+      "Infrastructure: production and staging servers on a self-managed VPS, with server configuration over SSH, database administration, and deploy and rollback scripts.",
       "Frontend: a React admin panel with role-based permissions, and the public-facing landing page.",
-      "Mobile: develop the Flutter app using GetX and Clean Architecture — vendor-facing menus, offers, and rewards, plus a merchant partner directory, with CI/CD workflows for automated builds and releases.",
+      "Mobile: develop the Flutter app using GetX and Clean Architecture, covering vendor-facing menus, offers, and rewards, a merchant partner directory, and CI/CD workflows for automated builds and releases.",
     ],
     "architecture":
         "Stack & Architecture: Laravel, React, Flutter, Dart, GetX, Clean Architecture, REST API, VPS (staging and production), CI/CD.",
     "desc":
-        "B2B loyalty platform, live in production — as technical partner I own the technical direction and run the full stack: Laravel backend, servers, React admin panel and landing page, and the Flutter app.",
+        "B2B loyalty platform, live in production. As technical partner I own the technical direction and run the full stack: Laravel backend, servers, React admin panel and landing page, and the Flutter app.",
     "tech": ["Laravel", "React", "Flutter", "DevOps"],
     "website": "https://lumi-rewards.app",
     "behance": "https://www.behance.net/gallery/238527685/LUMI-REWARDS",
@@ -95,15 +95,15 @@ final List<Map<String, dynamic>> projectsData = [
   {
     "tier": "production",
     "title": "EduPal",
-    "cardSummary": "Student housing system adopted by Al Sham Private University — 100+ students.",
+    "cardSummary": "Student housing system adopted by Al Sham Private University, serving 100+ students.",
     "schemaType": "SoftwareApplication",
     "role": "Sole Full-Stack Engineer",
     "cardBadges": ["Sole Engineer"],
     "badges": ["Live Production", "Sole Engineer", "Full Stack"],
     "outcome":
-        "The operational system Al Sham Private University adopted for its student housing department — serving 100+ students plus housing staff and managers.",
+        "The operational system Al Sham Private University adopted for its student housing department, serving 100+ students plus housing staff and managers.",
     "leadRole":
-        "Sole Full-Stack Engineer for EduPal — mobile app, web dashboard, and backend delivered single-handedly, then deployed and operated on my own VPS infrastructure.",
+        "Sole Full-Stack Engineer for EduPal. Mobile app, web dashboard, and backend delivered single-handedly, then deployed and operated on my own VPS infrastructure.",
     "achievements": [
       "Adopted by Al Sham Private University as the operational system for its student housing department, serving 100+ students plus housing staff and managers.",
       "Delivered the mobile app, web dashboard, and backend single-handedly for students, housing staff, maintenance teams, and administrators.",
@@ -112,7 +112,7 @@ final List<Map<String, dynamic>> projectsData = [
       "Deployed and operated on a self-managed VPS behind Nginx, with HTTPS/TLS, automated backups, and uptime monitoring.",
     ],
     "devOpsQa":
-        "DevOps: Self-managed VPS with Nginx, HTTPS/TLS, database migrations, scheduled jobs, automated backups, and uptime monitoring — no separate ops layer.",
+        "DevOps: Self-managed VPS with Nginx, HTTPS/TLS, database migrations, scheduled jobs, automated backups, and uptime monitoring. No separate ops layer.",
     "architecture":
         "Stack & Architecture: Flutter, GetX, Clean Architecture, PostgreSQL, JWT, VPS (Nginx). Role-aware data model, REST API, dual-wallet ledger, multi-role dashboards.",
     "desc":
@@ -129,8 +129,8 @@ final List<Map<String, dynamic>> projectsData = [
   // ─────────────────────────────────────────────────────────────
   {
     "tier": "production",
-    "title": "Citizens Abroad — Legal Support Platform",
-    "cardSummary": "Bilingual Arabic/Russian legal-aid platform — ~500 visitors a month.",
+    "title": "Citizens Abroad Legal Support Platform",
+    "cardSummary": "Bilingual Arabic/Russian legal-aid platform with ~500 visitors a month.",
     "schemaType": "WebSite",
     "schemaName":
         "Foundation for the Support & Protection of Citizens Abroad",
@@ -139,7 +139,7 @@ final List<Map<String, dynamic>> projectsData = [
     "cardBadges": ["Live Production"],
     "badges": ["Live Production", "Security", "Backend"],
     "outcome":
-        "Bilingual Arabic/Russian platform for a non-profit legal advisory foundation — built in one month, maintained in production since, ~500 monthly visitors.",
+        "Bilingual Arabic/Russian platform for a non-profit legal advisory foundation. Built in one month, maintained in production since, ~500 monthly visitors.",
     "leadRole":
         "Backend Developer and maintainer of the public platform of a non-profit legal advisory foundation serving Russian nationals in Syria.",
     "achievements": [
@@ -165,13 +165,13 @@ final List<Map<String, dynamic>> projectsData = [
   {
     "tier": "production",
     "title": "OboSyria",
-    "cardSummary": "Moderated classifieds for property and vehicles — every listing reviewed first.",
+    "cardSummary": "Moderated classifieds for property and vehicles. Every listing is reviewed first.",
     "schemaType": "SoftwareApplication",
     "role": "Sole Engineer",
     "cardBadges": ["Pre-Launch"],
     "badges": ["Full Stack", "Pre-Launch", "Sole Engineer"],
     "outcome":
-        "Moderated classifieds platform for real estate and vehicle listings — every listing is reviewed and approved before publication.",
+        "Moderated classifieds platform for real estate and vehicle listings. Every listing is reviewed and approved before publication.",
     "leadRole":
         "Sole engineer on the system: architecture, build, deployment, and day-to-day operations. Deployed and operating in pre-launch, with public release imminent.",
     "achievements": [
@@ -184,7 +184,7 @@ final List<Map<String, dynamic>> projectsData = [
     "architecture":
         "Stack & Architecture: Laravel, React (Vite), PWA / Service Workers, Cloudflare R2, WhatsApp OTP (Wasender), Resend, VPS (Nginx).",
     "desc":
-        "Moderated classifieds platform for real estate and vehicle listings — every listing is reviewed and approved before publication.",
+        "Moderated classifieds platform for real estate and vehicle listings. Every listing is reviewed and approved before publication.",
     "tech": ["Laravel", "React", "PWA"],
     "website": "https://obosyria.com/",
     // PLACEHOLDER BRAND MARK. To swap in the real logo, overwrite
@@ -204,7 +204,7 @@ final List<Map<String, dynamic>> projectsData = [
   {
     "tier": "production",
     "title": "مطمورتي",
-    "cardSummary": "Offline Arabic money tracker in pounds and dollars — data never leaves the phone.",
+    "cardSummary": "Offline Arabic money tracker in pounds and dollars. Data never leaves the phone.",
     "schemaType": "SoftwareApplication",
     "schemaName": "Matmurti (مطمورتي)",
     "operatingSystem": "Android, iOS (web app)",
@@ -213,20 +213,20 @@ final List<Map<String, dynamic>> projectsData = [
     "cardBadges": ["Android & iPhone"],
     "badges": ["Android & iPhone", "Fully Offline", "Privacy-First", "Sole Developer"],
     "outcome":
-        "Arabic money tracker for everyday life in Syria — expenses and income in Syrian pounds and dollars, fully offline, and your data never leaves your phone.",
+        "Arabic money tracker for everyday life in Syria. Expenses and income in Syrian pounds and dollars, fully offline, and your data never leaves your phone.",
     "leadRole":
         "Designed, built, and released single-handedly: the Arabic interface, the on-phone data layer, backups, the signed Android release, and the installable iPhone web app.",
     "achievements": [
-      "Track expenses and income in new Syrian pounds and US dollars — type amounts in old or new pounds and the app converts them (100 old = 1 new).",
+      "Track expenses and income in new Syrian pounds and US dollars. Type amounts in old or new pounds and the app converts them (100 old = 1 new).",
       "Record exchanges between dollars and pounds; an \"All\" view totals everything in pounds at each day's own rate.",
       "Works fully offline with no account: the app has no internet permission at all, so your data never leaves your phone.",
       "Back up to an Excel file and restore it later, merging with or replacing what is on the phone.",
-      "Released as a signed Android app and, from the same code, an iPhone web app that installs from Safari and works offline — backed by 240 automated tests plus browser tests in Chromium and WebKit.",
+      "Released as a signed Android app and, from the same code, an iPhone web app that installs from Safari and works offline, backed by 240 automated tests plus browser tests in Chromium and WebKit.",
     ],
     "architecture":
         "Stack & Architecture: Flutter, Dart, GetX, SQLite (native and WebAssembly), service worker, Excel (xlsx) backup, Android and iOS web app. Offline-first, versioned schema migrations, no network access.",
     "desc":
-        "Offline Arabic money tracker in Syrian pounds and dollars — your data never leaves your phone.",
+        "Offline Arabic money tracker in Syrian pounds and dollars. Your data never leaves your phone.",
     "tech": ["Flutter", "SQLite", "Offline", "Android + iPhone"],
     "website": "https://khaderhash.github.io/matmurti/",
     "image": "assets/matmurti.webp",
@@ -254,7 +254,7 @@ final List<Map<String, dynamic>> projectsData = [
     "outcome":
         "Smart campus app with a RAG AI chatbot, an AI schedule generator, and live bus tracking on OpenStreetMap.",
     "leadRole":
-        "Graduation project — a smart campus mobile application combining Clean Architecture, an AI scheduling system, a RAG chatbot, and real-time bus tracking.",
+        "Graduation project. A smart campus mobile application combining Clean Architecture, an AI scheduling system, a RAG chatbot, and real-time bus tracking.",
     "achievements": [
       "Hybrid AI system (n8n + Gemini) generating personalized academic schedules from GPA and prerequisite rules, with natural-language negotiation.",
       "RAG AI chatbot built with n8n and Gemini, answering student queries in real time from university data.",
@@ -283,7 +283,7 @@ final List<Map<String, dynamic>> projectsData = [
     "outcome":
         "Personal Clean Architecture Flutter build with an assistant that answers housing and transport questions.",
     "leadRole":
-        "Personal project — an API-first Flutter application built around Clean Architecture and GetX, with an assistant layered on top for housing and transport questions. Not a production system and not in use by an institution.",
+        "Personal project. An API-first Flutter application built around Clean Architecture and GetX, with an assistant layered on top for housing and transport questions. Not a production system and not in use by an institution.",
     "achievements": [
       "Built housing and transport workflows in Flutter with separated Presentation, Domain, and Data layers.",
       "Layered in an assistant on n8n + Gemini that answers housing and transport questions from the app's data.",
@@ -309,7 +309,7 @@ final List<Map<String, dynamic>> projectsData = [
     "role": "Creator",
     "badges": ["Personal Project", "AI Integration"],
     "outcome":
-        "Dual-personality finance assistant — one product serving business and individual flows, with AI-driven workflows.",
+        "Dual-personality finance assistant. One product serving business and individual flows, with AI-driven workflows.",
     "leadRole":
         "Lead Flutter Developer for a dual-personality financial assistant serving business and individual finance workflows with AI automation.",
     "achievements": [
@@ -320,7 +320,7 @@ final List<Map<String, dynamic>> projectsData = [
     "architecture":
         "Stack & Architecture: Flutter, Dart, Laravel, n8n, Gemini, REST APIs, CI/CD.",
     "desc":
-        "Dual-personality finance assistant — one product serving business and individual flows, with AI-driven workflows.",
+        "Dual-personality finance assistant. One product serving business and individual flows, with AI-driven workflows.",
     "tech": ["Flutter", "n8n", "Laravel"],
     "behance":
         "https://www.behance.net/gallery/231325481/Exs-A-smart-financial",
@@ -436,7 +436,7 @@ const String nameEn = "Khader Hwaijeh";
 /// Browser tab and search-result title. Also the MaterialApp title, which
 /// Flutter Web writes back into document.title once the app has loaded.
 const String siteTitle =
-    "خضر حويجة | Khader Hwaijeh — مهندس برمجيات ومؤسس وين كورسي";
+    "خضر حويجة | Khader Hwaijeh | مهندس برمجيات ومؤسس وين كورسي";
 
 /// Profile photo at a stable root URL (web/khader-hwaijeh.jpg), for the
 /// JSON-LD, the HTML shell and image search.
@@ -483,13 +483,13 @@ const List<Map<String, String>> educationData = [
   {
     "title": "B.Sc. in Software Engineering",
     "place": "Yarmouk Private University",
-    "date": "2020 — 2026",
+    "date": "2020–2026",
     "icon": "school",
   },
   {
     "title": "Flutter Development Training Program",
     "place": "Focal X Agency",
-    "date": "2023 — 2024",
+    "date": "2023–2024",
     "icon": "code",
   },
   {

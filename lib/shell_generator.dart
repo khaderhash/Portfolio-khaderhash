@@ -61,7 +61,7 @@ String projectBlock(Map<String, dynamic> p) {
     if (site != null) {
       final label = site.replaceFirst(RegExp(r'^https?://(www\.)?'), '')
           .replaceAll(RegExp(r'/$'), '');
-      if (stack.isNotEmpty) b.write(' — ');
+      if (stack.isNotEmpty) b.write('<br>');
       b.write('<a href="${esc(site)}">${esc(label)}</a>');
     }
     b.writeln('</p>');
@@ -107,8 +107,8 @@ String buildShell() {
   b.writeln();
   b.writeln('      <h2>Education &amp; training</h2>');
   for (final e in educationData) {
-    final date = e['date'] == 'Completed' ? '' : ' — ${esc(e['date']!)}';
-    b.writeln('      <p>${esc(e['title']!)} — ${esc(e['place']!)}$date</p>');
+    final date = e['date'] == 'Completed' ? '' : ', ${esc(e['date']!)}';
+    b.writeln('      <p>${esc(e['title']!)}, ${esc(e['place']!)}$date</p>');
   }
 
   b.writeln();

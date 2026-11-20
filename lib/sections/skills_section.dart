@@ -15,7 +15,7 @@ class SkillsSection extends StatelessWidget {
           kicker: "Skills",
           title: "Stack I ship with.",
           subtitle:
-              "Tools chosen for production work — infrastructure, backend, mobile, frontend, product architecture, and AI automation.",
+              "Tools chosen for production work across infrastructure, backend, mobile, frontend, product architecture, and AI automation.",
         ),
         const SizedBox(height: 32),
         LayoutBuilder(

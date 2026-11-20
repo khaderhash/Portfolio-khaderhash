@@ -43,7 +43,7 @@ class _MainLayoutState extends State<MainLayout> {
       scheme: 'mailto',
       path: contactEmail,
       queryParameters: {
-        'subject': 'Project brief — Khader Hwaijeh',
+        'subject': 'Project brief for Khader Hwaijeh',
         'body':
             'Hi Khader,\n\nProject:\nTimeline:\nBudget range:\nStack / constraints:\n\nShort context:\n',
       },

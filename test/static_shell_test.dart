@@ -197,7 +197,7 @@ void main() {
       for (final p in projectsData) {
         final title = p['title'] as String;
         // Citizens Abroad is listed under its full foundation name.
-        final needle = title.split(' — ').first;
+        final needle = title.replaceFirst(' Legal Support Platform', '');
         expect(llms, contains(needle),
             reason: 'Project "$title" is missing from llms.txt.');
         final site = p['website'] as String?;

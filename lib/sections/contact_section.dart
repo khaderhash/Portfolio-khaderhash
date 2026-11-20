@@ -13,7 +13,7 @@ class ContactSection extends StatelessWidget {
       scheme: 'mailto',
       path: contactEmail,
       queryParameters: {
-        'subject': 'Project brief — Khader Hwaijeh',
+        'subject': 'Project brief for Khader Hwaijeh',
         'body':
             'Hi Khader,\n\nProject:\nTimeline:\nBudget range:\nStack / constraints:\n\nShort context:\n',
       },
@@ -31,7 +31,7 @@ class ContactSection extends StatelessWidget {
           kicker: "Get in touch",
           title: "Got a platform to build? Let's scope it.",
           subtitle:
-              "I reply within 24 hours. Send a short brief and I'll help you clarify scope, timeline, and technical direction — no pitch deck required.",
+              "I reply within 24 hours. Send a short brief and I'll help you clarify scope, timeline, and technical direction. No pitch deck required.",
           align: CrossAxisAlignment.center,
         ),
         const SizedBox(height: 32),
