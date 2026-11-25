@@ -4,6 +4,8 @@ import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'models/data.dart';
+import 'theme/app_colors.dart';
+import 'theme/app_theme.dart';
 import 'utils/theme_provider.dart';
 import 'widgets/shared_widgets.dart';
 
@@ -185,9 +187,16 @@ class _TopNav extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final accent = premiumAccent(context);
-    final bg = (isDark ? AppPalette.darkBg : AppPalette.lightBg)
-        .withValues(alpha: 0.78);
+    // The navbar is a forest (30%) surface in both modes.
+    return Theme(
+      data: forestTheme,
+      child: Builder(builder: _buildBar),
+    );
+  }
+
+  Widget _buildBar(BuildContext context) {
+    final fill = premiumAccentFill(context);
+    final bg = premiumBg(context).withValues(alpha: 0.96);
     return Container(
       decoration: BoxDecoration(
         color: bg,
@@ -211,17 +220,14 @@ class _TopNav extends StatelessWidget {
                     width: 28,
                     height: 28,
                     decoration: BoxDecoration(
-                      color: accent.withValues(alpha: 0.12),
+                      color: fill,
                       borderRadius: BorderRadius.circular(8),
-                      border: Border.all(
-                        color: accent.withValues(alpha: 0.4),
-                      ),
                     ),
                     child: Center(
                       child: Text(
                         "K",
                         style: TextStyle(
-                          color: accent,
+                          color: premiumOnAccentFill(context),
                           fontSize: 14,
                           fontWeight: FontWeight.w800,
                           letterSpacing: -0.4,
@@ -280,7 +286,9 @@ class _ThemeToggle extends StatelessWidget {
       message: isDark ? "Switch to light mode" : "Switch to dark mode",
       child: MouseRegion(
         cursor: SystemMouseCursors.click,
-        child: GestureDetector(
+        child: FocusRing(
+          onTap: onTap,
+          child: GestureDetector(
           onTap: onTap,
           child: Container(
             width: 38,
@@ -302,6 +310,7 @@ class _ThemeToggle extends StatelessWidget {
               ),
             ),
           ),
+        ),
         ),
       ),
     );
@@ -370,9 +379,7 @@ class _BackgroundLayer extends StatelessWidget {
             gradient: LinearGradient(
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
-              colors: isDark
-                  ? const [Color(0xFF0B0D10), Color(0xFF0B0D10)]
-                  : const [Color(0xFFFBFBFC), Color(0xFFFBFBFC)],
+              colors: [premiumBg(context), premiumBg(context)],
             ),
           ),
           child: CustomPaint(
@@ -398,9 +405,8 @@ class _SubtleGridPainter extends CustomPainter {
         center: const Alignment(0, -1.0),
         radius: 1.1,
         colors: [
-          (isDark
-                  ? const Color(0xFF4ADE80)
-                  : const Color(0xFF059669))
+          // Sage glow on the forest page; forest on the sage page.
+          (isDark ? AppColors.sage : AppColors.forest)
               .withValues(alpha: isDark ? 0.06 : 0.05),
           Colors.transparent,
         ],

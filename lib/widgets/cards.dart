@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../theme/app_colors.dart';
 import 'shared_widgets.dart';
 
 // ────────────── Education card ──────────────
@@ -125,7 +126,11 @@ class _ProjectCardState extends State<ProjectCard> {
       cursor: SystemMouseCursors.click,
       onEnter: (_) => setState(() => _hovered = true),
       onExit: (_) => setState(() => _hovered = false),
-      child: GestureDetector(
+      child: FocusRing(
+        onTap: () => _openDetails(context, p),
+        radius: 14,
+        onHighlight: (v) => setState(() => _hovered = v),
+        child: GestureDetector(
         onTap: () => _openDetails(context, p),
         child: AnimatedContainer(
           duration: premiumFast,
@@ -269,6 +274,7 @@ class _ProjectCardState extends State<ProjectCard> {
             ],
           ),
         ),
+        ),
       ),
     );
   }
@@ -292,7 +298,7 @@ class _ProjectCardState extends State<ProjectCard> {
 
     showDialog<void>(
       context: context,
-      barrierColor: Colors.black54,
+      barrierColor: AppColors.scrim,
       builder: (dialogCtx) {
         final maxH = MediaQuery.of(dialogCtx).size.height - 48;
         return Dialog(
@@ -346,17 +352,16 @@ class _ProjectCardState extends State<ProjectCard> {
                                     width: 64,
                                     height: 64,
                                     decoration: BoxDecoration(
-                                      color:
-                                          Colors.black.withValues(alpha: 0.5),
+                                      color: AppColors.overlay,
                                       shape: BoxShape.circle,
                                       border: Border.all(
-                                        color: Colors.white
+                                        color: AppColors.sage
                                             .withValues(alpha: 0.4),
                                       ),
                                     ),
                                     child: const Icon(
                                       Icons.play_arrow_rounded,
-                                      color: Colors.white,
+                                      color: AppColors.yellow,
                                       size: 36,
                                     ),
                                   ),
@@ -367,12 +372,12 @@ class _ProjectCardState extends State<ProjectCard> {
                             top: 12,
                             right: 12,
                             child: Material(
-                              color: Colors.black.withValues(alpha: 0.5),
+                              color: AppColors.overlay,
                               shape: const CircleBorder(),
                               child: IconButton(
                                 tooltip: "Close",
                                 icon: const Icon(Icons.close_rounded,
-                                    color: Colors.white, size: 20),
+                                    color: AppColors.sage, size: 20),
                                 onPressed: () => Navigator.pop(dialogCtx),
                               ),
                             ),
@@ -762,35 +767,43 @@ class _ActionBtnState extends State<_ActionBtn> {
   @override
   Widget build(BuildContext context) {
     final accent = premiumAccent(context);
+    final fill = premiumAccentFill(context);
+    final fg = _h ? premiumOnAccentFill(context) : accent;
     return MouseRegion(
       cursor: SystemMouseCursors.click,
       onEnter: (_) => setState(() => _h = true),
       onExit: (_) => setState(() => _h = false),
-      child: GestureDetector(
+      child: FocusRing(
+        onTap: widget.onTap,
+        radius: 8,
+        onHighlight: (v) => setState(() => _h = v),
+        child: GestureDetector(
         onTap: widget.onTap,
         child: AnimatedContainer(
           duration: premiumFast,
           padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
           decoration: BoxDecoration(
-            color: _h ? accent.withValues(alpha: 0.10) : Colors.transparent,
+            color: _h ? fill : Colors.transparent,
             borderRadius: BorderRadius.circular(8),
-            border: Border.all(color: accent.withValues(alpha: 0.4)),
+            border: Border.all(
+                color: _h ? fill : accent.withValues(alpha: 0.4)),
           ),
           child: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              FaIcon(widget.icon, size: 13, color: accent),
+              FaIcon(widget.icon, size: 13, color: fg),
               const SizedBox(width: 7),
               Text(
                 widget.label,
                 style: TextStyle(
                   fontSize: 13,
                   fontWeight: FontWeight.w600,
-                  color: accent,
+                  color: fg,
                 ),
               ),
             ],
           ),
+        ),
         ),
       ),
     );
@@ -824,14 +837,15 @@ class _CardVisual extends StatelessWidget {
   Widget build(BuildContext context) {
     // Every project image sits on the same kind of tinted panel, so the
     // grid reads as one set whatever background each image brings. Brand
-    // marks use their brand colour; everything else a shared neutral slate.
+    // marks use their brand colour; everything else the site's forest.
     final isDark = Theme.of(context).brightness == Brightness.dark;
-    final base = brandColor ??
-        (isBrandMark ? premiumAccent(context) : const Color(0xFF334155));
-    // Soft tinted backdrop — mark sits on a calm brand-coloured panel.
+    final base = brandColor ?? AppColors.forest;
+    // Soft tinted backdrop: mark sits on a calm brand-coloured panel. Logos
+    // are drawn for light backgrounds (WeinKorsi's is forest itself), so the
+    // dark theme uses a light sage panel too instead of mixing toward forest.
     final bg = isDark
-        ? Color.lerp(base, Colors.black, 0.70)!
-        : Color.lerp(base, Colors.white, 0.92)!;
+        ? Color.lerp(base, AppColors.sage, 0.82)!
+        : Color.lerp(base, AppColors.white, 0.92)!;
 
     return Container(
       decoration: BoxDecoration(
@@ -840,7 +854,7 @@ class _CardVisual extends StatelessWidget {
           end: Alignment.bottomRight,
           colors: [
             bg,
-            Color.lerp(bg, isDark ? Colors.black : Colors.white, 0.35)!,
+            Color.lerp(bg, isDark ? AppColors.sage : AppColors.white, 0.35)!,
           ],
         ),
       ),
@@ -877,16 +891,16 @@ class _CardBadge extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 9, vertical: 5),
       decoration: BoxDecoration(
-        color: Colors.black.withValues(alpha: 0.55),
+        color: AppColors.overlay,
         borderRadius: BorderRadius.circular(999),
-        border: Border.all(color: Colors.white.withValues(alpha: 0.18)),
+        border: Border.all(color: AppColors.sage.withValues(alpha: 0.18)),
       ),
       child: Text(
         label,
         style: const TextStyle(
           fontSize: 10.5,
           fontWeight: FontWeight.w600,
-          color: Colors.white,
+          color: AppColors.yellow,
           letterSpacing: 0.1,
         ),
       ),

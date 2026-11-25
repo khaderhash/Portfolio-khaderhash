@@ -2,13 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../theme/app_colors.dart';
+import '../widgets/shared_widgets.dart';
+
 class CyberPage extends StatelessWidget {
   const CyberPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     final primaryColor = Theme.of(context).primaryColor;
-    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final muted = premiumMutedText(context);
 
     return Scaffold(
       appBar: AppBar(
@@ -16,7 +19,7 @@ class CyberPage extends StatelessWidget {
           "< KhaderHash />",
           style: GoogleFonts.firaCode(
             fontWeight: FontWeight.bold,
-            color: primaryColor,
+            color: AppColors.yellow,
           ),
         ),
         actions: [
@@ -24,7 +27,7 @@ class CyberPage extends StatelessWidget {
             onPressed: () => Navigator.pushNamed(context, '/'),
             child: Text(
               "Go to Portfolio",
-              style: TextStyle(color: isDark ? Colors.white : Colors.black),
+              style: const TextStyle(color: AppColors.sage),
             ),
           ),
           const SizedBox(width: 20),
@@ -47,10 +50,10 @@ class CyberPage extends StatelessWidget {
               ),
               const SizedBox(height: 15),
 
-              const Text(
+              Text(
                 "Secure your future! 🔒\nHere is the roadmap for Cybersecurity and Networks you asked for.",
                 textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 18, color: Colors.grey, height: 1.5),
+                style: TextStyle(fontSize: 18, color: muted, height: 1.5),
               ),
               const SizedBox(height: 40),
 
@@ -61,8 +64,6 @@ class CyberPage extends StatelessWidget {
                 icon: const Icon(Icons.download),
                 label: const Text("Download Cyber Map"),
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: primaryColor,
-                  foregroundColor: Colors.black,
                   padding: const EdgeInsets.symmetric(
                     horizontal: 40,
                     vertical: 20,
@@ -75,12 +76,12 @@ class CyberPage extends StatelessWidget {
               ),
 
               const SizedBox(height: 60),
-              const Divider(color: Colors.grey),
+              const Divider(),
               const SizedBox(height: 20),
 
-              const Text(
+              Text(
                 "Check out my secure apps:",
-                style: TextStyle(color: Colors.grey),
+                style: TextStyle(color: muted),
               ),
               const SizedBox(height: 10),
               TextButton(

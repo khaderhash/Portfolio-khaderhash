@@ -3,32 +3,47 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../utils/theme_provider.dart';
+import '../theme/app_colors.dart';
 
 // Motion tokens
 const premiumMotion = Cubic(0.22, 1, 0.36, 1);
 const premiumFast = Duration(milliseconds: 180);
 const premiumMedium = Duration(milliseconds: 420);
 
-// Color helpers
-Color premiumAccent(BuildContext context) => Theme.of(context).primaryColor;
+// Color helpers. All resolve to lib/theme/app_colors.dart via the theme.
+
+/// Text-safe accent for text, icons and thin lines: forest on the light
+/// theme, yellow on the dark theme. Never yellow on a light background.
+Color premiumAccent(BuildContext context) =>
+    Theme.of(context).colorScheme.primary;
+
+/// Accent FILL (always yellow) for CTAs, active states and small highlights.
+/// Put [premiumOnAccentFill] on top of it, never other text colours.
+Color premiumAccentFill(BuildContext context) =>
+    Theme.of(context).colorScheme.secondary;
+Color premiumAccentFillHover(BuildContext context) => AppColors.yellowHover;
+Color premiumOnAccentFill(BuildContext context) =>
+    Theme.of(context).colorScheme.onSecondary;
 
 bool _isDark(BuildContext c) => Theme.of(c).brightness == Brightness.dark;
 
+Color premiumBg(BuildContext c) =>
+    _isDark(c) ? AppColors.darkBg : AppColors.lightBg;
+
 Color premiumText(BuildContext c) =>
-    _isDark(c) ? AppPalette.darkText : AppPalette.lightText;
+    _isDark(c) ? AppColors.darkText : AppColors.lightText;
 
 Color premiumMutedText(BuildContext c) =>
-    _isDark(c) ? AppPalette.darkMuted : AppPalette.lightMuted;
+    _isDark(c) ? AppColors.darkMuted : AppColors.lightMuted;
 
 Color premiumSurface(BuildContext c) =>
-    _isDark(c) ? AppPalette.darkSurface : AppPalette.lightSurface;
+    _isDark(c) ? AppColors.darkSurface : AppColors.lightSurface;
 
 Color premiumSurfaceAlt(BuildContext c) =>
-    _isDark(c) ? AppPalette.darkSurfaceAlt : AppPalette.lightSurfaceAlt;
+    _isDark(c) ? AppColors.darkSurfaceAlt : AppColors.lightSurfaceAlt;
 
 Color premiumBorder(BuildContext c) =>
-    _isDark(c) ? AppPalette.darkBorder : AppPalette.lightBorder;
+    _isDark(c) ? AppColors.darkBorder : AppColors.lightBorder;
 
 TextStyle monoStyle(BuildContext c, {double size = 12, FontWeight? weight, Color? color}) =>
     GoogleFonts.jetBrainsMono(
@@ -37,6 +52,66 @@ TextStyle monoStyle(BuildContext c, {double size = 12, FontWeight? weight, Color
       color: color ?? premiumMutedText(c),
       letterSpacing: 0,
     );
+
+// ────────────── Focus ring ──────────────
+
+/// Makes a custom tappable reachable by keyboard (Tab, then Enter/Space)
+/// and draws a 2px ring outside it while it has keyboard focus. The ring is
+/// the text-safe accent, so it is forest on light backgrounds and yellow on
+/// dark ones (the navbar and footer included): visible on both.
+class FocusRing extends StatefulWidget {
+  final Widget child;
+  final VoidCallback? onTap;
+  final double radius;
+  final ValueChanged<bool>? onHighlight;
+
+  const FocusRing({
+    super.key,
+    required this.child,
+    required this.onTap,
+    this.radius = 10,
+    this.onHighlight,
+  });
+
+  @override
+  State<FocusRing> createState() => _FocusRingState();
+}
+
+class _FocusRingState extends State<FocusRing> {
+  bool _focused = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return FocusableActionDetector(
+      enabled: widget.onTap != null,
+      actions: {
+        ActivateIntent: CallbackAction<ActivateIntent>(
+          onInvoke: (_) {
+            widget.onTap?.call();
+            return null;
+          },
+        ),
+      },
+      onShowFocusHighlight: (v) {
+        setState(() => _focused = v);
+        widget.onHighlight?.call(v);
+      },
+      child: Container(
+        foregroundDecoration: _focused
+            ? BoxDecoration(
+                borderRadius: BorderRadius.circular(widget.radius),
+                border: Border.all(
+                  color: premiumAccent(context),
+                  width: 2,
+                  strokeAlign: BorderSide.strokeAlignOutside,
+                ),
+              )
+            : null,
+        child: widget.child,
+      ),
+    );
+  }
+}
 
 // ────────────── Section scaffolding ──────────────
 
@@ -147,12 +222,16 @@ class _NavButtonState extends State<NavButton> {
   bool _hovered = false;
   @override
   Widget build(BuildContext context) {
-    final color = _hovered ? premiumText(context) : premiumMutedText(context);
+    final color = _hovered ? premiumAccent(context) : premiumText(context);
     return MouseRegion(
       onEnter: (_) => setState(() => _hovered = true),
       onExit: (_) => setState(() => _hovered = false),
       cursor: SystemMouseCursors.click,
-      child: GestureDetector(
+      child: FocusRing(
+        onTap: widget.onPressed,
+        radius: 8,
+        onHighlight: (v) => setState(() => _hovered = v),
+        child: GestureDetector(
         onTap: widget.onPressed,
         child: AnimatedContainer(
           duration: premiumFast,
@@ -166,6 +245,7 @@ class _NavButtonState extends State<NavButton> {
               letterSpacing: -0.1,
             ),
           ),
+        ),
         ),
       ),
     );
@@ -193,43 +273,46 @@ class _SocialBtnState extends State<SocialBtn> {
   bool _hovered = false;
   @override
   Widget build(BuildContext context) {
-    final accent = premiumAccent(context);
+    final fill = premiumAccentFill(context);
+    final onFill = premiumOnAccentFill(context);
     final base = premiumMutedText(context);
+    Future<void> open() async {
+      final uri = Uri.parse(widget.url);
+      if (await canLaunchUrl(uri)) await launchUrl(uri);
+    }
+
     return Tooltip(
       message: widget.tooltip,
       child: MouseRegion(
         cursor: SystemMouseCursors.click,
         onEnter: (_) => setState(() => _hovered = true),
         onExit: (_) => setState(() => _hovered = false),
-        child: GestureDetector(
-          onTap: () async {
-            final uri = Uri.parse(widget.url);
-            if (await canLaunchUrl(uri)) await launchUrl(uri);
-          },
+        child: FocusRing(
+          onTap: open,
+          onHighlight: (v) => setState(() => _hovered = v),
+          child: GestureDetector(
+          onTap: open,
           child: AnimatedContainer(
             duration: premiumFast,
             curve: premiumMotion,
             width: 42,
             height: 42,
             decoration: BoxDecoration(
-              color: _hovered
-                  ? accent.withValues(alpha: 0.10)
-                  : premiumSurfaceAlt(context),
+              color: _hovered ? fill : premiumSurfaceAlt(context),
               borderRadius: BorderRadius.circular(10),
               border: Border.all(
-                color: _hovered
-                    ? accent.withValues(alpha: 0.45)
-                    : premiumBorder(context),
+                color: _hovered ? fill : premiumBorder(context),
               ),
             ),
             child: Center(
               child: FaIcon(
                 widget.icon,
                 size: 16,
-                color: _hovered ? accent : base,
+                color: _hovered ? onFill : base,
               ),
             ),
           ),
+        ),
         ),
       ),
     );
@@ -389,11 +472,13 @@ class _PremiumButtonState extends State<PremiumButton> {
   bool _hovered = false;
   @override
   Widget build(BuildContext context) {
+    // Filled = the yellow CTA with forest text. Outline = text-safe accent
+    // (forest on light, yellow on dark) with a faint tint on hover.
     final accent = premiumAccent(context);
-    final isDark = _isDark(context);
     final fillBg = _hovered
-        ? Color.lerp(accent, Colors.black, isDark ? 0.05 : 0.08)!
-        : accent;
+        ? premiumAccentFillHover(context)
+        : premiumAccentFill(context);
+    final onFill = premiumOnAccentFill(context);
     final outlineBg = _hovered
         ? accent.withValues(alpha: 0.08)
         : Colors.transparent;
@@ -402,7 +487,10 @@ class _PremiumButtonState extends State<PremiumButton> {
       cursor: SystemMouseCursors.click,
       onEnter: (_) => setState(() => _hovered = true),
       onExit: (_) => setState(() => _hovered = false),
-      child: GestureDetector(
+      child: FocusRing(
+        onTap: widget.onPressed,
+        onHighlight: (v) => setState(() => _hovered = v),
+        child: GestureDetector(
         onTap: widget.onPressed,
         child: AnimatedContainer(
           duration: premiumFast,
@@ -422,9 +510,7 @@ class _PremiumButtonState extends State<PremiumButton> {
                 Icon(
                   widget.icon,
                   size: 16,
-                  color: widget.filled
-                      ? (isDark ? Colors.black : Colors.white)
-                      : accent,
+                  color: widget.filled ? onFill : accent,
                 ),
                 const SizedBox(width: 8),
               ],
@@ -434,14 +520,13 @@ class _PremiumButtonState extends State<PremiumButton> {
                   fontSize: 14,
                   fontWeight: FontWeight.w600,
                   letterSpacing: -0.1,
-                  color: widget.filled
-                      ? (isDark ? Colors.black : Colors.white)
-                      : accent,
+                  color: widget.filled ? onFill : accent,
                 ),
               ),
             ],
           ),
         ),
+      ),
       ),
     );
   }

@@ -207,7 +207,11 @@ class _InlineLinkState extends State<_InlineLink> {
         cursor: SystemMouseCursors.click,
         onEnter: (_) => setState(() => _h = true),
         onExit: (_) => setState(() => _h = false),
-        child: GestureDetector(
+        child: FocusRing(
+          onTap: () => launchUrl(Uri.parse(widget.url)),
+          radius: 4,
+          onHighlight: (v) => setState(() => _h = v),
+          child: GestureDetector(
           onTap: () => launchUrl(Uri.parse(widget.url)),
           child: Text(
             widget.label,
@@ -221,6 +225,7 @@ class _InlineLinkState extends State<_InlineLink> {
               decorationColor: accent,
             ),
           ),
+        ),
         ),
       ),
     );
@@ -244,7 +249,11 @@ class _ResumeLinkState extends State<_ResumeLink> {
       cursor: SystemMouseCursors.click,
       onEnter: (_) => setState(() => _h = true),
       onExit: (_) => setState(() => _h = false),
-      child: GestureDetector(
+      child: FocusRing(
+        onTap: widget.onTap,
+        radius: 4,
+        onHighlight: (v) => setState(() => _h = v),
+        child: GestureDetector(
         onTap: widget.onTap,
         child: Row(
           mainAxisSize: MainAxisSize.min,
@@ -265,6 +274,7 @@ class _ResumeLinkState extends State<_ResumeLink> {
               child: const Text("Download résumé (PDF)"),
             ),
           ],
+        ),
         ),
       ),
     );

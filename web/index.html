@@ -7,7 +7,7 @@
   <meta name="google-site-verification" content="xbe7oaopifrLMocxIsTrXucUOzUff00odDl5jir1QwQ" />
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="theme-color" content="#0B0D10">
+  <meta name="theme-color" content="#1E3A2B">
 
   <title>خضر حويجة | Khader Hwaijeh | مهندس برمجيات ومؤسس وين كورسي</title>
   <meta name="description" content="خضر حويجة (Khader Hwaijeh) مهندس برمجيات ومؤسس وين كورسي WeinKorsi. Software engineer building production web and mobile apps in Flutter, Laravel, React.">
@@ -221,10 +221,10 @@
   <!-- LDJSON:END -->
 
   <style>
-    html, body { margin: 0; padding: 0; min-height: 100%; background: #0B0D10; }
-    @media (prefers-color-scheme: light) {
-      html, body { background: #FBFBFC; }
-    }
+    /* Palette: lib/theme/app_colors.dart. The app opens in its light (sage)
+       theme, so the page and the pre-load shell are sage too: no colour
+       flash before Flutter paints. Yellow is never text on sage (1.1:1). */
+    html, body { margin: 0; padding: 0; min-height: 100%; background: #DDE6DA; }
 
     /* Pre-hydration shell — the real content, in the DOM before the Flutter
        engine loads. Removed on `flutter-first-frame`; with JS disabled it
@@ -232,26 +232,27 @@
        from the rendered app. */
     #shell {
       position: fixed; inset: 0; overflow-y: auto; z-index: 9999;
-      background: #0B0D10; color: #E6EAEE;
+      background: #DDE6DA; color: #1E3A2B;
       font: 16px/1.65 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
       transition: opacity .35s ease;
     }
     #shell .shell-inner { max-width: 760px; margin: 0 auto; padding: 44px 22px 80px; }
     /* No underline at rest: the browser's default one breaks around Arabic
        letters and reads as a stray underscore. Continuous on hover. */
-    #shell a { color: #4ADE80; text-decoration: none; }
+    #shell a { color: #1E3A2B; font-weight: 600; text-decoration: none; }
+    #shell a:focus-visible { outline: 2px solid #1E3A2B; outline-offset: 2px; border-radius: 2px; }
     #shell a:hover { text-decoration: underline; text-decoration-skip-ink: none; text-underline-offset: 3px; }
     #shell h1 { font-size: 30px; line-height: 1.2; margin: 0 0 6px; letter-spacing: -.5px; }
     #shell h2 { font-size: 20px; margin: 40px 0 6px; letter-spacing: -.2px; }
     #shell h3 { font-size: 16px; margin: 26px 0 4px; }
     #shell p  { margin: 0 0 10px; }
     #shell ul { margin: 8px 0 10px; padding-left: 20px; }
-    #shell li { margin-bottom: 6px; color: #98A2AE; }
-    #shell .role  { color: #4ADE80; font-size: 14px; margin-bottom: 8px; }
-    #shell .lede  { color: #98A2AE; font-size: 14px; margin-bottom: 4px; }
-    #shell .stack { color: #98A2AE; font-size: 14px; }
+    #shell li { margin-bottom: 6px; color: #4A5E51; }
+    #shell .role  { color: #1E3A2B; font-weight: 600; font-size: 14px; margin-bottom: 8px; }
+    #shell .lede  { color: #4A5E51; font-size: 14px; margin-bottom: 4px; }
+    #shell .stack { color: #4A5E51; font-size: 14px; }
     #shell .photo { display: block; border-radius: 999px; margin-bottom: 16px; object-fit: cover; }
-    #shell footer { margin-top: 40px; padding-top: 16px; border-top: 1px solid #222A31; font-size: 14px; color: #98A2AE; }
+    #shell footer { margin-top: 40px; padding-top: 16px; border-top: 1px solid #B5C4B1; font-size: 14px; color: #4A5E51; }
     /* After the app paints, the shell stays in the DOM for crawlers and
        screen readers (Flutter paints to a canvas, so it holds no text) but
        leaves the screen — the standard visually-hidden pattern. */
@@ -259,12 +260,6 @@
       position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
       overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%);
       white-space: nowrap; border: 0; opacity: 0; pointer-events: none;
-    }
-    @media (prefers-color-scheme: light) {
-      #shell { background: #FBFBFC; color: #14181D; }
-      #shell a, #shell .role { color: #059669; }
-      #shell li, #shell .lede, #shell .stack { color: #5C6873; }
-      #shell footer { border-color: #E3E7EB; }
     }
   </style>
 </head>

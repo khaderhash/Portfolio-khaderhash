@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../models/data.dart';
+import '../theme/app_theme.dart';
 import '../widgets/shared_widgets.dart';
 
 class FooterSection extends StatelessWidget {
@@ -9,10 +10,19 @@ class FooterSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // The footer is a forest (30%) band in both modes, like the navbar.
+    return Theme(
+      data: forestTheme,
+      child: Builder(builder: _buildFooter),
+    );
+  }
+
+  Widget _buildFooter(BuildContext context) {
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 28),
       decoration: BoxDecoration(
+        color: premiumBg(context),
         border: Border(
           top: BorderSide(color: premiumBorder(context), width: 0.6),
         ),
@@ -73,7 +83,8 @@ class _FooterLinkState extends State<_FooterLink> {
   @override
   Widget build(BuildContext context) {
     final muted = premiumMutedText(context);
-    final text = premiumText(context);
+    final text = premiumAccent(context);
+    void open() => launchUrl(Uri.parse(widget.url));
     return Semantics(
       link: true,
       linkUrl: Uri.parse(widget.url),
@@ -81,8 +92,12 @@ class _FooterLinkState extends State<_FooterLink> {
         cursor: SystemMouseCursors.click,
         onEnter: (_) => setState(() => _h = true),
         onExit: (_) => setState(() => _h = false),
-        child: GestureDetector(
-          onTap: () => launchUrl(Uri.parse(widget.url)),
+        child: FocusRing(
+          onTap: open,
+          radius: 4,
+          onHighlight: (v) => setState(() => _h = v),
+          child: GestureDetector(
+          onTap: open,
           child: AnimatedDefaultTextStyle(
             duration: premiumFast,
             style: TextStyle(
@@ -94,6 +109,7 @@ class _FooterLinkState extends State<_FooterLink> {
             ),
             child: Text(widget.label),
           ),
+        ),
         ),
       ),
     );

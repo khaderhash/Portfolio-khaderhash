@@ -2,13 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../theme/app_colors.dart';
+import '../widgets/shared_widgets.dart';
+
 class MobileAppPage extends StatelessWidget {
   const MobileAppPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     final primaryColor = Theme.of(context).primaryColor;
-    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final muted = premiumMutedText(context);
 
     return Scaffold(
       appBar: AppBar(
@@ -16,7 +19,7 @@ class MobileAppPage extends StatelessWidget {
           "< KhaderHash />",
           style: GoogleFonts.firaCode(
             fontWeight: FontWeight.bold,
-            color: primaryColor,
+            color: AppColors.yellow,
           ),
         ),
         actions: [
@@ -24,7 +27,7 @@ class MobileAppPage extends StatelessWidget {
             onPressed: () => Navigator.pushNamed(context, '/'),
             child: Text(
               "Go to Portfolio",
-              style: TextStyle(color: isDark ? Colors.white : Colors.black),
+              style: const TextStyle(color: AppColors.sage),
             ),
           ),
           const SizedBox(width: 20),
@@ -50,10 +53,10 @@ class MobileAppPage extends StatelessWidget {
               const SizedBox(height: 15),
 
               // 3. الوصف
-              const Text(
+              Text(
                 "Want to build apps? 📱\nHere is the ultimate guide to starting your journey in Mobile Development (Flutter, Native, & more).",
                 textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 18, color: Colors.grey, height: 1.5),
+                style: TextStyle(fontSize: 18, color: muted, height: 1.5),
               ),
               const SizedBox(height: 40),
 
@@ -66,8 +69,6 @@ class MobileAppPage extends StatelessWidget {
                 icon: const Icon(Icons.download),
                 label: const Text("Download Mobile Guide"),
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: primaryColor,
-                  foregroundColor: Colors.black,
                   padding: const EdgeInsets.symmetric(
                     horizontal: 40,
                     vertical: 20,
@@ -80,13 +81,13 @@ class MobileAppPage extends StatelessWidget {
               ),
 
               const SizedBox(height: 60),
-              const Divider(color: Colors.grey),
+              const Divider(),
               const SizedBox(height: 20),
 
               // 5. دعوة لتصفح أعمالك
-              const Text(
+              Text(
                 "See what I built with Flutter:",
-                style: TextStyle(color: Colors.grey),
+                style: TextStyle(color: muted),
               ),
               const SizedBox(height: 10),
               TextButton(
