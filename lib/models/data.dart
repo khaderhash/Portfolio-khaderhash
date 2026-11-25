@@ -29,7 +29,7 @@ final List<Map<String, dynamic>> projectsData = [
   {
     "tier": "production",
     "title": "WeinKorsi",
-    "cardSummary": "Find courses in Syria by area, level and price. 108 courses, 14 institutes.",
+    "cardSummary": "Find courses in Syria by area, level and price. 150+ users, 15+ institutes.",
     "schemaType": "SoftwareApplication",
     "operatingSystem": "Web, Android",
     "applicationCategory": "EducationalApplication",
@@ -37,7 +37,7 @@ final List<Map<String, dynamic>> projectsData = [
     "cardBadges": ["Founder"],
     "badges": ["Founder", "Live Production", "Web + Android", "Sole Developer"],
     "outcome":
-        "Find courses and institutes in Syria by governorate, area, level and price, then contact the institute on WhatsApp or reserve a seat. 108 published courses, 14 institutes and 130+ registered students as of November 2026.",
+        "Find courses and institutes in Syria by governorate, area, level and price, then contact the institute on WhatsApp or reserve a seat. 150+ users, 15+ institutes and 100+ courses as of November 2026.",
     "leadRole":
         "Sole developer of WeinKorsi: product, backend, web, mobile, infrastructure and deployment. Live as a website and an Android app (v1.2.13, direct APK download).",
     "achievements": [
@@ -574,7 +574,7 @@ const String contactEmail = "khaderhuijih@gmail.com";
 const String githubUrl = "https://github.com/khaderhash";
 const String linkedInUrl =
     "https://www.linkedin.com/in/khader-hwaijeh-a8bb3629a/";
-const String whatsappUrl = "https://wa.me/963991199846";
+const String whatsappUrl = "https://wa.me/963981949180";
 const String telegramUrl = "https://t.me/khaderhash";
 const String instagramUrl = "https://www.instagram.com/khader._.hwaijeh";
 const String weinKorsiInstagramUrl = "https://www.instagram.com/wein_korsi";

@@ -43,3 +43,8 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# Personal CV sources: only web/cv.pdf is public.
+/khader-h-hwaijeh/
+/khader-h-hwaijeh.pdf
+/cv-output/
