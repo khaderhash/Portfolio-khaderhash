@@ -284,6 +284,7 @@ class _ProjectCardState extends State<ProjectCard> {
     final hasGithub = (p['github'] as String?)?.isNotEmpty ?? false;
     final hasBehance = (p['behance'] as String?)?.isNotEmpty ?? false;
     final hasWebsite = (p['website'] as String?)?.isNotEmpty ?? false;
+    final hasAndroid = (p['android'] as String?)?.isNotEmpty ?? false;
     final gallery = (p['gallery'] as List?)?.cast<String>() ?? const <String>[];
 
     final accent = premiumAccent(context);
@@ -528,6 +529,13 @@ class _ProjectCardState extends State<ProjectCard> {
                                     label: "Visit Live Platform",
                                     onTap: () =>
                                         launchUrl(Uri.parse(p['website'])),
+                                  ),
+                                if (hasAndroid)
+                                  _ActionBtn(
+                                    icon: Icons.android_rounded,
+                                    label: "Android App",
+                                    onTap: () =>
+                                        launchUrl(Uri.parse(p['android'])),
                                   ),
                                 if (hasVideo)
                                   _ActionBtn(

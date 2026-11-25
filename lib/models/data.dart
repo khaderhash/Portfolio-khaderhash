@@ -24,33 +24,36 @@ final List<Map<String, dynamic>> projectsData = [
   // ═════════════════════════════════════════════════════════════
 
   // ─────────────────────────────────────────────────────────────
-  // 1. WeinKorsi — Founder, sole engineer, production marketplace
+  // 1. WeinKorsi — Founder, sole developer, web + Android
   // ─────────────────────────────────────────────────────────────
   {
     "tier": "production",
     "title": "WeinKorsi",
-    "cardSummary": "Educational marketplace I founded. 12 institutes and 100+ users since launch.",
+    "cardSummary": "Find courses in Syria by area, level and price. 108 courses, 14 institutes.",
     "schemaType": "SoftwareApplication",
-    "role": "Founder & Full-Stack Engineer",
+    "operatingSystem": "Web, Android",
+    "applicationCategory": "EducationalApplication",
+    "role": "Founder & Sole Developer",
     "cardBadges": ["Founder"],
-    "badges": ["Founder", "Full Stack", "Live Production", "Marketplace"],
+    "badges": ["Founder", "Live Production", "Web + Android", "Sole Developer"],
     "outcome":
-        "Educational marketplace I founded and run. 12 training institutes onboarded and 100+ registered users since launch.",
+        "Find courses and institutes in Syria by governorate, area, level and price, then contact the institute on WhatsApp or reserve a seat. 108 published courses, 14 institutes and 130+ registered students as of November 2026.",
     "leadRole":
-        "Founder and sole engineer of WeinKorsi, owning product strategy, system architecture, frontend, backend, infrastructure, security, deployment, and day-to-day operations.",
+        "Sole developer of WeinKorsi: product, backend, web, mobile, infrastructure and deployment. Live as a website and an Android app (v1.2.13, direct APK download).",
     "achievements": [
-      "In production since launch: 12 training institutes onboarded and 100+ registered users.",
-      "Founded the venture and built the product: field market research, then personally pitched and onboarded 12 training institutes before the full technical build.",
-      "React frontend, Laravel REST API, and a companion Flutter mobile app with role-based access for students, institutes, and administrators.",
-      "OTP authentication, authorization middleware, rate limiting, and Arabic RTL course discovery, filtering, and reservation flows.",
-      "Runs on a self-managed VPS behind Nginx. Provisioning, HTTPS/TLS, migrations, scheduled jobs, automated backups, and uptime monitoring are all mine.",
+      "Contact requires sign-in, so every student enquiry reaches the institute as an attributed lead.",
+      "Institute self-registration with email and WhatsApp OTP verification, versioned terms acceptance, and an admin approval workflow.",
+      "Course matching by level, interests and GPS distance, in Arabic and English with full RTL and dark mode.",
+      "Privacy-first analytics with hashed visitor IDs and aggregated counts only; an append-only admin audit log, role-based staff accounts, and a Zero Trust protected admin.",
+      "Scripted VPS deploys with post-deploy health checks, backed by 1,400+ backend, 400+ web and 800+ Flutter tests.",
     ],
     "architecture":
-        "Stack & Architecture: React (Vite), Laravel 12, Flutter, PostgreSQL, Cloudflare R2, VPS (Nginx). Role-based access control, OTP authentication, REST API, scoped admin dashboards, Arabic RTL interfaces.",
+        "Stack & Architecture: Laravel API, PostgreSQL, React, Flutter (Android), Cloudflare (CDN, Zero Trust), Cloudflare R2, VPS. Scripted deploys with post-deploy health checks, Arabic/English with full RTL.",
     "desc":
-        "Educational marketplace I founded and run, connecting students, institutes, and providers under a multi-role architecture.",
-    "tech": ["React", "Laravel", "PostgreSQL", "VPS"],
+        "Platform to find courses and institutes in Syria, on the web and Android. Students contact institutes on WhatsApp or reserve a seat.",
+    "tech": ["Laravel", "React", "Flutter", "PostgreSQL", "Cloudflare"],
     "website": weinKorsiUrl,
+    "android": weinKorsiAndroidUrl,
     "publisherId": weinKorsiOrgId,
     "image": "assets/weinkorsi_logo.png",
     "logo": true,
@@ -447,6 +450,7 @@ const String photoAlt = "$nameAr - $nameEn";
 // wein-korsi.com is canonical (www redirects to it). The @id is the one
 // WeinKorsi's own JSON-LD declares, so both sites describe ONE entity.
 const String weinKorsiUrl = "https://wein-korsi.com/";
+const String weinKorsiAndroidUrl = "https://wein-korsi.com/android-app";
 const String weinKorsiOrgId = "https://wein-korsi.com/#organization";
 const String weinKorsiNameAr = "وين كورسي";
 const String weinKorsiNameEn = "WeinKorsi";

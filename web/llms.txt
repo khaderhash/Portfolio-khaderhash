@@ -32,12 +32,19 @@ September 2025, now as technical partner owning the technical direction of Lumi 
 
 ### WeinKorsi (وين كورسي)
 https://wein-korsi.com/
-Founder & Full-Stack Engineer. Educational marketplace connecting students, training
-institutes and course providers. In production since launch: 12 training institutes
-onboarded, 100+ registered users. Role-based access for students, institutes and
-administrators; OTP authentication, authorization middleware, rate limiting, and Arabic
-RTL course discovery and reservation flows.
-Stack: React (Vite), Laravel 12, Flutter, PostgreSQL, Cloudflare R2, VPS (Nginx).
+Android app (v1.2.13, direct APK download): https://wein-korsi.com/android-app
+Founder & Sole Developer (product, backend, web, mobile, infrastructure and deployment).
+Platform to find courses and institutes in Syria by governorate, area, level and price;
+students contact institutes on WhatsApp or reserve a seat. As of November 2026: 108
+published courses, 14 institutes, 130+ registered students. Contact requires sign-in, so
+every enquiry is an attributed lead; institute self-registration with email and WhatsApp
+OTP verification, versioned terms acceptance and admin approval; course matching by level,
+interests and GPS distance; privacy-first analytics (hashed visitor IDs, aggregated counts
+only); append-only admin audit log, role-based staff accounts, Zero Trust protected admin;
+Arabic/English with full RTL and dark mode. Scripted deploys with post-deploy health checks;
+1,400+ backend, 400+ web and 800+ Flutter tests.
+Stack: Laravel API, PostgreSQL, React, Flutter (Android), Cloudflare (CDN, Zero Trust),
+Cloudflare R2, VPS.
 
 ### Lumi Rewards
 https://lumi-rewards.app

@@ -64,6 +64,10 @@ String projectBlock(Map<String, dynamic> p) {
       if (stack.isNotEmpty) b.write('<br>');
       b.write('<a href="${esc(site)}">${esc(label)}</a>');
     }
+    final android = p['android'] as String?;
+    if (android != null) {
+      b.write(' · <a href="${esc(android)}">Android app</a>');
+    }
     b.writeln('</p>');
   }
   return b.toString();
