@@ -285,7 +285,7 @@ class _ProjectCardState extends State<ProjectCard> {
     final hasBehance = (p['behance'] as String?)?.isNotEmpty ?? false;
     final hasWebsite = (p['website'] as String?)?.isNotEmpty ?? false;
     final hasAndroid = (p['android'] as String?)?.isNotEmpty ?? false;
-    final gallery = (p['gallery'] as List?)?.cast<String>() ?? const <String>[];
+    final gallery = (p['gallery'] as List?) ?? const [];
 
     final accent = premiumAccent(context);
     final muted = premiumMutedText(context);
@@ -578,10 +578,12 @@ class _ProjectCardState extends State<ProjectCard> {
 // ────────────── Gallery: a row of phone screenshots ──────────────
 //
 // Optional `gallery` field: screenshots shown in the details dialog, in a
-// row that scrolls sideways when it does not fit.
+// row that scrolls sideways when it does not fit. An entry is either a path
+// (a phone screenshot, shown 9:20) or {"path": ..., "aspect": w / h} for a
+// screenshot of another shape, such as a desktop browser.
 
 class _Gallery extends StatelessWidget {
-  final List<String> paths;
+  final List<dynamic> paths;
   final String title;
   final Color errorColor;
 
@@ -601,19 +603,28 @@ class _Gallery extends StatelessWidget {
         scrollDirection: Axis.horizontal,
         itemCount: paths.length,
         separatorBuilder: (_, __) => const SizedBox(width: 10),
-        itemBuilder: (context, i) => ClipRRect(
-          borderRadius: BorderRadius.circular(12),
-          child: AspectRatio(
-            aspectRatio: 9 / 20,
-            child: ProjectImage(
-              path: paths[i],
-              fit: BoxFit.cover,
-              cacheWidth: 360,
-              errorColor: errorColor,
-              semanticLabel: '$title, screenshot ${i + 1}',
+        itemBuilder: (context, i) {
+          final entry = paths[i];
+          final path =
+              entry is Map ? entry['path'] as String : entry as String;
+          final aspect =
+              entry is Map ? (entry['aspect'] as num).toDouble() : 9 / 20;
+          return ClipRRect(
+            borderRadius: BorderRadius.circular(12),
+            child: AspectRatio(
+              aspectRatio: aspect,
+              child: ProjectImage(
+                path: path,
+                fit: BoxFit.cover,
+                // ~1.4x the tile width (363 for a phone tile, as before),
+                // capped at the widest source image.
+                cacheWidth: (aspect * _height * 3.1).round().clamp(0, 1008),
+                errorColor: errorColor,
+                semanticLabel: '$title, screenshot ${i + 1}',
+              ),
             ),
-          ),
-        ),
+          );
+        },
       ),
     );
   }

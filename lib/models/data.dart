@@ -58,6 +58,13 @@ final List<Map<String, dynamic>> projectsData = [
     "image": "assets/weinkorsi_logo.png",
     "logo": true,
     "brandColor": 0xFF1F3A2A,
+    "gallery": [
+      {"path": "web/weinkorsi/desktop-home.webp", "aspect": 1008 / 681},
+      {"path": "web/weinkorsi/desktop-institutes.webp", "aspect": 1008 / 681},
+      "web/weinkorsi/course.webp",
+      "web/weinkorsi/search.webp",
+      "web/weinkorsi/home.webp",
+    ],
   },
 
   // ─────────────────────────────────────────────────────────────
